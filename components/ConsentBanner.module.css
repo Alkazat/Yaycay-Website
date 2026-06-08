@@ -1,0 +1,64 @@
+.banner {
+  position: fixed;
+  left: var(--space-4);
+  right: var(--space-4);
+  bottom: calc(var(--space-4) + var(--safe-bottom));
+  z-index: 60;
+  margin-inline: auto;
+  max-width: 720px;
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background: var(--surface-card);
+  border: var(--outline) solid var(--ink);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-4) var(--space-5);
+}
+
+.text {
+  margin: 0;
+  flex: 1 1 320px;
+  font-size: var(--step--1);
+  color: var(--ink);
+}
+
+.actions {
+  display: flex;
+  gap: var(--space-3);
+  flex: 0 0 auto;
+}
+
+.accept,
+.decline {
+  min-height: 44px;
+  padding: var(--space-2) var(--space-5);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step--1);
+  border-radius: var(--radius-pill);
+  border: var(--outline) solid var(--ink);
+  cursor: pointer;
+}
+
+.accept {
+  background: var(--brand-cta);
+  color: var(--ink);
+}
+.decline {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--hairline);
+}
+
+@media (max-width: 520px) {
+  .actions {
+    width: 100%;
+  }
+  .accept,
+  .decline {
+    flex: 1;
+  }
+}

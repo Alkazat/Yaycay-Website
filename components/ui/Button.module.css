@@ -1,0 +1,72 @@
+.btn {
+  /* Touch hard-rule: comfortable minimum tap target. */
+  min-height: 48px;
+  min-width: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-decoration: none;
+  border: var(--outline) solid var(--ink);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition:
+    transform 0.08s ease,
+    box-shadow 0.08s ease,
+    filter 0.12s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn:active {
+  transform: translateY(3px);
+}
+
+.md {
+  font-size: var(--step-0);
+  padding: var(--space-3) var(--space-5);
+}
+
+.lg {
+  font-size: var(--step-1);
+  padding: var(--space-4) var(--space-7);
+}
+
+.cta {
+  background: var(--brand-cta);
+  color: var(--ink);
+  box-shadow: var(--shadow-cta);
+}
+.cta:hover {
+  filter: brightness(1.04);
+}
+.cta:active {
+  box-shadow: var(--shadow-cta-press);
+}
+
+.primary {
+  background: var(--brand-primary);
+  color: #fff;
+  box-shadow: 0 6px 0 var(--brand-primary-deep);
+}
+.primary:active {
+  box-shadow: 0 2px 0 var(--brand-primary-deep);
+}
+
+.ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--hairline);
+  box-shadow: none;
+}
+.ghost:hover {
+  background: rgba(28, 39, 51, 0.05);
+}
+
+.btn[disabled],
+.btn[aria-disabled='true'] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
