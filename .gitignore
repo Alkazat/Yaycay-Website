@@ -3,6 +3,9 @@
 /.pnp
 .pnp.js
 
+# lockfile is regenerated in CI for now; commit it once direct git push is available
+package-lock.json
+
 # next.js
 /.next/
 /out/
