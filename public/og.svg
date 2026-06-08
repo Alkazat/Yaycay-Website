@@ -1,18 +1,47 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <defs>
-    <radialGradient id="sky" cx="50%" cy="0%" r="90%">
-      <stop offset="0%" stop-color="#E3F1FB"/>
-      <stop offset="100%" stop-color="#FBF7EC"/>
-    </radialGradient>
+    <linearGradient id="scene" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6FBEEC"/>
+      <stop offset="44%" stop-color="#45A8E2"/>
+      <stop offset="78%" stop-color="#FFD778"/>
+      <stop offset="100%" stop-color="#F7AA15"/>
+    </linearGradient>
+    <clipPath id="badge">
+      <path d="M980 150 1130 300 980 450 830 300Z"/>
+    </clipPath>
   </defs>
-  <rect width="1200" height="630" fill="url(#sky)"/>
-  <circle cx="980" cy="150" r="190" fill="#FDECCB"/>
-  <circle cx="980" cy="150" r="70" fill="#F7AA15" stroke="#1C2733" stroke-width="6"/>
-  <g font-family="Fredoka, Nunito, sans-serif" fill="#1C2733">
-    <text x="90" y="250" font-size="78" font-weight="700">The holiday your kids</text>
-    <text x="90" y="340" font-size="78" font-weight="700">will never stop</text>
-    <text x="90" y="430" font-size="78" font-weight="700">talking about.</text>
-    <text x="90" y="520" font-size="40" font-weight="600" fill="#0A4C8B">Yaycay · One chat builds your whole trip.</text>
-    <text x="90" y="575" font-size="32" font-weight="600" fill="#6F695D">For families making memories.</text>
+
+  <!-- sky-to-sunset scene -->
+  <rect width="1200" height="630" fill="url(#scene)"/>
+
+  <!-- clouds -->
+  <g fill="#FEFCF6">
+    <ellipse cx="170" cy="90" rx="95" ry="30" opacity="0.92"/>
+    <ellipse cx="240" cy="74" rx="60" ry="22" opacity="0.92"/>
+    <ellipse cx="620" cy="120" rx="70" ry="22" opacity="0.78"/>
+  </g>
+
+  <!-- diamond shield badge -->
+  <g clip-path="url(#badge)">
+    <rect x="830" y="150" width="300" height="300" fill="#45A8E2"/>
+    <rect x="830" y="345" width="300" height="105" fill="#2BC3D0"/>
+    <circle cx="1052" cy="250" r="40" fill="#F7AA15"/>
+    <ellipse cx="918" cy="248" rx="52" ry="24" fill="#FEFCF6"/>
+    <ellipse cx="950" cy="232" rx="28" ry="17" fill="#FEFCF6"/>
+  </g>
+  <path d="M980 150 1130 300 980 450 830 300Z" fill="none" stroke="#073D72" stroke-width="11" stroke-linejoin="round"/>
+
+  <!-- box-art headline: cream fill, royal stroke -->
+  <g font-family="Fredoka, Nunito, sans-serif" font-weight="700" fill="#FEFCF6"
+     stroke="#073D72" stroke-width="7" paint-order="stroke" stroke-linejoin="round">
+    <text x="80" y="248" font-size="76">The holiday your kids</text>
+    <text x="80" y="338" font-size="76">will never stop</text>
+    <text x="80" y="428" font-size="76">talking about.</text>
+  </g>
+
+  <!-- supporting copy -->
+  <g font-family="Fredoka, Nunito, sans-serif">
+    <text x="82" y="500" font-size="38" font-weight="600" fill="#04223F">Yaycay · One chat builds your whole trip.</text>
+    <text x="82" y="552" font-size="30" font-weight="600" fill="#073D72">For families making memories.</text>
   </g>
 </svg>
