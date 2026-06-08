@@ -1,38 +1,20 @@
 /*
- * Yaycay design tokens.
+ * Site-local token layer.
  *
- * The shared design system ships its own styles.css; until that package is
- * wired in, this file mirrors the semantic tokens from the model context so the
- * marketing site stays brand-accurate. When @yaycay design system is available,
- * replace this with its styles.css import and keep only site-local additions.
+ * The Yaycay design system (styles/yaycay/styles.css) is the source of truth for
+ * the brand: fonts, the full colour palette, typography, spacing, and the
+ * box-art effects (pop shadows, gloss, gradients, radii). This file only adds
+ * what the marketing site needs on top of it:
+ *   1. a fluid type scale for long-form responsive copy (the DS ships fixed sizes),
+ *   2. iOS safe-area + container helpers,
+ *   3. compatibility aliases so the site's local token names resolve onto DS tokens.
+ *
+ * Imported AFTER the DS so these declarations win where they intentionally
+ * override (e.g. the fluid type scale, the wider marketing container).
  */
 
 :root {
-  /* Brand palette (semantic tokens) */
-  --brand-primary: #2a96d8; /* sky */
-  --brand-primary-deep: #0a4c8b; /* royal */
-  --brand-cta: #f7aa15; /* sun */
-  --brand-accent: #2bc3d0; /* aqua */
-  --success: #46b25e; /* meadow */
-  --alert: #ff6f4d; /* coral */
-
-  /* Surfaces + ink */
-  --surface: #fbf7ec; /* cream */
-  --surface-card: #ffffff;
-  --ink: #1c2733;
-  --muted: #6f695d; /* sand */
-
-  /* Derived tints */
-  --brand-primary-soft: #e3f1fb;
-  --brand-cta-soft: #fdeccb;
-  --accent-soft: #ddf6f8;
-  --hairline: rgba(28, 39, 51, 0.12);
-
-  /* Typography */
-  --font-display: var(--font-fredoka), 'Fredoka', system-ui, sans-serif;
-  --font-body: var(--font-nunito), 'Nunito', system-ui, sans-serif;
-
-  /* Fluid type scale */
+  /* Fluid type scale — long marketing copy that breathes from phone to desktop. */
   --step--1: clamp(0.83rem, 0.78rem + 0.25vw, 0.95rem);
   --step-0: clamp(1rem, 0.94rem + 0.3vw, 1.15rem);
   --step-1: clamp(1.25rem, 1.13rem + 0.6vw, 1.6rem);
@@ -40,30 +22,31 @@
   --step-3: clamp(2.1rem, 1.7rem + 2vw, 3.2rem);
   --step-4: clamp(2.6rem, 1.9rem + 3.4vw, 4.4rem);
 
-  /* Spacing */
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-5: 1.5rem;
-  --space-6: 2rem;
+  /* Spacing rungs the DS scale skips but the site composes with. */
   --space-7: 3rem;
-  --space-8: 4rem;
   --space-9: 6rem;
 
-  /* Shape + depth (chunky, outlined, glossy box-art look) */
-  --radius-sm: 10px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
-  --radius-pill: 999px;
-  --outline: 3px;
-  --shadow-card: 0 10px 0 rgba(10, 76, 139, 0.12), 0 18px 40px rgba(10, 76, 139, 0.12);
-  --shadow-cta: 0 6px 0 #c9870a, 0 14px 24px rgba(199, 135, 10, 0.35);
-  --shadow-cta-press: 0 2px 0 #c9870a, 0 6px 12px rgba(199, 135, 10, 0.3);
-
-  /* Layout */
+  /* Marketing layout widths + iOS safe areas. */
   --container: 1140px;
   --container-narrow: 760px;
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
+
+  /* ---- Compatibility aliases: site-local names -> DS tokens ---- */
+  --surface: var(--surface-page); /* warm cream page */
+  --muted: var(--text-muted);
+  --success: var(--state-success);
+  --alert: var(--coral-400);
+  --hairline: rgba(28, 39, 51, 0.12);
+  --outline: var(--stroke-w); /* 2.5px signature ink stroke */
+
+  /* Soft tints derived from the DS palette. */
+  --brand-primary-soft: var(--sky-50);
+  --brand-cta-soft: var(--sun-100);
+  --accent-soft: var(--aqua-100);
+
+  /* Chunky box-art shadows for cards + the sunshine CTA. */
+  --shadow-card: var(--card-lift);
+  --shadow-cta: 0 6px 0 var(--sun-600), 0 14px 24px rgba(199, 135, 10, 0.35);
+  --shadow-cta-press: 0 2px 0 var(--sun-600), 0 6px 12px rgba(199, 135, 10, 0.3);
 }

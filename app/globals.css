@@ -1,13 +1,14 @@
+/* Yaycay design system: fonts, palette, typography, spacing, effects, base. */
+@import '../styles/yaycay/styles.css';
+/* Site-local layer: fluid type, safe areas, container, compatibility aliases. */
 @import '../styles/tokens.css';
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+/*
+ * Element defaults (box-sizing, headings, links, focus) come from the DS base.
+ * Everything below is marketing-site chrome the DS doesn't ship.
+ */
 
 html {
-  -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
 }
 
@@ -25,15 +26,9 @@ html {
 }
 
 body {
-  margin: 0;
-  background: var(--surface);
-  color: var(--ink);
-  font-family: var(--font-body);
+  /* Fluid body copy + honour iOS safe areas without trapping scroll. */
   font-size: var(--step-0);
   line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-  /* Honour iOS safe areas without trapping scroll. */
   padding: var(--safe-top) 0 var(--safe-bottom);
 }
 
@@ -41,40 +36,15 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: var(--font-display);
-  font-weight: 600;
-  line-height: 1.08;
   letter-spacing: -0.01em;
-  margin: 0 0 var(--space-4);
   text-wrap: balance;
-}
-
-p {
-  margin: 0 0 var(--space-4);
-}
-
-a {
-  color: var(--brand-primary-deep);
-  text-underline-offset: 2px;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-:focus-visible {
-  outline: 3px solid var(--brand-primary-deep);
-  outline-offset: 3px;
-  border-radius: 4px;
 }
 
 .skip-link {
   position: absolute;
   left: -9999px;
   top: 0;
-  background: var(--ink);
+  background: var(--royal-700);
   color: #fff;
   padding: var(--space-3) var(--space-4);
   border-radius: 0 0 var(--radius-sm) 0;
@@ -89,7 +59,7 @@ img {
   width: 100%;
   max-width: var(--container);
   margin-inline: auto;
-  padding-inline: var(--space-5);
+  padding-inline: var(--space-6);
 }
 
 .section {
@@ -102,7 +72,7 @@ img {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-size: var(--step--1);
-  color: var(--brand-primary-deep);
+  color: var(--sky-600);
   margin: 0 0 var(--space-3);
 }
 

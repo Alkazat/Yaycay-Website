@@ -9,23 +9,28 @@
   font-family: var(--font-display);
   font-weight: 600;
   text-decoration: none;
-  border: var(--outline) solid var(--ink);
+  white-space: nowrap;
+  border: 2.5px solid var(--royal-600);
   border-radius: var(--radius-pill);
   cursor: pointer;
   transition:
-    transform 0.08s ease,
-    box-shadow 0.08s ease,
-    filter 0.12s ease;
+    transform var(--dur-fast) var(--ease-bounce),
+    box-shadow var(--dur-fast) var(--ease-bounce),
+    filter var(--dur-fast) var(--ease-out);
   -webkit-tap-highlight-color: transparent;
 }
 
+.btn:hover {
+  transform: translateY(-2px);
+  filter: saturate(1.06) brightness(1.03);
+}
 .btn:active {
   transform: translateY(3px);
 }
 
 .md {
   font-size: var(--step-0);
-  padding: var(--space-3) var(--space-5);
+  padding: var(--space-3) var(--space-6);
 }
 
 .lg {
@@ -33,40 +38,49 @@
   padding: var(--space-4) var(--space-7);
 }
 
+/* Sunshine "go" CTA — the one conversion colour. */
 .cta {
-  background: var(--brand-cta);
-  color: var(--ink);
-  box-shadow: var(--shadow-cta);
-}
-.cta:hover {
-  filter: brightness(1.04);
+  background: var(--sun-400);
+  border-color: var(--sun-600);
+  color: var(--royal-800);
+  box-shadow: var(--pop-sun), var(--gloss-top);
 }
 .cta:active {
-  box-shadow: var(--shadow-cta-press);
+  box-shadow: 0 1px 0 var(--sun-600), var(--gloss-top);
 }
 
+/* Sky primary. */
 .primary {
-  background: var(--brand-primary);
+  background: var(--sky-500);
+  border-color: var(--royal-600);
   color: #fff;
-  box-shadow: 0 6px 0 var(--brand-primary-deep);
+  box-shadow: var(--pop-sky), var(--gloss-top);
 }
 .primary:active {
-  box-shadow: 0 2px 0 var(--brand-primary-deep);
+  box-shadow: 0 1px 0 var(--royal-600), var(--gloss-top);
 }
 
+/* Quiet ghost — used in nav / secondary contexts. */
 .ghost {
   background: transparent;
-  color: var(--ink);
-  border-color: var(--hairline);
+  color: var(--royal-700);
+  border-color: transparent;
   box-shadow: none;
 }
 .ghost:hover {
-  background: rgba(28, 39, 51, 0.05);
+  background: var(--sky-50);
+  transform: translateY(-1px);
+  filter: none;
+}
+.ghost:active {
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 .btn[disabled],
 .btn[aria-disabled='true'] {
-  opacity: 0.6;
+  opacity: 0.5;
   cursor: not-allowed;
   transform: none;
+  filter: grayscale(0.3);
 }

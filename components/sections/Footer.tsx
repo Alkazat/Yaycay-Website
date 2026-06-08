@@ -10,9 +10,7 @@ export function Footer() {
       <div className="container">
         <div className={s.footerGrid}>
           <div className={s.footerBrand}>
-            <span className={s.footerLogo}>
-              <Logo />
-            </span>
+            <Logo width={150} />
             <p className={s.footerBlurb}>{footer.blurb}</p>
           </div>
           {footer.columns.map((col) => (

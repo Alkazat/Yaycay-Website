@@ -1,3 +1,4 @@
+import { Icon } from '@/components/ui/Icon';
 import { proof } from '@/lib/content';
 import s from './sections.module.css';
 
@@ -22,6 +23,11 @@ export function Proof() {
         <div className={s.quoteGrid}>
           {proof.testimonials.map((t) => (
             <figure key={t.name} className={s.quote}>
+              <span className={s.quoteStars} aria-hidden="true">
+                {[0, 1, 2, 3, 4].map((i) => (
+                  <Icon key={i} name="star" />
+                ))}
+              </span>
               <blockquote className={s.quoteText}>
                 &ldquo;{t.quote}&rdquo;
               </blockquote>

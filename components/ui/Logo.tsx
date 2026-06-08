@@ -1,28 +1,22 @@
+import Image from 'next/image';
 import styles from './Logo.module.css';
 
-/** Wordmark with the sun motif. SVG so it stays crisp and weighs almost nothing. */
-export function Logo({ className }: { className?: string }) {
+// Intrinsic size of the box-art lockup asset (assets/brand/yaycay-logo-transparent.png).
+const LOGO_RATIO = 968 / 1212;
+
+/**
+ * The Yaycay box-art lockup: diamond shield badge + bubble wordmark + ribbon.
+ * Rendered from the design-system brand asset so the mark is always on-brand.
+ */
+export function Logo({ width = 124, className }: { width?: number; className?: string }) {
   return (
-    <span className={[styles.logo, className].filter(Boolean).join(' ')}>
-      <svg
-        className={styles.mark}
-        viewBox="0 0 32 32"
-        aria-hidden="true"
-        focusable="false"
-      >
-        <circle cx="16" cy="16" r="8" fill="var(--brand-cta)" stroke="var(--ink)" strokeWidth="2.5" />
-        <g stroke="var(--ink)" strokeWidth="2.5" strokeLinecap="round">
-          <line x1="16" y1="2" x2="16" y2="6" />
-          <line x1="16" y1="26" x2="16" y2="30" />
-          <line x1="2" y1="16" x2="6" y2="16" />
-          <line x1="26" y1="16" x2="30" y2="16" />
-          <line x1="6" y1="6" x2="9" y2="9" />
-          <line x1="23" y1="23" x2="26" y2="26" />
-          <line x1="26" y1="6" x2="23" y2="9" />
-          <line x1="9" y1="23" x2="6" y2="26" />
-        </g>
-      </svg>
-      <span className={styles.word}>Yaycay</span>
-    </span>
+    <Image
+      src="/brand/yaycay-logo.png"
+      alt="Yaycay"
+      width={width}
+      height={Math.round(width * LOGO_RATIO)}
+      className={[styles.logo, className].filter(Boolean).join(' ')}
+      priority
+    />
   );
 }

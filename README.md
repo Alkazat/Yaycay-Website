@@ -13,9 +13,13 @@ hands the visitor to the app demo.
 - TypeScript + Next.js (App Router). Pages are statically generated (SSG); a
   single `/api/signup` route handler runs as a serverless function on Vercel for
   the Brevo capture fallback.
-- Design system tokens (Fredoka + Nunito, the semantic palette) live in
-  `styles/tokens.css`. When the shared `@yaycay` design system package is
-  available, swap that file for its `styles.css`.
+- The shared **Yaycay design system** is vendored under `styles/yaycay/`
+  (`styles.css` + `tokens/*` + the Fredoka/Nunito variable webfonts). It is the
+  source of truth for the brand: palette, type, spacing, and the "box-art"
+  effects (thick royal outlines, chunky pop shadows, gloss, sky/sunset
+  gradients). `styles/tokens.css` is a thin site-local layer on top (fluid type
+  scale, safe areas, container, and compatibility aliases). Replace the vendored
+  copy with the published `@yaycay` package when it ships.
 - The only backend integration is the `POST /signup/capture` DTO from
   `@yaycay/contracts`, mirrored in `lib/contracts.ts` until the package is pinned.
 
