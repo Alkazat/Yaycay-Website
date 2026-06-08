@@ -1,0 +1,96 @@
+import { NextResponse } from 'next/server';
+import type { SignupCaptureRequest, SignupCaptureResponse } from '@/lib/contracts';
+import { demoHandoffUrl } from '@/lib/site';
+
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+/**
+ * The website's single backend touch. It prefers the BE `/signup/capture`
+ * endpoint (the @yaycay/contracts handshake); if that is not configured or
+ * fails, it captures the lead straight into Brevo behind the same function so
+ * the funnel never drops a signup. The redirect is wired here so the client
+ * always gets a destination back.
+ */
+export async function POST(request: Request) {
+  let body: SignupCaptureRequest;
+  try {
+    body = (await request.json()) as SignupCaptureRequest;
+  } catch {
+    return NextResponse.json({ ok: false, error: 'Invalid request body' }, { status: 400 });
+  }
+
+  const email = (body.email ?? '').trim().toLowerCase();
+  const consent = Boolean(body.consent);
+  const source = typeof body.source === 'string' ? body.source : undefined;
+
+  if (!EMAIL_RE.test(email)) {
+    return NextResponse.json({ ok: false, error: 'Invalid email' }, { status: 422 });
+  }
+  if (!consent) {
+    return NextResponse.json({ ok: false, error: 'Consent required' }, { status: 422 });
+  }
+
+  const redirectUrl = demoHandoffUrl(email);
+  const apiBase = process.env.NEXT_PUBLIC_API_BASE;
+
+  // Preferred path: hand the lead to BE, which owns marketing_contacts + Brevo.
+  if (apiBase) {
+    try {
+      const res = await fetch(`${apiBase.replace(/\/$/, '')}/signup/capture`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, consent, source } satisfies SignupCaptureRequest),
+      });
+      if (res.ok) {
+        const data = (await res.json().catch(() => ({}))) as Partial<SignupCaptureResponse>;
+        return NextResponse.json({
+          ok: true,
+          redirectUrl: data.redirectUrl ?? redirectUrl,
+        });
+      }
+      // fall through to Brevo fallback on a non-2xx
+    } catch {
+      // network error, fall through to Brevo fallback
+    }
+  }
+
+  // Fallback path: capture straight into Brevo.
+  const brevoKey = process.env.BREVO_API_KEY;
+  if (brevoKey) {
+    try {
+      const listId = process.env.BREVO_LIST_ID;
+      const res = await fetch('https://api.brevo.com/v3/contacts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          accept: 'application/json',
+          'api-key': brevoKey,
+        },
+        body: JSON.stringify({
+          email,
+          updateEnabled: true,
+          attributes: { CONSENT: consent, SOURCE: source ?? 'website' },
+          ...(listId ? { listIds: [Number(listId)] } : {}),
+        }),
+      });
+      // Brevo returns 201 (created) or 204 (updated). Either is success for us.
+      if (res.ok || res.status === 204) {
+        return NextResponse.json({ ok: true, redirectUrl });
+      }
+      return NextResponse.json(
+        { ok: false, error: 'Capture failed' },
+        { status: 502 },
+      );
+    } catch {
+      return NextResponse.json({ ok: false, error: 'Capture failed' }, { status: 502 });
+    }
+  }
+
+  // Nothing is configured (local dev). Acknowledge so the handoff still works,
+  // but make it visible in logs that the lead was not persisted.
+  console.warn('[signup] No NEXT_PUBLIC_API_BASE or BREVO_API_KEY set; lead not persisted.');
+  return NextResponse.json({ ok: true, redirectUrl });
+}

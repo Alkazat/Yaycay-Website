@@ -1,0 +1,124 @@
+.form {
+  width: 100%;
+  max-width: 560px;
+}
+
+.row {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.field {
+  flex: 1 1 240px;
+  min-width: 0;
+  text-align: left;
+}
+
+.label {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step--1);
+  margin-bottom: var(--space-2);
+  color: var(--text-strong);
+}
+
+.input {
+  width: 100%;
+  min-height: 52px;
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--step-0);
+  color: var(--ink);
+  background: var(--surface-card);
+  border: 2.5px solid var(--royal-500);
+  border-radius: var(--radius-md);
+}
+.input::placeholder {
+  color: var(--muted);
+  font-weight: 400;
+}
+.input:focus-visible {
+  outline: none;
+  box-shadow: var(--ring-focus);
+}
+
+.submit {
+  flex: 0 0 auto;
+  min-height: 52px;
+  padding: var(--space-3) var(--space-6);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step-0);
+  color: var(--royal-800);
+  background: var(--sun-400);
+  border: 2.5px solid var(--sun-600);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--pop-sun), var(--gloss-top);
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    transform var(--dur-fast) var(--ease-bounce),
+    box-shadow var(--dur-fast) var(--ease-bounce),
+    filter var(--dur-fast) var(--ease-out);
+  -webkit-tap-highlight-color: transparent;
+}
+.submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: saturate(1.06) brightness(1.03);
+}
+.submit:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--sun-600), var(--gloss-top);
+}
+.submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.consent {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-start;
+  margin-top: var(--space-4);
+  text-align: left;
+  font-size: var(--step--1);
+  color: var(--muted);
+}
+.consent input {
+  margin-top: 3px;
+  width: 20px;
+  height: 20px;
+  flex: none;
+  accent-color: var(--sky-500);
+}
+.consent a {
+  color: var(--sky-600);
+}
+
+.message {
+  min-height: 1.4em;
+  margin: var(--space-3) 0 0;
+  text-align: left;
+  font-size: var(--step--1);
+  font-weight: 700;
+}
+.error {
+  color: var(--alert);
+}
+.success {
+  color: var(--success);
+}
+
+@media (max-width: 520px) {
+  .row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .submit {
+    width: 100%;
+  }
+}
