@@ -3,6 +3,56 @@
   max-width: 560px;
 }
 
+/* Honeypot: present in the DOM for bots, removed from view + a11y tree. */
+.hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Celebratory waitlist confirmation, replaces the form on success. */
+.successCard {
+  width: 100%;
+  max-width: 560px;
+  background: var(--surface-card);
+  border: 2.5px solid var(--royal-600);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--card-lift), var(--gloss-top);
+  padding: var(--space-6);
+  text-align: center;
+}
+.successCheck {
+  display: inline-grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--meadow-400);
+  color: #fff;
+  border: 2.5px solid var(--royal-600);
+  box-shadow: 0 4px 0 var(--royal-600), var(--gloss-top);
+  margin-bottom: var(--space-4);
+}
+.successCheck svg {
+  width: 30px;
+  height: 30px;
+}
+.successTitle {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step-1);
+  color: var(--royal-800);
+  margin: 0 0 var(--space-1);
+}
+.successText {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+
 .row {
   display: flex;
   gap: var(--space-3);
