@@ -3,6 +3,14 @@
  * consistent with the FE claims/wedge. Writing rule: no em-dashes.
  */
 
+export const teaser = {
+  eyebrow: 'Launching soon',
+  title: 'Plan the trip. Keep the yay.',
+  subtitle:
+    'Yaycay turns the admin of a family holiday into part of the fun: shared itineraries, packing lists, and a countdown the whole family loves. Join the waitlist and we will tell you the moment it opens.',
+  note: 'No spam. Just one email when we launch.',
+};
+
 export const hero = {
   eyebrow: 'For families making memories',
   title: 'The holiday your kids will never stop talking about.',

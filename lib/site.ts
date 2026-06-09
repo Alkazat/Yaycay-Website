@@ -19,3 +19,6 @@ export function demoHandoffUrl(email: string): string {
 }
 
 export const CTA_LABEL = 'Build your free day';
+
+/** Pre-launch waitlist capture label (teaser index). */
+export const WAITLIST_LABEL = 'Join the waitlist';

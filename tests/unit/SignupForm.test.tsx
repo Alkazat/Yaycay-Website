@@ -46,4 +46,31 @@ describe('SignupForm', () => {
       expect(screen.getByRole('status')).toHaveTextContent(/free day/i),
     );
   });
+
+  it('waitlist mode captures and confirms (no demo handoff)', async () => {
+    vi.spyOn(global, 'fetch').mockResolvedValue(
+      new Response(JSON.stringify({ ok: true }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      }),
+    );
+
+    render(<SignupForm mode="waitlist" />);
+    expect(
+      screen.getByRole('button', { name: /join the waitlist/i }),
+    ).toBeInTheDocument();
+
+    fireEvent.change(screen.getByLabelText(/email address/i), {
+      target: { value: 'parent@example.com' },
+    });
+    fireEvent.click(screen.getByRole('button', { name: /join the waitlist/i }));
+
+    await waitFor(() =>
+      expect(screen.getByRole('status')).toHaveTextContent(/on the list/i),
+    );
+    expect(global.fetch).toHaveBeenCalledWith(
+      '/api/signup',
+      expect.objectContaining({ method: 'POST' }),
+    );
+  });
 });
