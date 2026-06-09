@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('marketing funnel', () => {
   test('loads with the hero promise and the single CTA', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/homepage');
     await expect(
       page.getByRole('heading', {
         name: /the holiday your kids will never stop talking about/i,
@@ -26,7 +26,7 @@ test.describe('marketing funnel', () => {
       });
     });
 
-    await page.goto('/');
+    await page.goto('/homepage');
 
     const email = page.getByLabel(/email address/i).first();
     await email.fill('parent@example.com');
@@ -38,7 +38,7 @@ test.describe('marketing funnel', () => {
   });
 
   test('shows a validation message for a bad email', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/homepage');
     const email = page.getByLabel(/email address/i).first();
     await email.fill('nope');
     await page.getByRole('button', { name: /build your free day/i }).first().click();

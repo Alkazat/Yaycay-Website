@@ -2,15 +2,26 @@
 
 import { useId, useState } from 'react';
 import { trackLead } from '@/lib/analytics';
-import { demoHandoffUrl, CTA_LABEL } from '@/lib/site';
+import { demoHandoffUrl, CTA_LABEL, WAITLIST_LABEL } from '@/lib/site';
 import type { SignupCaptureResponse } from '@/lib/contracts';
 import styles from './SignupForm.module.css';
 
 type Status = 'idle' | 'submitting' | 'done' | 'error';
+type Mode = 'demo' | 'waitlist';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export function SignupForm({ id = 'signup', compact = false }: { id?: string; compact?: boolean }) {
+export function SignupForm({
+  id = 'signup',
+  compact = false,
+  mode = 'demo',
+}: {
+  id?: string;
+  compact?: boolean;
+  /** 'demo' captures then hands off to the app demo; 'waitlist' captures only. */
+  mode?: Mode;
+}) {
+  const isWaitlist = mode === 'waitlist';
   const emailId = useId();
   const consentId = useId();
   const [email, setEmail] = useState('');
@@ -29,17 +40,23 @@ export function SignupForm({ id = 'signup', compact = false }: { id?: string; co
     }
     if (!consent) {
       setStatus('error');
-      setMessage('Please agree to receive your free day and occasional updates.');
+      setMessage(
+        isWaitlist
+          ? 'Please agree to be emailed when Yaycay opens.'
+          : 'Please agree to receive your free day and occasional updates.',
+      );
       return;
     }
 
     setStatus('submitting');
     setMessage('');
 
-    const source =
+    const utm =
       typeof window !== 'undefined'
         ? new URLSearchParams(window.location.search).get('utm_source') ?? undefined
         : undefined;
+    // Tag waitlist leads for attribution when no explicit utm_source is present.
+    const source = utm ?? (isWaitlist ? 'waitlist' : undefined);
 
     try {
       const res = await fetch('/api/signup', {
@@ -56,8 +73,14 @@ export function SignupForm({ id = 'signup', compact = false }: { id?: string; co
       trackLead();
 
       setStatus('done');
-      setMessage('Got it. Taking you to your free day...');
 
+      if (isWaitlist) {
+        // Pre-launch: capture only, no handoff. Keep the visitor on the teaser.
+        setMessage("You're on the list. We'll email you the moment Yaycay opens.");
+        return;
+      }
+
+      setMessage('Got it. Taking you to your free day...');
       const redirect = data.redirectUrl ?? demoHandoffUrl(trimmed);
       // Brief beat so the success state is seen, then hand off to the app demo.
       window.setTimeout(() => {
@@ -70,6 +93,8 @@ export function SignupForm({ id = 'signup', compact = false }: { id?: string; co
   }
 
   const busy = status === 'submitting' || status === 'done';
+  const submitLabel = isWaitlist ? WAITLIST_LABEL : CTA_LABEL;
+  const busyLabel = isWaitlist ? 'Joining...' : 'Building...';
 
   return (
     <form
@@ -100,7 +125,7 @@ export function SignupForm({ id = 'signup', compact = false }: { id?: string; co
           />
         </div>
         <button type="submit" className={styles.submit} disabled={busy}>
-          {status === 'submitting' ? 'Building...' : CTA_LABEL}
+          {status === 'submitting' ? busyLabel : submitLabel}
         </button>
       </div>
 
@@ -113,8 +138,10 @@ export function SignupForm({ id = 'signup', compact = false }: { id?: string; co
           disabled={busy}
         />
         <label htmlFor={consentId}>
-          Email me my free day and the occasional Yaycay update. No spam, unsubscribe
-          anytime. See our <a href="/legal/privacy">privacy notice</a>.
+          {isWaitlist
+            ? 'Email me when Yaycay opens, plus the occasional update.'
+            : 'Email me my free day and the occasional Yaycay update.'}{' '}
+          No spam, unsubscribe anytime. See our <a href="/legal/privacy">privacy notice</a>.
         </label>
       </div>
 
