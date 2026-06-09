@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { demoHandoffUrl, SITE, CTA_LABEL } from '@/lib/site';
+import { demoHandoffUrl, SITE, CTA_LABEL, WAITLIST_LABEL } from '@/lib/site';
 
 describe('demoHandoffUrl', () => {
   it('builds the app demo URL with the email prefilled', () => {
@@ -21,5 +21,9 @@ describe('brand invariants', () => {
 
   it('keeps the single conversion CTA label', () => {
     expect(CTA_LABEL).toBe('Build your free day');
+  });
+
+  it('has a distinct pre-launch waitlist label', () => {
+    expect(WAITLIST_LABEL).toBe('Join the waitlist');
   });
 });

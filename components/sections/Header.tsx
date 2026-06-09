@@ -14,6 +14,9 @@ export function Header() {
           <a className={s.navLink} href="#how-it-works">
             How it works
           </a>
+          <a className={s.navLink} href="#destinations">
+            Destinations
+          </a>
           <a className={s.navLink} href="#pricing">
             Pricing
           </a>

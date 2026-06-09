@@ -3,6 +3,14 @@
  * consistent with the FE claims/wedge. Writing rule: no em-dashes.
  */
 
+export const teaser = {
+  eyebrow: 'Launching soon',
+  title: 'Plan the trip. Keep the yay.',
+  subtitle:
+    'Yaycay turns the admin of a family holiday into part of the fun: shared itineraries, packing lists, and a countdown the whole family loves. Join the waitlist and we will tell you the moment it opens.',
+  note: 'No spam. Just one email when we launch.',
+};
+
 export const hero = {
   eyebrow: 'For families making memories',
   title: 'The holiday your kids will never stop talking about.',
@@ -57,6 +65,18 @@ export const howItWorks = {
       title: 'Balance every child',
       body: 'It weighs each kid so nobody is bored and nobody is dragged along. Then it hands the family a day they will all remember.',
     },
+  ],
+};
+
+export const destinations = {
+  eyebrow: 'Where to next',
+  title: 'Adventures for every kind of family',
+  intro: 'Real warm-weather days out, picked for families. Tap a vibe and start a plan.',
+  cards: [
+    { id: 'sand', name: 'Sun & sand', sub: 'Beaches the whole family loves', tag: 'Popular', tone: 'sun' },
+    { id: 'outdoors', name: 'Great outdoors', sub: 'Trails, lakes and big skies', tag: 'New', tone: 'meadow' },
+    { id: 'city', name: 'City breaks', sub: 'Kid-friendly streets and squares', tag: 'Easy', tone: 'sky' },
+    { id: 'theme', name: 'Theme parks', sub: 'Big-thrill days out', tag: 'Thrills', tone: 'aqua' },
   ],
 };
 
