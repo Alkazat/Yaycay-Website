@@ -94,41 +94,68 @@ export async function POST(request: Request) {
         });
       }
       // fall through to Brevo fallback on a non-2xx
-    } catch {
+      console.warn(`[signup] BE capture returned ${res.status}; falling back to Brevo.`);
+    } catch (err) {
       // network error, fall through to Brevo fallback
+      console.warn('[signup] BE capture request failed; falling back to Brevo:', err);
     }
   }
 
   // Fallback path: capture straight into Brevo.
   const brevoKey = process.env.BREVO_API_KEY;
   if (brevoKey) {
-    try {
-      const listId = process.env.BREVO_LIST_ID;
-      const res = await fetch('https://api.brevo.com/v3/contacts', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          accept: 'application/json',
-          'api-key': brevoKey,
-        },
-        body: JSON.stringify({
-          email,
-          updateEnabled: true,
-          attributes: { CONSENT: consent, SOURCE: source ?? 'website' },
-          ...(listId ? { listIds: [Number(listId)] } : {}),
-        }),
-      });
-      // Brevo returns 201 (created) or 204 (updated). Either is success for us.
-      if (res.ok || res.status === 204) {
-        return NextResponse.json({ ok: true, redirectUrl });
+    const listId = process.env.BREVO_LIST_ID;
+    const listIds = listId ? [Number(listId)] : undefined;
+
+    // Try the full payload first, then degrade so a misconfigured attribute or
+    // list never costs us the lead. Every failure is logged with Brevo's reason
+    // so the cause (bad key, missing CONSENT/SOURCE attribute, bad list id) is
+    // visible in the function logs.
+    const attempts: Array<Record<string, unknown>> = [
+      {
+        email,
+        updateEnabled: true,
+        attributes: { CONSENT: consent, SOURCE: source ?? 'website' },
+        ...(listIds ? { listIds } : {}),
+      },
+    ];
+    if (listIds) attempts.push({ email, updateEnabled: true, listIds });
+    attempts.push({ email, updateEnabled: true });
+
+    let lastStatus = 0;
+    let lastDetail = '';
+    for (let i = 0; i < attempts.length; i++) {
+      try {
+        const res = await fetch('https://api.brevo.com/v3/contacts', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            accept: 'application/json',
+            'api-key': brevoKey,
+          },
+          body: JSON.stringify(attempts[i]),
+        });
+        // Brevo returns 201 (created) or 204 (updated). Either is success.
+        if (res.ok || res.status === 204) {
+          if (i > 0) {
+            console.warn(
+              `[signup] Brevo captured on degraded attempt ${i + 1}. Check BREVO_LIST_ID ` +
+                `and that the CONSENT/SOURCE contact attributes exist on this account. ` +
+                `Full payload was rejected with ${lastStatus}: ${lastDetail.slice(0, 200)}`,
+            );
+          }
+          return NextResponse.json({ ok: true, redirectUrl });
+        }
+        lastStatus = res.status;
+        lastDetail = await res.text().catch(() => '');
+        console.error(
+          `[signup] Brevo attempt ${i + 1} failed (${lastStatus}): ${lastDetail.slice(0, 400)}`,
+        );
+      } catch (err) {
+        console.error(`[signup] Brevo attempt ${i + 1} request error:`, err);
       }
-      return NextResponse.json(
-        { ok: false, error: 'Capture failed' },
-        { status: 502 },
-      );
-    } catch {
-      return NextResponse.json({ ok: false, error: 'Capture failed' }, { status: 502 });
     }
+    return NextResponse.json({ ok: false, error: 'Capture failed' }, { status: 502 });
   }
 
   // Nothing is configured (local dev). Acknowledge so the handoff still works,
