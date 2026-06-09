@@ -257,6 +257,92 @@
   font-weight: 600;
 }
 
+/* ---- Destinations (generated scene photography) ---- */
+.destGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+}
+.destCard {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-card);
+  border: 2.5px solid var(--royal-600);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--card-lift);
+  overflow: hidden;
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+.destCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+.destMedia {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-bottom: 2.5px solid var(--royal-600);
+}
+.destImg {
+  object-fit: cover;
+}
+.destTag {
+  position: absolute;
+  top: var(--space-3);
+  left: var(--space-3);
+  border-radius: var(--radius-pill);
+  padding: var(--space-1) var(--space-3);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step--1);
+  border: 2.5px solid var(--royal-600);
+  box-shadow: var(--gloss-top);
+}
+.badgeSun {
+  background: var(--sun-400);
+  color: var(--royal-800);
+  border-color: var(--sun-600);
+}
+.badgeSky {
+  background: var(--sky-500);
+  color: #fff;
+}
+.badgeMeadow {
+  background: var(--meadow-400);
+  color: #fff;
+  border-color: var(--meadow-600);
+}
+.badgeAqua {
+  background: var(--aqua-400);
+  color: var(--royal-800);
+  border-color: var(--aqua-600);
+}
+.destBody {
+  padding: var(--space-4) var(--space-5) var(--space-5);
+}
+.destName {
+  font-size: var(--step-1);
+  margin-bottom: var(--space-1);
+}
+.destSub {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 600;
+  font-size: var(--step--1);
+}
+@media (max-width: 900px) {
+  .destGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 560px) {
+  .destGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ---- Pricing ---- */
 .tierGrid {
   display: grid;

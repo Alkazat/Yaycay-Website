@@ -2,6 +2,7 @@ import { Header } from '@/components/sections/Header';
 import { Hero } from '@/components/sections/Hero';
 import { Wedge } from '@/components/sections/Wedge';
 import { HowItWorks } from '@/components/sections/HowItWorks';
+import { Destinations } from '@/components/sections/Destinations';
 import { Pricing } from '@/components/sections/Pricing';
 import { Proof } from '@/components/sections/Proof';
 import { FinalCta } from '@/components/sections/FinalCta';
@@ -36,6 +37,7 @@ export default function HomePage() {
         <Hero />
         <Wedge />
         <HowItWorks />
+        <Destinations />
         <Pricing />
         <Proof />
         <FinalCta />

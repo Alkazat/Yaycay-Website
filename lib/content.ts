@@ -60,6 +60,18 @@ export const howItWorks = {
   ],
 };
 
+export const destinations = {
+  eyebrow: 'Where to next',
+  title: 'Adventures for every kind of family',
+  intro: 'Real warm-weather days out, picked for families. Tap a vibe and start a plan.',
+  cards: [
+    { id: 'sand', name: 'Sun & sand', sub: 'Beaches the whole family loves', tag: 'Popular', tone: 'sun' },
+    { id: 'outdoors', name: 'Great outdoors', sub: 'Trails, lakes and big skies', tag: 'New', tone: 'meadow' },
+    { id: 'city', name: 'City breaks', sub: 'Kid-friendly streets and squares', tag: 'Easy', tone: 'sky' },
+    { id: 'theme', name: 'Theme parks', sub: 'Big-thrill days out', tag: 'Thrills', tone: 'aqua' },
+  ],
+};
+
 export const pricing = {
   title: 'One holiday, two ways to buy',
   intro: 'Pay once. No subscription on the holiday itself.',
