@@ -24,8 +24,11 @@ export function SignupForm({
   const isWaitlist = mode === 'waitlist';
   const emailId = useId();
   const consentId = useId();
+  const trapId = useId();
   const [email, setEmail] = useState('');
   const [consent, setConsent] = useState(true);
+  // Honeypot: stays empty for real users; bots that auto-fill reveal themselves.
+  const [company, setCompany] = useState('');
   const [status, setStatus] = useState<Status>('idle');
   const [message, setMessage] = useState('');
 
@@ -62,7 +65,7 @@ export function SignupForm({
       const res = await fetch('/api/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: trimmed, consent, source }),
+        body: JSON.stringify({ email: trimmed, consent, source, company }),
       });
 
       if (!res.ok) throw new Error(`Capture failed (${res.status})`);
@@ -92,6 +95,25 @@ export function SignupForm({
     }
   }
 
+  // Celebratory confirmation replaces the waitlist form once they're in.
+  if (isWaitlist && status === 'done') {
+    return (
+      <div
+        className={[styles.successCard, compact ? styles.compact : ''].filter(Boolean).join(' ')}
+        role="status"
+        aria-live="polite"
+      >
+        <span className={styles.successCheck} aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M5 13l4 4L19 7" />
+          </svg>
+        </span>
+        <p className={styles.successTitle}>You&rsquo;re on the list.</p>
+        <p className={styles.successText}>We&rsquo;ll email you the moment Yaycay opens.</p>
+      </div>
+    );
+  }
+
   const busy = status === 'submitting' || status === 'done';
   const submitLabel = isWaitlist ? WAITLIST_LABEL : CTA_LABEL;
   const busyLabel = isWaitlist ? 'Joining...' : 'Building...';
@@ -103,6 +125,20 @@ export function SignupForm({
       onSubmit={handleSubmit}
       noValidate
     >
+      {/* Honeypot. Off-screen and hidden from assistive tech; only bots fill it. */}
+      <div className={styles.hp} aria-hidden="true">
+        <label htmlFor={trapId}>Company</label>
+        <input
+          id={trapId}
+          type="text"
+          name="company"
+          tabIndex={-1}
+          autoComplete="off"
+          value={company}
+          onChange={(e) => setCompany(e.target.value)}
+        />
+      </div>
+
       <div className={styles.row}>
         <div className={styles.field}>
           <label htmlFor={emailId} className={styles.label}>
