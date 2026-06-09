@@ -7,6 +7,32 @@ export const dynamic = 'force-dynamic';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+// Best-effort, in-memory per-IP throttle. Serverless instances are ephemeral and
+// not shared, so this curbs bursts against a warm instance rather than acting as
+// a global limiter (use a KV/Upstash store for that). Cheap defence-in-depth.
+const RL_WINDOW_MS = 60_000;
+const RL_MAX = 12;
+const hits = new Map<string, number[]>();
+
+function rateLimited(ip: string): boolean {
+  const now = Date.now();
+  const recent = (hits.get(ip) ?? []).filter((t) => now - t < RL_WINDOW_MS);
+  recent.push(now);
+  hits.set(ip, recent);
+  if (hits.size > 5000) {
+    for (const [k, v] of hits) {
+      if (v.every((t) => now - t >= RL_WINDOW_MS)) hits.delete(k);
+    }
+  }
+  return recent.length > RL_MAX;
+}
+
+function clientIp(request: Request): string {
+  const fwd = request.headers.get('x-forwarded-for');
+  if (fwd) return fwd.split(',')[0]!.trim();
+  return request.headers.get('x-real-ip') ?? 'unknown';
+}
+
 /**
  * The website's single backend touch. It prefers the BE `/signup/capture`
  * endpoint (the @yaycay/contracts handshake); if that is not configured or
@@ -15,9 +41,16 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
  * always gets a destination back.
  */
 export async function POST(request: Request) {
-  let body: SignupCaptureRequest;
+  if (rateLimited(clientIp(request))) {
+    return NextResponse.json(
+      { ok: false, error: 'Too many requests' },
+      { status: 429 },
+    );
+  }
+
+  let body: SignupCaptureRequest & { company?: unknown };
   try {
-    body = (await request.json()) as SignupCaptureRequest;
+    body = (await request.json()) as SignupCaptureRequest & { company?: unknown };
   } catch {
     return NextResponse.json({ ok: false, error: 'Invalid request body' }, { status: 400 });
   }
@@ -25,6 +58,15 @@ export async function POST(request: Request) {
   const email = (body.email ?? '').trim().toLowerCase();
   const consent = Boolean(body.consent);
   const source = typeof body.source === 'string' ? body.source : undefined;
+
+  // Honeypot: a hidden field no human fills. If it has a value, treat as a bot.
+  // Acknowledge with a normal-looking response so the bot moves on, but never
+  // persist the lead.
+  const trap = typeof body.company === 'string' ? body.company.trim() : '';
+  if (trap) {
+    console.warn('[signup] Honeypot triggered; dropping suspected bot submission.');
+    return NextResponse.json({ ok: true, redirectUrl: demoHandoffUrl(email) });
+  }
 
   if (!EMAIL_RE.test(email)) {
     return NextResponse.json({ ok: false, error: 'Invalid email' }, { status: 422 });
