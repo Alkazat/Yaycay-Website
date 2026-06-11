@@ -38,6 +38,9 @@ const paths: Record<string, JSX.Element> = {
   star: (
     <path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.2l1-5.8L3.5 9.2l5.9-.9z" />
   ),
+  map: (
+    <path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2ZM9 4v14M15 6v14" />
+  ),
 };
 
 export function Icon({ name, className }: { name: string; className?: string }) {

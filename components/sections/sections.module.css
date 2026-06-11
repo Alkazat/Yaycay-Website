@@ -257,6 +257,60 @@
   font-weight: 600;
 }
 
+/* ---- Showcase ("what you get") ---- */
+.showcaseGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-5);
+}
+.showcaseItem {
+  display: flex;
+  gap: var(--space-4);
+  align-items: flex-start;
+  background: var(--surface-card);
+  border: 2.5px solid var(--royal-600);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-5);
+}
+.showcaseIcon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: var(--sky-500);
+  color: #fff;
+  border: 2.5px solid var(--royal-600);
+  box-shadow: 0 3px 0 var(--royal-600), var(--gloss-top);
+}
+.showcaseIcon svg {
+  width: 24px;
+  height: 24px;
+}
+.showcaseItem:nth-child(2n) .showcaseIcon {
+  background: var(--sun-400);
+  color: var(--royal-800);
+}
+.showcaseItem:nth-child(3n) .showcaseIcon {
+  background: var(--meadow-400);
+}
+.showcaseItem:nth-child(4n) .showcaseIcon {
+  background: var(--aqua-400);
+  color: var(--royal-800);
+}
+.showcaseTitle {
+  font-size: var(--step-0);
+  margin: 0 0 var(--space-1);
+}
+.showcaseBody {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 600;
+  font-size: var(--step--1);
+}
+
 /* ---- Destinations (generated scene photography) ---- */
 .destGrid {
   display: grid;
@@ -419,6 +473,18 @@
   background: var(--meadow-400);
   box-shadow: inset 0 0 0 2px var(--royal-600);
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' d='M5 12l4 4 10-10'/%3E%3C/svg%3E") center / 70% no-repeat;
+}
+.tierGuide {
+  display: inline-block;
+  margin: calc(-1 * var(--space-3)) 0 var(--space-5);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step--1);
+  color: var(--sky-600);
+  text-decoration: none;
+}
+.tierGuide:hover {
+  text-decoration: underline;
 }
 .tierCta {
   margin-top: auto;
