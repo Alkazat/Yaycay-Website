@@ -4,7 +4,7 @@ test.describe('waitlist teaser (index)', () => {
   test('shows the teaser promise and the waitlist CTA', async ({ page }) => {
     await page.goto('/');
     await expect(
-      page.getByRole('heading', { name: /plan the trip\. keep the yay\./i }),
+      page.getByRole('heading', { name: /skip the stress/i }),
     ).toBeVisible();
     await expect(
       page.getByRole('button', { name: /join the waitlist/i }).first(),

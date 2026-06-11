@@ -15,33 +15,45 @@ export function Pricing() {
           <p className="lead">{pricing.intro}</p>
         </div>
         <div className={s.tierGrid}>
-          {pricing.tiers.map((tier) => (
-            <article
-              key={tier.id}
-              className={[s.tier, tier.featured ? s.tierFeatured : '']
-                .filter(Boolean)
-                .join(' ')}
-            >
-              <span className={s.tierBadge}>{tier.badge}</span>
-              <h3 className={s.tierName}>{tier.name}</h3>
-              <p className={s.tierPrice}>{tier.price}</p>
-              <p className={s.tierTagline}>{tier.tagline}</p>
-              <ul className={s.tierFeatures}>
-                {tier.features.map((f) => (
-                  <li key={f}>{f}</li>
-                ))}
-              </ul>
-              <div className={s.tierCta}>
-                <Button
-                  href="#signup"
-                  variant={tier.featured ? 'cta' : 'primary'}
-                  className="full"
-                >
-                  {CTA_LABEL}
-                </Button>
-              </div>
-            </article>
-          ))}
+          {pricing.tiers.map((tier) => {
+            const guide = tier as typeof tier & {
+              guideHref?: string;
+              guideLabel?: string;
+            };
+            return (
+              <article
+                key={tier.id}
+                className={[s.tier, tier.featured ? s.tierFeatured : '']
+                  .filter(Boolean)
+                  .join(' ')}
+              >
+                <span className={s.tierBadge}>{tier.badge}</span>
+                <h3 className={s.tierName}>{tier.name}</h3>
+                <p className={s.tierPrice}>{tier.price}</p>
+                <p className={s.tierTagline}>{tier.tagline}</p>
+                <ul className={s.tierFeatures}>
+                  {tier.features.map((f) => (
+                    <li key={f}>{f}</li>
+                  ))}
+                </ul>
+                {guide.guideHref && (
+                  <a className={s.tierGuide} href={guide.guideHref}>
+                    {guide.guideLabel ?? 'Learn more'}
+                    <span aria-hidden="true"> &rarr;</span>
+                  </a>
+                )}
+                <div className={s.tierCta}>
+                  <Button
+                    href="#signup"
+                    variant={tier.featured ? 'cta' : 'primary'}
+                    className="full"
+                  >
+                    {CTA_LABEL}
+                  </Button>
+                </div>
+              </article>
+            );
+          })}
         </div>
         <p className={s.pricingFootnote}>{pricing.footnote}</p>
       </div>
