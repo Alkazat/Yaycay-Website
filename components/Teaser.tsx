@@ -10,17 +10,6 @@ import styles from './Teaser.module.css';
 export function Teaser() {
   return (
     <main id="main" className={styles.teaser}>
-      <span
-        className={styles.cloud}
-        aria-hidden="true"
-        style={{ width: 150, height: 44, top: '12%', left: '10%', opacity: 0.9, boxShadow: '56px -16px 0 -6px var(--cream-50)' }}
-      />
-      <span
-        className={styles.cloud}
-        aria-hidden="true"
-        style={{ width: 110, height: 34, top: '22%', right: '12%', opacity: 0.8 }}
-      />
-
       <div className={styles.inner}>
         <Logo width={150} className={styles.logo} />
         <p className={styles.eyebrow}>

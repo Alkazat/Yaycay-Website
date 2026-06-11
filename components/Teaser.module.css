@@ -7,7 +7,19 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: var(--grad-scene);
+  /* Warm family photo, anchored right so the open sky sits behind the copy.
+     A soft wash keeps the headline + copy legible; the scene gradient is the
+     graceful fallback if the photo is not present. */
+  background:
+    linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.34) 0%,
+        rgba(255, 255, 255, 0.12) 42%,
+        rgba(247, 170, 21, 0.2) 100%
+      )
+      center / cover no-repeat,
+    url('/hero-family.jpg') right center / cover no-repeat,
+    var(--grad-scene);
   padding: var(--space-12) var(--space-5) var(--space-8);
 }
 
