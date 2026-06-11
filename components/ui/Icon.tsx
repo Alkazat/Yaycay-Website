@@ -41,6 +41,24 @@ const paths: Record<string, JSX.Element> = {
   map: (
     <path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2ZM9 4v14M15 6v14" />
   ),
+  clock: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7.5v5l3.5 2" />
+    </>
+  ),
+  sound: (
+    <>
+      <path d="M11 5 6 9H3v6h3l5 4V5Z" />
+      <path d="M15.5 8.5a5 5 0 0 1 0 7" />
+    </>
+  ),
+  quiz: (
+    <>
+      <path d="M4 5h16v11H9l-4 4v-4H4z" />
+      <path d="M9.2 9a2.8 2.8 0 0 1 5.4 1c0 1.8-2.6 1.8-2.6 3.4" />
+    </>
+  ),
 };
 
 export function Icon({ name, className }: { name: string; className?: string }) {

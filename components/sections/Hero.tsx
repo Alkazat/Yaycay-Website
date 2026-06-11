@@ -6,12 +6,6 @@ import s from './sections.module.css';
 export function Hero() {
   return (
     <section className={s.hero} aria-labelledby="hero-title">
-      <span className={s.heroSun} aria-hidden="true" />
-      <span
-        className={s.cloud}
-        aria-hidden="true"
-        style={{ width: 110, height: 34, top: '28%', right: '12%', opacity: 0.8 }}
-      />
       <div className="container">
         <div className={s.heroInner}>
           <p className={s.heroEyebrow}>
