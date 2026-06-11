@@ -3,6 +3,7 @@ import { Header } from '@/components/sections/Header';
 import { Hero } from '@/components/sections/Hero';
 import { Wedge } from '@/components/sections/Wedge';
 import { HowItWorks } from '@/components/sections/HowItWorks';
+import { Showcase } from '@/components/sections/Showcase';
 import { Destinations } from '@/components/sections/Destinations';
 import { Pricing } from '@/components/sections/Pricing';
 import { Proof } from '@/components/sections/Proof';
@@ -46,6 +47,7 @@ export default function HomepagePage() {
         <Hero />
         <Wedge />
         <HowItWorks />
+        <Showcase />
         <Destinations />
         <Pricing />
         <Proof />

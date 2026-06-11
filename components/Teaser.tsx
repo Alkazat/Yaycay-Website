@@ -29,10 +29,12 @@ export function Teaser() {
         </p>
         <h1 className={styles.title}>{teaser.title}</h1>
         <p className={styles.subtitle}>{teaser.subtitle}</p>
+        <p className={styles.incentive}>{teaser.incentive}</p>
         <div className={styles.formWrap}>
           <SignupForm id="waitlist" mode="waitlist" />
         </div>
         <p className={styles.note}>{teaser.note}</p>
+        <p className={styles.trust}>{teaser.trust}</p>
       </div>
 
       <div className={styles.footer}>
