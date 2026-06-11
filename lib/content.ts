@@ -5,17 +5,19 @@
 
 export const teaser = {
   eyebrow: 'Launching soon',
-  title: 'Plan the trip. Keep the yay.',
+  title: 'Plan the trip. Skip the stress. Keep the yay.',
   subtitle:
-    'Yaycay turns the admin of a family holiday into part of the fun: shared itineraries, packing lists, and a countdown the whole family loves. Join the waitlist and we will tell you the moment it opens.',
-  note: 'No spam. Just one email when we launch.',
+    'Yaycay builds the whole family holiday for you. Every child gets their own age-perfect adventure, allergies are flagged at every meal, the packing is sorted, and there is a countdown the kids cannot stop checking. You hold one calm plan instead of twenty browser tabs.',
+  incentive: 'Founding families get early access and launch pricing, before spring break.',
+  trust: 'Built by parents who were done with holiday admin.',
+  note: 'No spam. Just one email when we open.',
 };
 
 export const hero = {
   eyebrow: 'For families making memories',
   title: 'The holiday your kids will never stop talking about.',
   subtitle:
-    'One chat builds your whole trip. Every child gets a personalised adventure, the grown-ups get a calm plan, and the family keeps a memory book.',
+    'One chat builds your whole trip. Every child gets a personalised adventure, you get a calm day-by-day plan with allergies and real rest built in, and the family keeps a memory book.',
   ctaNote: 'Free to start. No app to install. Build one real day in under a minute.',
 };
 
@@ -25,23 +27,23 @@ export const wedge = {
   cards: [
     {
       icon: 'sparkle',
-      title: 'Per-child magic',
-      body: 'Every child gets their own explorer mode, quizzes pitched to their age, and a journal that is theirs to fill. One plan, a different adventure for each kid.',
-    },
-    {
-      icon: 'compass',
-      title: 'A live companion',
-      body: 'During the trip the app keeps pace with the day. Maps, the next thing to do, photo capture, and offline access when the signal drops.',
+      title: 'A different adventure for each child',
+      body: 'Every kid gets their own explorer mode, pitched to their age. The teen gets tougher challenges and a journal, the four year old gets read-aloud and tap games. One plan, a personal trip for each child.',
     },
     {
       icon: 'shield',
-      title: 'Safe and kid-paced',
-      body: 'Allergy and dietary flags ride along with every booking, surfaced to grown-ups. The day is built around real rest, not a forced march.',
+      title: 'Allergies handled, every meal',
+      body: 'Dietary and allergy flags ride on every booking and venue, surfaced to you. Safe-order lists, cross-contamination warnings, even EpiPen reminders. Eat out without the dread.',
+    },
+    {
+      icon: 'compass',
+      title: 'The mental load, lifted',
+      body: 'Bookings, costs, transport and a packing list for each child, all in one calm grown-ups view. The kids get the fun. You get the plan, and your evenings back.',
     },
     {
       icon: 'book',
-      title: 'A keepsake to keep',
-      body: 'Ratings, notes and print-grade photos become a memory book the family keeps long after you are home.',
+      title: 'A keepsake they make themselves',
+      body: 'Photo journals, star rewards, daily mini-games and a live countdown turn the trip into a book the family keeps long after you are home.',
     },
   ],
 };
@@ -68,6 +70,22 @@ export const howItWorks = {
   ],
 };
 
+export const showcase = {
+  eyebrow: 'What you get',
+  title: 'A whole trip, built around your family',
+  intro: 'One chat becomes a complete, kid-first companion for the entire holiday.',
+  items: [
+    { icon: 'compass', title: 'Day-by-day itinerary', body: 'Every day planned with the right pace, rest and travel time for your crew.' },
+    { icon: 'sparkle', title: 'Per-child adventures', body: 'Age-perfect activities, challenges and rewards for each kid.' },
+    { icon: 'shield', title: 'Allergy-safe dining', body: 'Safe and avoid guidance on every meal and venue.' },
+    { icon: 'bag', title: 'Packing lists', body: 'A sorted, tickable list for every child and the family bag.' },
+    { icon: 'map', title: 'Interactive map', body: 'Every stop pinned, one tap to see what you are doing there.' },
+    { icon: 'book', title: 'Travel journal', body: 'Photos, moods and notes that export into a keepsake book.' },
+    { icon: 'star', title: 'Rewards and games', body: 'Star banks and mini-games that keep kids excited all trip.' },
+    { icon: 'calendar', title: 'Grown-ups guide', body: 'Bookings, costs and transport in one calm logistics view.' },
+  ],
+};
+
 export const destinations = {
   eyebrow: 'Where to next',
   title: 'Adventures for every kind of family',
@@ -82,35 +100,37 @@ export const destinations = {
 
 export const pricing = {
   title: 'One holiday, two ways to buy',
-  intro: 'Pay once. No subscription on the holiday itself.',
+  intro: 'Pay once per holiday. No subscription, ever.',
   tiers: [
+    {
+      id: 'ours',
+      name: 'Done for you',
+      price: 'US$129',
+      tagline: 'We bring the AI and run the planning chat. Nothing to set up.',
+      badge: 'Most chosen',
+      featured: true,
+      features: [
+        'A guardrailed Yaycay chat builds your whole trip',
+        'No AI subscription, no tech, nothing to install',
+        'Allergy and dietary safety on every booking',
+        'Per-child adventures, packing, journal and a keepsake',
+      ],
+    },
     {
       id: 'byo',
       name: 'Bring your own AI',
       price: 'US$59',
-      tagline: 'Use the ChatGPT, Claude or Gemini you already pay for.',
-      badge: 'Accessible entry',
+      tagline: 'Already use ChatGPT, Claude or Gemini? Connect Yaycay in about two minutes.',
+      badge: 'Best value',
       featured: false,
       features: [
-        'Connect your own AI with a secure connector',
+        'Use the AI you already pay for',
+        'Guided two-minute setup, we walk you through every step',
         'The full planning and holidaying experience',
-        'Per-child modes, quizzes and journal',
-        'Live during-trip companion, offline ready',
+        'Per-child modes, safety, packing, journal and map',
       ],
-    },
-    {
-      id: 'ours',
-      name: 'Use our AI',
-      price: 'US$129',
-      tagline: 'We run the chat for you. No AI subscription needed.',
-      badge: 'Most chosen',
-      featured: true,
-      features: [
-        'A guardrailed Yaycay chat builds your trip',
-        'Everything in Bring your own AI',
-        'Allergy and dietary safety on every booking',
-        'A memory book to keep when you are home',
-      ],
+      guideHref: '/connect',
+      guideLabel: 'See the 2-minute setup',
     },
   ],
   footnote: 'Prices in US dollars. One-off purchase per holiday.',
@@ -157,8 +177,9 @@ export const footer = {
       heading: 'Product',
       links: [
         { label: 'How it works', href: '#how-it-works' },
+        { label: 'What you get', href: '#showcase' },
         { label: 'Pricing', href: '#pricing' },
-        { label: 'Build your free day', href: '#signup' },
+        { label: 'Connect your own AI', href: '/connect' },
       ],
     },
     {
@@ -169,4 +190,50 @@ export const footer = {
       ],
     },
   ],
+};
+
+export const connect = {
+  title: 'Connect your own AI',
+  intro:
+    'On the Bring your own AI plan, Yaycay plugs into the assistant you already use, so it can build and run your whole trip from inside your own chat. It takes about two minutes. Pick your assistant below.',
+  needs: [
+    'A Yaycay account, plus your personal connection link (find it in your Yaycay dashboard under Settings, then Connect).',
+    'A current ChatGPT, Claude or Gemini account on a plan that supports connectors.',
+  ],
+  providers: [
+    {
+      id: 'chatgpt',
+      name: 'ChatGPT',
+      tone: 'meadow',
+      steps: [
+        'In ChatGPT, open Settings and go to Connectors (available on Plus, Pro and Business plans).',
+        'Choose Add custom connector and paste your Yaycay connection link.',
+        'Sign in when prompted and approve access. This authorises Yaycay for your account only, and you can remove it any time.',
+        'Start a new chat, switch on the Yaycay connector, and say "Plan our family holiday". Yaycay takes it from there.',
+      ],
+    },
+    {
+      id: 'claude',
+      name: 'Claude',
+      tone: 'sun',
+      steps: [
+        'In Claude, open Settings and go to Connectors.',
+        'Choose Add custom connector and paste your Yaycay connection link.',
+        'Complete the sign-in and approve the permissions Yaycay requests.',
+        'Open a new chat, enable Yaycay, and ask it to start planning your trip.',
+      ],
+    },
+    {
+      id: 'gemini',
+      name: 'Gemini',
+      tone: 'sky',
+      steps: [
+        'In Gemini, open your Extensions or Apps settings.',
+        'Add Yaycay with your connection link, or find Yaycay in the directory if it is listed there.',
+        'Sign in and grant access when Gemini asks.',
+        'Mention Yaycay in a prompt, for example "Use Yaycay to plan our trip", to begin.',
+      ],
+    },
+  ],
+  help: 'Stuck on any step? Email hello@yaycay.ai and we will get you connected.',
 };
