@@ -35,7 +35,7 @@ function clientIp(request: Request): string {
 
 /**
  * The website's single backend touch. It prefers the BE `/signup/capture`
- * endpoint (the @yaycay/contracts handshake); if that is not configured or
+ * endpoint (the @alkazat/contracts handshake); if that is not configured or
  * fails, it captures the lead straight into Brevo behind the same function so
  * the funnel never drops a signup. The redirect is wired here so the client
  * always gets a destination back.

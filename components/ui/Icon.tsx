@@ -1,5 +1,7 @@
 /** A small set of outlined box-art icons. Decorative, hidden from a11y. */
 
+import type { JSX } from 'react';
+
 const paths: Record<string, JSX.Element> = {
   sparkle: (
     <path d="M12 3l2.2 5.3L20 10l-5.3 2.2L12 18l-2.2-5.8L4 10l5.8-1.7L12 3z" />
