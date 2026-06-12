@@ -8,19 +8,29 @@
   justify-content: center;
   text-align: center;
   /* Warm family photo, anchored right so the open sky sits behind the copy.
-     A soft wash keeps the headline + copy legible; the scene gradient is the
+     A cream wash (stronger through the text band) keeps every line legible at
+     WCAG AA over a busy, partly-bright photo; the scene gradient is the
      graceful fallback if the photo is not present. */
   background:
     linear-gradient(
         180deg,
-        rgba(255, 255, 255, 0.34) 0%,
-        rgba(255, 255, 255, 0.12) 42%,
-        rgba(247, 170, 21, 0.2) 100%
-      )
-      center / cover no-repeat,
+        rgba(251, 247, 236, 0.3) 0%,
+        rgba(251, 247, 236, 0.58) 18%,
+        rgba(251, 247, 236, 0.58) 92%,
+        rgba(251, 247, 236, 0.5) 100%
+      ),
     url('/hero-family.jpg') right center / cover no-repeat,
     var(--grad-scene);
   padding: var(--space-12) var(--space-5) var(--space-8);
+}
+/* Honour a user's request for more contrast with a heavier wash. */
+@media (prefers-contrast: more) {
+  .teaser {
+    background:
+      linear-gradient(180deg, rgba(251, 247, 236, 0.82), rgba(251, 247, 236, 0.82)),
+      url('/hero-family.jpg') right center / cover no-repeat,
+      var(--grad-scene);
+  }
 }
 
 /* Soft cream clouds drifting behind the content. */
@@ -56,7 +66,7 @@
   font-size: var(--step--1);
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--royal-700);
+  color: var(--royal-800);
   margin-bottom: var(--space-5);
 }
 .eyebrow svg {
@@ -75,9 +85,9 @@
   -webkit-text-stroke: 4px var(--royal-600);
   paint-order: stroke fill;
   text-shadow:
-    1px 1px 0 var(--royal-700),
-    2px 2px 0 var(--royal-700),
-    3px 3px 0 var(--royal-700),
+    1px 1px 0 var(--royal-800),
+    2px 2px 0 var(--royal-800),
+    3px 3px 0 var(--royal-800),
     4px 6px 9px rgba(4, 34, 63, 0.4);
 }
 
@@ -113,15 +123,14 @@
   margin-top: var(--space-3);
   font-weight: 700;
   font-size: var(--step--1);
-  color: var(--royal-700);
-  opacity: 0.9;
+  color: var(--royal-800);
 }
 
 .note {
   margin-top: var(--space-4);
   font-size: var(--step--1);
   font-weight: 700;
-  color: var(--royal-700);
+  color: var(--royal-800);
 }
 
 .footer {
@@ -135,10 +144,10 @@
   justify-content: center;
   font-size: var(--step--1);
   font-weight: 700;
-  color: var(--royal-700);
+  color: var(--royal-800);
 }
 .footer a {
-  color: var(--royal-700);
+  color: var(--royal-800);
 }
 .tagline {
   font-family: var(--font-display);

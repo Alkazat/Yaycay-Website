@@ -136,7 +136,8 @@
   margin-top: var(--space-4);
   text-align: left;
   font-size: var(--step--1);
-  color: var(--muted);
+  font-weight: 600;
+  color: var(--royal-800);
 }
 .consent input {
   margin-top: 3px;
@@ -145,8 +146,11 @@
   flex: none;
   accent-color: var(--sky-500);
 }
+/* Underlined + dark so the link is distinguishable without relying on colour,
+   and passes contrast over the photo hero. */
 .consent a {
-  color: var(--sky-600);
+  color: var(--royal-800);
+  text-decoration: underline;
 }
 
 .message {
@@ -156,11 +160,12 @@
   font-size: var(--step--1);
   font-weight: 700;
 }
+/* Darker status hues so transient messages stay legible over the photo. */
 .error {
-  color: var(--alert);
+  color: var(--coral-600);
 }
 .success {
-  color: var(--success);
+  color: var(--meadow-600);
 }
 
 @media (max-width: 520px) {

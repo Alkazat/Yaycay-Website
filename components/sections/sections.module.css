@@ -65,9 +65,29 @@
 .hero {
   position: relative;
   overflow: hidden;
-  background: var(--grad-scene);
+  /* Warm family photo behind the funnel hero, with a cream wash (stronger
+     through the text band) so the copy stays legible at WCAG AA. The scene
+     gradient is the graceful fallback. */
+  background:
+    linear-gradient(
+        180deg,
+        rgba(251, 247, 236, 0.34) 0%,
+        rgba(251, 247, 236, 0.58) 22%,
+        rgba(251, 247, 236, 0.58) 88%,
+        rgba(251, 247, 236, 0.44) 100%
+      ),
+    url('/hero-family.jpg') right center / cover no-repeat,
+    var(--grad-scene);
   border-bottom: 3px solid var(--royal-600);
   padding-block: var(--space-12) var(--space-16);
+}
+@media (prefers-contrast: more) {
+  .hero {
+    background:
+      linear-gradient(180deg, rgba(251, 247, 236, 0.82), rgba(251, 247, 236, 0.82)),
+      url('/hero-family.jpg') right center / cover no-repeat,
+      var(--grad-scene);
+  }
 }
 /* Scene clouds, behind the content. */
 .heroSun {
