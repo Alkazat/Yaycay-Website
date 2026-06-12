@@ -16,27 +16,32 @@ const LINKS = [
 export function Header() {
   const pathname = usePathname();
   return (
-    <header className={s.header}>
-      <div className={`container ${s.headerInner}`}>
-        <Link href="/homepage" aria-label="Yaycay home">
-          <Logo width={108} />
-        </Link>
-        <nav className={s.headerNav} aria-label="Primary">
+    <div className={s.navStack}>
+      <header className={s.header}>
+        <div className={`container ${s.headerInner}`}>
+          <Link href="/homepage" aria-label="Yaycay home">
+            <Logo width={108} />
+          </Link>
+          <Button href="/homepage#start" variant="cta">
+            Start today, free
+          </Button>
+        </div>
+      </header>
+      {/* Sticky sub-nav: menu items stay visible (scrolls horizontally on phones). */}
+      <nav className={s.subNav} aria-label="Primary">
+        <div className={`container ${s.subNavInner}`}>
           {LINKS.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className={s.navLink}
+              className={s.subNavLink}
               aria-current={pathname === l.href ? 'page' : undefined}
             >
               {l.label}
             </Link>
           ))}
-        </nav>
-        <Button href="/homepage#start" variant="cta">
-          Start today, free
-        </Button>
-      </div>
-    </header>
+        </div>
+      </nav>
+    </div>
   );
 }
