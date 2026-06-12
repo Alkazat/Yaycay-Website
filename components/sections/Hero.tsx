@@ -5,7 +5,7 @@ import s from './sections.module.css';
 
 export function Hero() {
   return (
-    <section className={s.hero} aria-labelledby="hero-title">
+    <section id="start" className={s.hero} aria-labelledby="hero-title">
       <div className="container">
         <div className={s.heroInner}>
           <p className={s.heroEyebrow}>

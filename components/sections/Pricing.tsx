@@ -44,7 +44,7 @@ export function Pricing() {
                 )}
                 <div className={s.tierCta}>
                   <Button
-                    href="#signup"
+                    href="/homepage#start"
                     variant={tier.featured ? 'cta' : 'primary'}
                     className="full"
                   >

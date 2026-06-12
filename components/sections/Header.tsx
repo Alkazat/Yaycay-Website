@@ -1,29 +1,41 @@
+'use client';
+
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Logo } from '@/components/ui/Logo';
 import { Button } from '@/components/ui/Button';
-import { CTA_LABEL } from '@/lib/site';
 import s from './sections.module.css';
 
+const LINKS = [
+  { href: '/homepage', label: 'Home' },
+  { href: '/for-kids', label: 'For kids' },
+  { href: '/for-parents', label: 'For parents' },
+  { href: '/pricing', label: 'Pricing' },
+];
+
 export function Header() {
+  const pathname = usePathname();
   return (
     <header className={s.header}>
       <div className={`container ${s.headerInner}`}>
-        <a href="#top" aria-label="Yaycay home" style={{ textDecoration: 'none' }}>
-          <Logo />
-        </a>
+        <Link href="/homepage" aria-label="Yaycay home">
+          <Logo width={108} />
+        </Link>
         <nav className={s.headerNav} aria-label="Primary">
-          <a className={s.navLink} href="#how-it-works">
-            How it works
-          </a>
-          <a className={s.navLink} href="#destinations">
-            Destinations
-          </a>
-          <a className={s.navLink} href="#pricing">
-            Pricing
-          </a>
-          <Button href="#signup" variant="cta">
-            {CTA_LABEL}
-          </Button>
+          {LINKS.map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              className={s.navLink}
+              aria-current={pathname === l.href ? 'page' : undefined}
+            >
+              {l.label}
+            </Link>
+          ))}
         </nav>
+        <Button href="/homepage#start" variant="cta">
+          Start today, free
+        </Button>
       </div>
     </header>
   );

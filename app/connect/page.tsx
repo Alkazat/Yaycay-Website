@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   description:
     'Use the Bring your own AI plan? Connect Yaycay to ChatGPT, Claude or Gemini in about two minutes with these step-by-step instructions.',
   alternates: { canonical: '/connect' },
+  robots: { index: false, follow: false },
 };
 
 const TONE: Record<string, string> = {
@@ -75,7 +76,7 @@ export default function ConnectPage() {
             </p>
 
             <div className={s.backCta}>
-              <Button href="/homepage#pricing" variant="primary">
+              <Button href="/pricing" variant="primary">
                 Back to pricing
               </Button>
             </div>
