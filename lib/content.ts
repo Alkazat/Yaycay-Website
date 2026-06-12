@@ -174,15 +174,69 @@ export const finalCta = {
   body: 'See exactly what your family gets. One real day, built for one of your kids, in under a minute.',
 };
 
+export const explore = {
+  title: 'One trip, two kinds of happy',
+  intro: 'The kids get an adventure they help build. You get the calm of a plan that runs itself.',
+  cards: [
+    {
+      href: '/for-kids',
+      eyebrow: 'For the kids',
+      title: 'An adventure they own',
+      body: 'Their own explorer mode, games, challenges, rewards and a journal they fill in themselves.',
+      cta: 'See the kids experience',
+      tone: 'sun',
+    },
+    {
+      href: '/for-parents',
+      eyebrow: 'For the grown-ups',
+      title: 'A weight off your shoulders',
+      body: 'The whole plan, allergies handled, packing sorted, and the logistics kept quietly to one side.',
+      cta: 'See what parents get',
+      tone: 'sky',
+    },
+  ],
+};
+
+export const forKids = {
+  eyebrow: 'For the kids',
+  title: 'A trip they help build, and never forget',
+  subtitle:
+    'Yaycay turns the holiday into an adventure book each child actually owns, pitched perfectly to their age.',
+  features: [
+    { icon: 'sparkle', title: 'Their own explorer mode', body: 'The teen gets tougher challenges and a journal. The little one gets bigger text, read-aloud and tap games. Everyone gets a trip that feels made for them.' },
+    { icon: 'quiz', title: 'Challenges and quizzes', body: 'Spot-it games, photo missions and age-pitched questions on every stop, so the learning hides inside the fun.' },
+    { icon: 'star', title: 'Real rewards', body: 'Stars turn into holiday spending money. Doing the day earns the treat, and the kids stay motivated all trip.' },
+    { icon: 'book', title: 'Their own journal', body: 'Photos, moods and notes the kids add themselves, that export into a printable keepsake book of the trip.' },
+    { icon: 'map', title: 'An interactive map', body: 'Every stop pinned. One tap shows what you are doing there, with a kid-friendly story for each place.' },
+    { icon: 'clock', title: 'A countdown to take-off', body: 'Counts down the sleeps, so the excitement builds for weeks before you even pack.' },
+  ],
+};
+
+export const forParents = {
+  eyebrow: 'For the grown-ups',
+  title: 'You carry less. You enjoy more.',
+  subtitle:
+    'Yaycay takes the admin of a family holiday off your plate, so the only thing left to do is enjoy it.',
+  features: [
+    { icon: 'compass', title: 'The mental load, lifted', body: 'One calm plan instead of twenty browser tabs. Every child is balanced into the day, so nobody is bored and nobody is dragged along.' },
+    { icon: 'shield', title: 'Allergies handled, every meal', body: 'Safe and avoid guidance on every booking and venue, cross-contamination warnings, and EpiPen reminders. Eat out without the dread.' },
+    { icon: 'calendar', title: 'A grown-ups guide', body: 'Bookings to confirm, costs in your own currency, and transport with fares, all in one quiet view the kids never see.' },
+    { icon: 'bag', title: 'Packing, sorted', body: 'A tickable list for every child and the family bag, so nothing essential gets left on the bench.' },
+    { icon: 'plane', title: 'Works on the plane', body: 'The whole plan keeps working offline, so a dead signal never strands you mid-trip.' },
+    { icon: 'sound', title: 'You actually relax', body: 'With the plan handled and the kids delighted, you finally get to be on the holiday too.' },
+  ],
+};
+
 export const footer = {
   blurb: 'A family holiday companion. One chat builds the trip, every child gets an adventure, and the family keeps the memories.',
   columns: [
     {
       heading: 'Product',
       links: [
-        { label: 'How it works', href: '#how-it-works' },
-        { label: 'What you get', href: '#showcase' },
-        { label: 'Pricing', href: '#pricing' },
+        { label: 'Home', href: '/homepage' },
+        { label: 'For kids', href: '/for-kids' },
+        { label: 'For parents', href: '/for-parents' },
+        { label: 'Pricing', href: '/pricing' },
         { label: 'Connect your own AI', href: '/connect' },
       ],
     },

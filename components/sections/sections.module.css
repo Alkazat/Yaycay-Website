@@ -61,6 +61,99 @@
   }
 }
 
+.navLink[aria-current='page'] {
+  background: var(--sky-100);
+  color: var(--royal-800);
+}
+
+/* ---- Inner page hero (no signup form) ---- */
+.pageHero {
+  position: relative;
+  overflow: hidden;
+  background: var(--grad-scene);
+  border-bottom: 3px solid var(--royal-600);
+  padding-block: var(--space-12);
+  text-align: center;
+}
+.pageHeroInner {
+  position: relative;
+  max-width: 720px;
+  margin-inline: auto;
+}
+.pageHeroEyebrow {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: var(--step--1);
+  color: var(--royal-800);
+  margin: 0 0 var(--space-3);
+}
+.pageHeroTitle {
+  font-size: var(--step-4);
+  line-height: 1.04;
+  margin-bottom: var(--space-5);
+}
+.pageHeroSubtitle {
+  font-size: var(--step-1);
+  font-weight: 700;
+  color: var(--royal-800);
+  max-width: 600px;
+  margin: 0 auto var(--space-6);
+}
+
+/* ---- Home explore split (links to the audience pages) ---- */
+.splitGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-6);
+}
+.splitCard {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border: 2.5px solid var(--royal-600);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--card-lift);
+  padding: var(--space-7);
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+.splitCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+.splitSun {
+  background: var(--sun-100);
+}
+.splitSky {
+  background: var(--sky-50);
+}
+.splitEyebrow {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: var(--step--1);
+  color: var(--royal-800);
+  margin: 0 0 var(--space-2);
+}
+.splitTitle {
+  font-size: var(--step-2);
+  margin-bottom: var(--space-2);
+}
+.splitBody {
+  color: var(--text-body);
+  font-weight: 600;
+  margin-bottom: var(--space-4);
+}
+.splitCta {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--sky-700);
+}
+
 /* ---- Hero ---- */
 .hero {
   position: relative;
