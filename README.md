@@ -21,7 +21,7 @@ hands the visitor to the app demo.
   scale, safe areas, container, and compatibility aliases). Replace the vendored
   copy with the published `@yaycay` package when it ships.
 - The only backend integration is the `POST /signup/capture` DTO from
-  `@yaycay/contracts`, mirrored in `lib/contracts.ts` until the package is pinned.
+  `@alkazat/contracts`, mirrored in `lib/contracts.ts` until the package is pinned.
 
 ## Getting started
 
