@@ -3,16 +3,16 @@ import { Header } from '@/components/sections/Header';
 import { Hero } from '@/components/sections/Hero';
 import { Wedge } from '@/components/sections/Wedge';
 import { HowItWorks } from '@/components/sections/HowItWorks';
+import { ExploreSplit } from '@/components/sections/ExploreSplit';
 import { Showcase } from '@/components/sections/Showcase';
 import { Destinations } from '@/components/sections/Destinations';
-import { Pricing } from '@/components/sections/Pricing';
 import { Proof } from '@/components/sections/Proof';
 import { FinalCta } from '@/components/sections/FinalCta';
 import { Footer } from '@/components/sections/Footer';
 import { SITE } from '@/lib/site';
 
-// The finished funnel, parked here until launch. Hidden from search until the
-// teaser is retired and this becomes the index again.
+// The full site, staged here behind the waitlist until launch. Hidden from
+// search until the flip (this becomes the index and the teaser is retired).
 export const metadata: Metadata = {
   title: 'The family holiday companion',
   alternates: { canonical: '/homepage' },
@@ -41,15 +41,14 @@ export default function HomepagePage() {
   return (
     <>
       <JsonLd />
-      <span id="top" />
       <Header />
       <main id="main">
         <Hero />
         <Wedge />
         <HowItWorks />
+        <ExploreSplit />
         <Showcase />
         <Destinations />
-        <Pricing />
         <Proof />
         <FinalCta />
       </main>
