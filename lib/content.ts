@@ -379,6 +379,74 @@ export const allergySafety = {
   closing: { headline: "Build a free day with your family's needs built in.", subhead: 'Tell us where you are going, who is coming, and exactly what they cannot eat. Your free day arrives with every meal flagged and the questions to ask, in your inbox within 24 hours.', secondary: { label: 'How the whole trip works', href: '/how-it-works' } },
 };
 
+// ---- Explorer types (the four user types, promise-led) ----
+// Lead with the promise to each person, then the experiences that back it up.
+export const explorerTypes = {
+  eyebrow: 'One holiday, every age',
+  title: 'One holiday. Four ways to live it.',
+  intro: 'Everyone in the family gets their own version of the same trip, pitched to exactly where they are. Here is the promise we make to each of them, and the experiences that keep it.',
+  types: [
+    {
+      badge: '🐣',
+      name: 'Little Explorer',
+      age: 'Under 6',
+      promise: 'The littlest one leads, before they can even read.',
+      experiences: [
+        'Their day, read aloud. They tap, Yaycay reads. No reading required.',
+        'Gentle on purpose. Wow-facts and stickers, never puzzles or pressure.',
+        'Wins they can collect. Stars and reward stickers, just for doing the day.',
+      ],
+      tone: 'sun',
+    },
+    {
+      badge: '🧭',
+      name: 'Explorer',
+      age: '7 to 11',
+      promise: 'They are excited about tomorrow before today is even over.',
+      experiences: [
+        'Puzzles hidden in the day. A challenge waiting at every stop.',
+        'A reason to come back. Wow-facts, streaks and a growing star bank.',
+        'Their own journal. They record the trip themselves, in their words.',
+      ],
+      tone: 'sky',
+    },
+    {
+      badge: '🚀',
+      name: 'Big Explorer',
+      age: '12 to 16',
+      promise: 'The one who is "too cool for this" quietly gets into it.',
+      experiences: [
+        'Deeper by design. Bonus quizzes and deep-dive facts, not baby stuff.',
+        'Treated their age. Real challenges for the completionist who would otherwise age out.',
+        'Theirs to keep. A journal and keepsake a teenager actually holds on to.',
+      ],
+      tone: 'coral',
+    },
+    {
+      badge: '🛡️',
+      name: 'Grown Ups',
+      age: 'You',
+      promise: 'You get to be on the holiday, not run it.',
+      experiences: [
+        'The whole plan, behind one PIN. Bookings, logistics and the grown-ups guide.',
+        'The safety view in full. Allergy and EpiPen protocol the kids never need to see.',
+        'You hold the plan. They hold the magic.',
+      ],
+      tone: 'royal',
+      href: '/for-parents',
+      hrefLabel: 'See the grown-ups command centre',
+    },
+  ],
+  access: {
+    title: 'Grown-ups stuff stays with the grown-ups.',
+    body: 'Children live in the Explorers view: their adventures, their journal, their rewards. The logistics, the bookings and the full safety notes live in the Grown-ups view, behind a simple four-digit PIN. On a child profile, that view is not switched off, it is not there at all.',
+  },
+  grows: {
+    title: 'One account. Every age. It grows with them.',
+    body: 'Add a profile for each child and Yaycay pitches every day to them. A four-year-old, a fourteen-year-old and you, on the same trip, each getting their own version. When the little one becomes an Explorer, the trip grows up with them.',
+  },
+};
+
 export const footer = {
   blurb: 'A family holiday companion. One chat builds the trip, every child gets an adventure, and the family keeps the memories.',
   legal:
