@@ -320,6 +320,65 @@ export const freeDayRequested = {
   cta: { label: 'How it works', href: '/how-it-works' },
 };
 
+// ---- Phase 2 pages (verbatim work-order copy) ----
+
+export const howItWorksPage = {
+  hero: {
+    headline: 'Here is exactly what happens, from first chat to keepsake.',
+    subhead: 'No mystery, no magic. One conversation in, one holiday out, and Yaycay alongside you the whole way.',
+  },
+  steps: [
+    { n: 1, title: 'One chat. Tell us about your crew.', body: "You talk, Yaycay listens. Where you are going, when, who is coming, their ages, their allergies and dietary needs, what each kid is obsessed with this month, how much walking grandad's knees can take. If you already have flights or a hotel booked, forward the confirmation emails and they are in the plan. Got a screenshot of a place someone recommended? Send that too. The chat takes most families fifteen to twenty minutes, and you can come back and add things any time." },
+    { n: 2, title: 'Your holiday arrives, built around each child.', body: "A day-by-day plan for the whole trip. Each child gets their own adventures inside the family's shared day, matched to their age and interests. Days are routed sensibly, so you are not crossing the city twice before lunch. Energy is balanced across the trip: big days, slow days, and rest built in on purpose. Mixed group? Toddlers, teens and grandparents get balanced too; nobody's day is an afterthought. Every meal suggestion carries allergy flags and the reasoning behind them. And every day has a weather contingency already attached.", cta: { label: 'See a real day', href: '/sample-day' } },
+    { n: 3, title: 'Tweak anything. It is your holiday.', body: 'Swap a museum for a beach. Tell Yaycay the kids hated the idea of the night safari, or that you have booked a cooking class on Thursday. The plan reshapes around your changes, and everything downstream (routes, meals, energy balance) adjusts with it. You stay the decision-maker. Yaycay does the reshuffling.' },
+    { n: 4, title: 'On the trip, Yaycay is in your pocket.', body: "This is where most planners go quiet. Yaycay does not. It rains: your wet-weather plan is one tap away. Everyone is hungry now: ask what is good near here, and the suggestions arrive with your family's allergy flags already applied. The six-year-old has hit the wall at 2pm: ask for a quiet hour nearby. You are never the only one holding the trip together, because the trip is being held for you." },
+    { n: 5, title: 'The holiday becomes a book.', body: 'Through the trip, each child fills their own journal: stamps, drawings, one question a day. Afterwards, the journals, your days and your photos come together as a keepsake memory book. It is the bit nobody expects and nobody forgets. Holidays end. This does not.', cta: { label: 'What the kids get', href: '/for-kids' } },
+  ],
+  faqHead: 'The questions sceptics ask. Fair enough.',
+  faq: [
+    { q: 'What if a suggestion is wrong or closed?', a: 'It happens; no planner on earth is immune. Tell Yaycay during the trip and you get a replacement in moments, not a refund form. The plan is alive, not laminated.' },
+    { q: 'Do you book flights and hotels?', a: 'No. Yaycay is not a booking engine. You book where you like; forward the confirmations and they fold into the plan. We plan and accompany, we do not sell you flights.' },
+    { q: 'Is this just ChatGPT with a logo?', a: 'No. Generic assistants give plausible answers with no structure, no allergy checking layer, no journals, no trip companion. Yaycay is the family layer that generic chat does not have. If you already pay for an assistant, the US$59 tier puts that layer on top of it.' },
+  ],
+  faqCta: { label: 'More questions answered', href: '/faq' },
+  closing: { headline: 'Start with the free day. Judge us on it.', subhead: 'Three questions, then one full day of your actual holiday, in your inbox within 24 hours.', secondary: { label: 'See a real free day first', href: '/sample-day' } },
+};
+
+export const sampleDay = {
+  contextHeadline: 'This is a real free day.',
+  contextSub: "Built for the Walker family: Singapore, four days, Sam (9), Pip (6), and Pip's tree-nut allergy. Nothing below has been polished for marketing. This is what arrives in your inbox.",
+  artefact: {
+    title: 'Day 2 in Singapore: Gardens, hawkers and one very good rain plan',
+    sub: 'Tuesday. Forecast: 31°C, likely afternoon storm. Energy plan: big morning, slow middle, gentle evening.',
+    blocks: [
+      { time: '8.30am', title: 'Gardens by the Bay, two adventures running side by side.', body: ['For Sam (9): the Supertree Grove engineering hunt. Six questions on his journal page, including "find the tree that breathes for the building". He is looking for the exhaust vents, though he will not know that yet.', 'For Pip (6): the Hidden Creatures trail through the Cloud Forest. Seven animals to spot and stamp. The seventh is genuinely hard to find. That is deliberate.'], note: 'Each child gets their own version of the same morning. Same place, same family, two different adventures.' },
+      { time: '12.30pm', title: 'Lunch at Satay by the Bay.', body: ['Why this one: open-air hawker centre, five minutes\' walk, and we have flagged the stalls where satay sauce contains peanuts and cross-contact is likely. Three stalls are flagged as lower-risk for tree nuts based on their published menus, but please confirm with the stall holder on the day. Here is the question to show them, in English and Mandarin: "Does this dish contain any nuts or nut oils? My daughter has a serious tree-nut allergy."'], note: 'Every meal comes with flags, checks and reminders that help you stay in control. We show our reasoning. You make the call, and you confirm on the day.', allergy: true },
+      { time: '2pm', title: 'The rain plan, already loaded.', body: ['The forecast says afternoon storm, so the afternoon is indoors by design: the Future World galleries at ArtScience Museum. Pre-book the 2.15pm entry (link in your plan). If the storm misses, swap to the Marina Barrage kite lawn. Both options are seven minutes from lunch. Either way, nobody is standing in rain googling "things to do Singapore wet weather".'], note: 'Contingencies are built in before you leave, not improvised on the day.' },
+      { time: '4.30pm', title: 'Hotel pool. That is it. That is the plan.', body: ['Six-year-olds have a battery. Day 2 of a four-day trip is exactly when it runs out. The evening is deliberately empty except for one easy dinner suggestion nearby (allergy flags included).'], note: 'A good family plan includes doing less. We schedule the rest, too.' },
+      { time: '9pm', title: "Pip's journal page for today.", body: ['Stamp the creatures you found. Draw the strangest plant in the Cloud Forest. One question to answer at breakfast: "If you could build a Supertree, what would yours do?"'], note: 'The journal pages become the keepsake book after the trip. This is where the holiday gets remembered.' },
+    ],
+  },
+  maths: { headline: 'That was one day. Your holiday has more of them.', body: 'The full holiday is every day planned like this, the on-trip companion answering questions where you stand, and the keepsake book at the end. US$129, once. Or US$59 with your own AI assistant. If the free day does not convince you, it cost you nothing and you keep the day.' },
+  closing: { headline: 'Now build yours.', subhead: 'Three questions about your trip. Your free day arrives in your inbox within 24 hours.', secondary: { label: 'Still comparing? See pricing', href: '/pricing' } },
+};
+
+export const allergySafety = {
+  hero: { headline: 'Travelling with a food allergy means you can never just trust a menu. We built Yaycay knowing that.', subhead: 'Every meal suggestion in your plan comes with flags, checks and reminders that help you stay in control. Here is exactly how that works, and exactly where its limits are.' },
+  check: { headline: 'What Yaycay checks before a meal makes it into your plan', body: "Your family's allergies and dietary needs are part of the trip from the first chat, not a filter you toggle later. For every restaurant, café or food stall we suggest, we check published menus and ingredient information against your family's needs. We flag dishes and venues where your allergen commonly appears, including the unobvious places (satay sauce, pesto, curry pastes, fried foods sharing oil). We flag cross-contact risks where the cuisine or kitchen style makes them likely. We note which venues publish allergen menus and which do not. And every suggestion carries a plain-language note: what we checked, what we could not verify, and what to confirm on the day." },
+  cannot: { headline: 'What we cannot check, and will not pretend to', body: 'We cannot see inside a kitchen. We cannot know that a menu changed yesterday, that a supplier substituted an ingredient, or that a relief chef is in today. We cannot guarantee any meal, anywhere, is free of your child\'s allergen, and we will never use the words "100% safe", because nobody can honestly say them. What we can do is make sure you walk in informed: what to ask, how to ask it, and what the risks are likely to be. The final check is always yours, on the day, with the people cooking the food. Our job is to make that check easy and to make sure it never gets forgotten in the holiday blur.' },
+  tools: {
+    headline: 'Built into every day of your trip',
+    items: [
+      { title: 'Ask-the-kitchen cards', body: "The exact question to ask, written in the local language and yours, specific to your child's allergy. Show it at the counter. No mime, no hoping." },
+      { title: 'Meal-time reminders', body: 'Before each planned meal, a reminder of the flags for that venue and what to confirm. Useful on day one. More useful on day six, when guards drop.' },
+      { title: 'On-the-ground checks', body: "Plans change and everyone ends up hungry somewhere unplanned. Ask Yaycay what is nearby, and suggestions arrive with your family's flags already applied, plus the same confirm-on-the-day notes." },
+    ],
+    cta: { label: 'See these in a real day', href: '/sample-day' },
+  },
+  beyond: { headline: 'Not just allergies', body: 'The same flags, checks and reminders work for coeliac disease, intolerances, vegetarian and vegan kids, halal and kosher needs, and the child who is simply in a beige-food era. Tell Yaycay once, in the first chat. Every meal suggestion on the trip carries it from then on.' },
+  closing: { headline: "Build a free day with your family's needs built in.", subhead: 'Tell us where you are going, who is coming, and exactly what they cannot eat. Your free day arrives with every meal flagged and the questions to ask, in your inbox within 24 hours.', secondary: { label: 'How the whole trip works', href: '/how-it-works' } },
+};
+
 export const footer = {
   blurb: 'A family holiday companion. One chat builds the trip, every child gets an adventure, and the family keeps the memories.',
   legal:
@@ -328,11 +387,19 @@ export const footer = {
     {
       heading: 'Product',
       links: [
-        { label: 'Home', href: '/homepage' },
-        { label: 'For kids', href: '/for-kids' },
-        { label: 'For parents', href: '/for-parents' },
+        { label: 'How it works', href: '/how-it-works' },
+        { label: 'Sample day', href: '/sample-day' },
         { label: 'Pricing', href: '/pricing' },
         { label: 'Connect your own AI', href: '/connect' },
+        { label: 'Build your free day', href: '/free-day' },
+      ],
+    },
+    {
+      heading: 'For families',
+      links: [
+        { label: 'For parents', href: '/for-parents' },
+        { label: 'For kids', href: '/for-kids' },
+        { label: 'Allergy and dietary safety', href: '/allergy-safety' },
       ],
     },
     {
