@@ -9,6 +9,13 @@ concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
 
+# @alkazat/contracts is published to GitHub Packages under the @alkazat scope.
+# packages:read + NODE_AUTH_TOKEN let `npm ci` resolve it via the committed
+# .npmrc auth line.
+permissions:
+  contents: read
+  packages: read
+
 jobs:
   verify:
     name: Lint, typecheck, unit, build
@@ -19,6 +26,8 @@ jobs:
         with:
           node-version: 20
       - run: npm ci --no-audit --no-fund
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: npm run lint
       - run: npm run typecheck
       - run: npm test
@@ -33,6 +42,8 @@ jobs:
         with:
           node-version: 20
       - run: npm ci --no-audit --no-fund
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # phone + desktop run on Chromium; the iPad (tablet) project runs on WebKit.
       - run: npx playwright install --with-deps chromium webkit
       - run: npm run test:e2e
@@ -52,6 +63,8 @@ jobs:
         with:
           node-version: 20
       - run: npm ci --no-audit --no-fund
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: npm run build
       - name: Run Lighthouse CI
         run: |
