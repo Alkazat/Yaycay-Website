@@ -379,6 +379,64 @@ export const allergySafety = {
   closing: { headline: "Build a free day with your family's needs built in.", subhead: 'Tell us where you are going, who is coming, and exactly what they cannot eat. Your free day arrives with every meal flagged and the questions to ask, in your inbox within 24 hours.', secondary: { label: 'How the whole trip works', href: '/how-it-works' } },
 };
 
+// ---- For parents page (verbatim spec + the Grown Ups command centre) ----
+export const forParentsPage = {
+  hero: {
+    headline: 'You plan it. You pack it. You carry it. You are also, technically, on holiday.',
+    subhead: 'Yaycay exists for the parent who is the itinerary. The mental load, lifted.',
+  },
+  invisible: {
+    headline: 'Nobody sees the work. We will list it anyway.',
+    items: [
+      'Researching whether the laksa place can do dairy-free.',
+      'Holding the backup plan for the backup plan.',
+      'Knowing the museum shuts at four on Tuesdays.',
+      'Being asked "what are we doing today?" by four people who could, in theory, also read.',
+      'Re-planning Thursday at 11pm because the forecast changed.',
+      'Remembering which child is currently refusing which food.',
+      'Booking things in a timezone you have not adjusted to yet.',
+    ],
+  },
+  ledger: {
+    headline: 'Hand it over. Piece by piece.',
+    pairs: [
+      { pain: 'The twenty research tabs', held: 'One chat that already knows your family.' },
+      { pain: 'The restaurant vetting', held: 'Allergy flags, checks and reminders on every meal suggestion, with the reasoning shown, so you stay in control.' },
+      { pain: 'The "what if it rains"', held: 'A contingency attached to every day before you leave.' },
+      { pain: 'The being-the-itinerary', held: 'Everyone can see the plan. You are no longer the app.' },
+      { pain: 'The 11pm re-plan', held: 'Tell Yaycay what changed. The plan reshapes itself.' },
+      { pain: 'The bored-kid emergencies', held: 'Each child has their own adventures, built for their age, before boredom gets a vote.' },
+    ],
+    cta: { label: 'See how it works', href: '/how-it-works' },
+  },
+  commandCentre: {
+    eyebrow: 'The grown-ups command centre',
+    headline: 'Your side of the app. Behind one PIN.',
+    body: 'Yaycay has two views. The kids live in Explorers: their adventures, their journal, their rewards. You get the Grown-ups view, opened with a simple four-digit PIN the kids never see. It holds the part of the trip that is yours to carry.',
+    items: [
+      'The full plan: bookings, times and logistics, in one place.',
+      'The safety view in full: every note shown to you, not the kid "ask a grown-up" cue.',
+      'The allergy and EpiPen protocol, with the dietary flags for your crew.',
+      'The grown-ups guide and checklist, packing and documents.',
+      'Manage every profile: add a child, set their age band, let it grow with them.',
+    ],
+  },
+  group: {
+    headline: 'Seven people, three dietary needs, one nana who naps at two.',
+    subhead: 'Big mixed groups are where family plans usually fall apart. They are where Yaycay starts.',
+    body: 'Tell Yaycay everyone who is coming: the toddler, the teenager who claims to hate everything, the grandparents and what their knees can manage. The plan balances energy levels across the group, splits the day where it helps (teens to the climbing wall, nana to the gardens, everyone back together for dinner), and carries every dietary need in every meal suggestion. You stop being the diplomat. The plan does the negotiating.',
+  },
+  present: {
+    headline: 'And on the trip itself, you get to be present.',
+    body: 'That is the actual product. Not the itinerary, not the app. The version of the holiday where you are at the table, in the pool, in the photo, because the answers are handled. Parents tell us the strangest part is the quiet: nobody asking you what is next, because everyone already knows.',
+  },
+  closing: {
+    headline: 'Start by handing over one day.',
+    subhead: 'Three questions about your trip. We will plan one full day, free, allergy checks and rain plan included. In your inbox within 24 hours.',
+    secondary: { label: 'Travelling with an allergy? Read this first', href: '/allergy-safety' },
+  },
+};
+
 // ---- Explorer types (the four user types, promise-led) ----
 // Lead with the promise to each person, then the experiences that back it up.
 export const explorerTypes = {
