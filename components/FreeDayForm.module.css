@@ -1,0 +1,99 @@
+.form {
+  width: 100%;
+  max-width: 560px;
+  text-align: left;
+}
+
+.hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.field {
+  margin-bottom: var(--space-4);
+}
+.label {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step-0);
+  margin-bottom: var(--space-2);
+  color: var(--text-strong);
+}
+.input,
+.textarea {
+  width: 100%;
+  min-height: 52px;
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--step-0);
+  color: var(--ink);
+  background: var(--surface-card);
+  border: 2.5px solid var(--royal-500);
+  border-radius: var(--radius-md);
+}
+.textarea {
+  resize: vertical;
+  line-height: 1.5;
+}
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--muted);
+  font-weight: 400;
+}
+.input:focus-visible,
+.textarea:focus-visible {
+  outline: none;
+  box-shadow: var(--ring-focus);
+}
+
+.submit {
+  width: 100%;
+  min-height: 56px;
+  margin-top: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step-1);
+  color: var(--royal-800);
+  background: var(--sun-400);
+  border: 2.5px solid var(--sun-600);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--pop-sun), var(--gloss-top);
+  cursor: pointer;
+  transition:
+    transform var(--dur-fast) var(--ease-bounce),
+    box-shadow var(--dur-fast) var(--ease-bounce),
+    filter var(--dur-fast) var(--ease-out);
+  -webkit-tap-highlight-color: transparent;
+}
+.submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: saturate(1.06) brightness(1.03);
+}
+.submit:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--sun-600), var(--gloss-top);
+}
+.submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.reassurance {
+  margin: var(--space-3) 0 0;
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--muted);
+}
+.message {
+  min-height: 1.4em;
+  margin: var(--space-2) 0 0;
+  font-size: var(--step--1);
+  font-weight: 700;
+  color: var(--coral-600);
+}

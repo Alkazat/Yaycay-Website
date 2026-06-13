@@ -227,8 +227,103 @@ export const forParents = {
   ],
 };
 
+// Homepage copy, built verbatim to the work-order spec (Section 4, Homepage).
+// British/Australian English, no em-dashes, USD prices. {curly} = founder fills.
+export const home = {
+  hero: {
+    headline: 'The holiday your kids will never stop talking about',
+    subhead:
+      'One chat builds the whole trip. Yaycay plans around your kids, checks every meal against their allergies, travels with you, and turns it all into a keepsake. Paid once, for this holiday only.',
+    primaryCta: { label: 'Build your free day', href: '/free-day' },
+    secondaryCta: { label: 'See a real free day first', href: '/sample-day' },
+  },
+  recognition: {
+    headline: 'You know how this usually goes.',
+    body: 'Twenty browser tabs. A spreadsheet nobody else opens. Screenshots in the family chat. And on the trip itself, you are the one holding it all: the bookings, the backup plans, the "is this restaurant safe for her". Everyone else relaxes. You navigate.',
+  },
+  pillars: {
+    headline: 'Yaycay carries the trip, so you can be on it.',
+    subhead: 'The mental load, lifted. Here is what that actually means.',
+    cards: [
+      {
+        title: 'Built around your kids',
+        body: "Every child gets their own adventures, matched to their age and what makes them light up. A nine-year-old's day and a six-year-old's day, woven into one family plan. They even get their own travel journal.",
+      },
+      {
+        title: 'With you the whole way',
+        body: 'Most planners stop at departure. Yaycay travels with you: what to do when it rains, where to eat near where you actually are, with allergy flags and checks on every meal suggestion so you stay in control.',
+      },
+      {
+        title: 'Paid once, for this holiday',
+        body: 'No subscription. No annual plan quietly renewing in March. One price for one holiday, because families take holidays, not subscriptions.',
+      },
+    ],
+    cta: { label: 'How it works', href: '/how-it-works' },
+  },
+  proofTeaser: {
+    headline: "Don't take our word for it. Read a real day.",
+    subhead:
+      "Here is one full day from a family's Singapore trip: two kids, one tree-nut allergy, one rainy afternoon, fully handled.",
+    body: 'Morning adventures for each child. Lunch chosen with the allergy reasoning shown, not hidden. A rain plan that was ready before the clouds were. This is exactly what your free day looks like.',
+    cta: { label: 'See the full sample day', href: '/sample-day' },
+  },
+  steps: {
+    headline: 'One chat builds the whole trip.',
+    items: [
+      { n: 1, title: 'Tell us about your crew', body: 'Where you are going, when, who is coming, ages, allergies, what they love. One conversation, not a form marathon.' },
+      { n: 2, title: 'Your plan arrives', body: "A day-by-day holiday built around each child, with every meal suggestion checked against your family's dietary needs." },
+      { n: 3, title: 'Yaycay travels with you', body: 'Answers on the ground, rain plans, "what is near us right now", without you re-researching at 9pm in the hotel.' },
+      { n: 4, title: 'Keep the memories', body: "After the trip, the kids' journals and your days become a keepsake book the family will actually look at again." },
+    ],
+    cta: { label: 'See the full picture', href: '/how-it-works' },
+  },
+  allergyBlock: {
+    headline: 'Travelling with an allergy? We take that as seriously as you do.',
+    body: 'Every meal suggestion comes with flags, checks and reminders that help you stay in control: what we have checked, what you should confirm on the day, and how to ask in the local language. We will never tell you a restaurant is "100% safe", because no one honestly can. We will make sure you are never guessing.',
+    cta: { label: 'How allergy checks work', href: '/allergy-safety' },
+  },
+  testimonials: {
+    headline: 'For families making memories',
+    items: [
+      { quote: 'I read the plan on the plane and realised I had nothing to hold in my head. First time ever.', who: '{Name}, mum of two (7 and 10), {destination} trip' },
+      { quote: 'Our daughter has a nut allergy. Having the questions to ask written out in Japanese changed the whole trip.', who: '{Name}, dad of {kids}, Japan' },
+      { quote: 'The keepsake book made my eight-year-old cry happy tears. Worth it for that alone.', who: '{Name}, parent of {kids}, {destination}' },
+    ],
+  },
+  pricingTeaser: {
+    headline: 'One holiday. One price. Nothing renewing.',
+    body: 'US$129 for the full done-for-you holiday, or US$59 if you bring the AI assistant you already pay for. Both start the same way: with a free day, built for your family, no card required.',
+    primaryCta: { label: 'See pricing', href: '/pricing' },
+    secondaryCta: { label: 'Bring your own AI', href: '/connect' },
+  },
+};
+
+// The free day form (work-order C21): three trip questions, email last.
+export const freeDayForm = {
+  headline: 'Build your free day',
+  subhead:
+    'Tell us three things about your trip. We will build one full day, free, so you can judge us on the real thing. Your free day arrives in your inbox within 24 hours.',
+  fields: {
+    destination: 'Where are you headed (or dreaming of)?',
+    when: 'When, roughly?',
+    who: 'Who is coming? Ages, and any allergies or dietary needs.',
+    email: 'Where should we send it?',
+  },
+  button: 'Build your free day',
+  reassurance:
+    'No card. No subscription. One email with your day in it, and that is a promise, not a drip campaign.',
+};
+
+export const freeDayRequested = {
+  headline: 'Your day is being built.',
+  body: 'We are on it. Your free day arrives in your inbox within 24 hours, with each kid\'s adventure, flagged meals and a backup plan inside. One email, exactly as promised. While you wait, see how a free day becomes a whole holiday.',
+  cta: { label: 'How it works', href: '/how-it-works' },
+};
+
 export const footer = {
   blurb: 'A family holiday companion. One chat builds the trip, every child gets an adventure, and the family keeps the memories.',
+  legal:
+    'Yaycay provides planning assistance and information, not medical or safety guarantees. Always confirm allergy and dietary requirements directly with food providers.',
   columns: [
     {
       heading: 'Product',

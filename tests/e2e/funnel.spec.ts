@@ -1,13 +1,14 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('marketing funnel', () => {
-  test('loads with the hero promise and the single CTA', async ({ page }) => {
+test.describe('homepage and free day', () => {
+  test('homepage loads with the hero promise and the CTA', async ({ page }) => {
     await page.goto('/homepage');
     await expect(
       page.getByRole('heading', {
         name: /the holiday your kids will never stop talking about/i,
       }),
     ).toBeVisible();
+    // The closing free-day form's submit button.
     await expect(
       page.getByRole('button', { name: /build your free day/i }).first(),
     ).toBeVisible();
@@ -15,33 +16,31 @@ test.describe('marketing funnel', () => {
     await expect(page.getByText('For families making memories.')).toBeVisible();
   });
 
-  test('captures a lead and hands the visitor to the demo', async ({ page }) => {
-    // Stand in for BE/Brevo: return success with a same-origin redirect so the
-    // handoff navigation can be asserted in-test.
+  test('the free day form captures and confirms', async ({ page }) => {
+    // Stand in for the BE/Brevo capture.
     await page.route('**/api/signup', async (route) => {
       await route.fulfill({
         status: 200,
         contentType: 'application/json',
-        body: JSON.stringify({ ok: true, redirectUrl: '/legal/privacy' }),
+        body: JSON.stringify({ ok: true }),
       });
     });
 
-    await page.goto('/homepage');
+    await page.goto('/free-day');
+    await page.getByLabel(/where should we send it/i).fill('sarah@example.com');
+    await page.getByRole('button', { name: /build your free day/i }).click();
 
-    const email = page.getByLabel(/email address/i).first();
-    await email.fill('parent@example.com');
-    await page.getByRole('button', { name: /build your free day/i }).first().click();
-
-    await expect(page.getByRole('status').first()).toContainText(/free day/i);
-    // The handoff fires.
-    await expect(page).toHaveURL(/\/legal\/privacy/);
+    // The order is placed; the visitor lands on the confirmation page.
+    await expect(page).toHaveURL(/\/free-day-requested/);
+    await expect(
+      page.getByRole('heading', { name: /your day is being built/i }),
+    ).toBeVisible();
   });
 
   test('shows a validation message for a bad email', async ({ page }) => {
-    await page.goto('/homepage');
-    const email = page.getByLabel(/email address/i).first();
-    await email.fill('nope');
-    await page.getByRole('button', { name: /build your free day/i }).first().click();
+    await page.goto('/free-day');
+    await page.getByLabel(/where should we send it/i).fill('nope');
+    await page.getByRole('button', { name: /build your free day/i }).click();
     await expect(page.getByRole('status').first()).toContainText(/valid email/i);
   });
 });

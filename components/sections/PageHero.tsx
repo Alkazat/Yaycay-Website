@@ -21,8 +21,8 @@ export function PageHero({
             {title}
           </h1>
           <p className={s.pageHeroSubtitle}>{subtitle}</p>
-          <Button href="/homepage#start" variant="cta" size="lg">
-            Start today, free
+          <Button href="/free-day" variant="cta" size="lg">
+            Build your free day
           </Button>
         </div>
       </div>
