@@ -36,6 +36,12 @@
   border-top-color: var(--royal-600);
   background: var(--sky-50);
 }
+.typeShot {
+  margin-bottom: var(--space-4);
+}
+.noteShot {
+  margin-top: var(--space-4);
+}
 .badge {
   display: grid;
   place-items: center;
