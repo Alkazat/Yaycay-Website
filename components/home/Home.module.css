@@ -311,6 +311,11 @@
   margin-bottom: var(--space-6);
 }
 
+.allergyShot {
+  margin: var(--space-6) auto 0;
+  max-width: 300px;
+}
+
 /* 7 · Testimonials */
 .tstGrid {
   display: grid;

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Header } from '@/components/sections/Header';
 import { Footer } from '@/components/sections/Footer';
+import { ImageSlot } from '@/components/ui/ImageSlot';
 import { ClosingForm } from '@/components/sections/ClosingForm';
 import { sampleDay as p } from '@/lib/content';
 import s from '@/components/content/content.module.css';
@@ -47,9 +48,14 @@ export default function SampleDayPage() {
                       </p>
                     ))}
                     {'allergy' in b && b.allergy && (
-                      <p className={s.allergyCard}>
-                        Ask-the-kitchen card included, in English and Mandarin.
-                      </p>
+                      <ImageSlot
+                        src="/media/sample/ask-the-kitchen-card.png"
+                        alt="The ask-the-kitchen card: a tree-nut allergy question shown in English and Mandarin to show staff at the counter"
+                        source="app-screenshot"
+                        frame="none"
+                        ratio="16 / 9"
+                        brief='App screenshot. The bilingual "ask-the-kitchen" card as it appears in the plan: the question "Does this dish contain any nuts or nut oils? My daughter has a serious tree-nut allergy." in English and Mandarin, in a clean card a parent can show at the stall. Soft-green checked styling with a clear text label, never colour alone.'
+                      />
                     )}
                     <p className={s.marginNote}>{b.note}</p>
                   </div>

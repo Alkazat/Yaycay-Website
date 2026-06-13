@@ -1,40 +1,9 @@
 import { Button } from '@/components/ui/Button';
 import { Icon } from '@/components/ui/Icon';
+import { ImageSlot } from '@/components/ui/ImageSlot';
 import { FreeDayForm } from '@/components/FreeDayForm';
 import { home } from '@/lib/content';
 import s from './Home.module.css';
-
-/** Decorative "free day" preview card shown beside the hero copy. */
-function PreviewCard() {
-  return (
-    <div className={s.preview} aria-hidden="true">
-      <div className={s.previewHead}>
-        <span className={s.previewDay}>Day 3</span>
-        <span>Sentosa, Singapore</span>
-      </div>
-      <ul className={s.previewList}>
-        <li className={s.previewRow}>
-          <span className={`${s.previewDot} ${s.dotSky}`} />
-          <span>Ollie, 9: Oceanarium shark dive</span>
-        </li>
-        <li className={s.previewRow}>
-          <span className={`${s.previewDot} ${s.dotSun}`} />
-          <span>Maya, 6: tide-pool explorer trail</span>
-        </li>
-        <li className={`${s.previewRow} ${s.previewFlag}`}>
-          <span className={s.previewFlagIcon}>
-            <Icon name="shield" />
-          </span>
-          <span>Lunch checked for tree-nut allergy</span>
-        </li>
-        <li className={s.previewRow}>
-          <span className={`${s.previewDot} ${s.dotMeadow}`} />
-          <span>Rain plan: ArtScience Museum, ready</span>
-        </li>
-      </ul>
-    </div>
-  );
-}
 
 export function Home() {
   return (
@@ -57,7 +26,14 @@ export function Home() {
                 </Button>
               </div>
             </div>
-            <PreviewCard />
+            <ImageSlot
+              src="/media/home/hero-chat.png"
+              alt="The Yaycay planning chat building the Walkers' Singapore trip, three trip questions answered and a day taking shape"
+              source="app-screenshot"
+              frame="phone"
+              ratio="9 / 17"
+              brief="App screenshot. The live planning chat mid-conversation for the Walker family (Singapore, Sam 9, Pip 6, tree-nut allergy). Show 2-3 Yaycay chat bubbles in blue and one parent reply, with a day card just beginning to render beneath (per-child morning, an allergy flag chip). Clean status bar, no personal data. This is the hero 'UI proof' panel of the photo+UI pairing."
+            />
           </div>
         </div>
       </section>
@@ -102,6 +78,19 @@ export function Home() {
         </div>
       </section>
 
+      {/* Documentary photo band (pairing rule: warmth beside the UI proof) */}
+      <section className="section">
+        <div className="container">
+          <ImageSlot
+            src="/media/home/present-parent.jpg"
+            alt="A parent fully present on holiday with their kids at golden hour, not buried in a phone"
+            source="nanobanana"
+            ratio="16 / 7"
+            brief="Nanobanana image. Documentary family-travel photograph, warm cream/sand grade, golden-hour available light. A parent walking a sunlit street or beach with two children mid-activity (one holding a gelato, one a map), shot from behind or over the shoulder. NO identifiable minor faces (back views, motion blur, or cropped above the face). The feeling is 'I am actually on this holiday', the opposite of being the walking itinerary. No posed smiles, no stock look."
+          />
+        </div>
+      </section>
+
       {/* 4 · Proof teaser */}
       <section className={`section ${s.proof}`} aria-labelledby="proof-title">
         <div className="container">
@@ -116,8 +105,15 @@ export function Home() {
                 {home.proofTeaser.cta.label}
               </Button>
             </div>
-            <div className={s.proofArt} aria-hidden="true">
-              <PreviewCard />
+            <div className={s.proofArt}>
+              <ImageSlot
+                src="/media/home/sample-day-crop.png"
+                alt="A cropped view of the Walkers' sample free day, showing the allergy-vetted lunch card with its reasoning"
+                source="app-screenshot"
+                frame="browser"
+                ratio="4 / 3"
+                brief="App screenshot. A cropped section of the rendered free-day document for the Walker family (Singapore day 2), centred on the Satay by the Bay lunch block: the venue, the flagged stalls, and the visible 'what we checked / confirm on the day' reasoning. One margin annotation visible. This is the proof-teaser artwork."
+              />
               <p className={s.proofAnnotation}>
                 The allergy reasoning is shown on the card, not hidden.
               </p>
@@ -167,6 +163,15 @@ export function Home() {
             <Button href={home.allergyBlock.cta.href} variant="primary">
               {home.allergyBlock.cta.label}
             </Button>
+            <ImageSlot
+              className={s.allergyShot}
+              src="/media/home/allergy-meal-card.png"
+              alt="An allergy-checked meal suggestion card flagging tree-nut risk, with what was checked and what to confirm on the day"
+              source="app-screenshot"
+              frame="phone"
+              ratio="9 / 14"
+              brief="App screenshot. A single meal-suggestion card from the Walker plan: venue name, a soft-green 'checked' row and an amber 'confirm on the day' caution row (text labels, never colour alone), the tree-nut flag, and the 'ask the kitchen' line in English and Mandarin. Shows flags-checks-reminders without ever saying 'safe' or '100%'."
+            />
           </div>
         </div>
       </section>

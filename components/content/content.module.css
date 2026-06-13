@@ -85,6 +85,14 @@
   text-decoration: underline;
 }
 
+.heroPhoto {
+  max-width: 760px;
+  margin: var(--space-7) auto 0;
+}
+.stepShot {
+  margin-top: var(--space-4);
+}
+
 /* Mini FAQ */
 .faq {
   max-width: 820px;

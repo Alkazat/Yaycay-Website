@@ -1,0 +1,83 @@
+.slot {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  border: 2.5px dashed var(--royal-500);
+  border-radius: var(--radius-lg);
+  background:
+    repeating-linear-gradient(
+      45deg,
+      var(--sky-50),
+      var(--sky-50) 12px,
+      var(--cream-100) 12px,
+      var(--cream-100) 24px
+    );
+  overflow: hidden;
+}
+.inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  overflow: auto;
+}
+.badge {
+  align-self: flex-start;
+  border-radius: var(--radius-pill);
+  padding: 2px var(--space-3);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step--1);
+  border: 2px solid var(--royal-700);
+}
+.badgeApp {
+  background: var(--sky-500);
+  color: #fff;
+}
+.badgeNano {
+  background: var(--sun-400);
+  color: var(--royal-800);
+}
+.alt {
+  margin: var(--space-1) 0 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step-0);
+  color: var(--royal-800);
+}
+.brief {
+  margin: 0;
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--text-body);
+  line-height: 1.5;
+}
+.path {
+  margin-top: auto;
+  font-size: var(--step--1);
+  color: var(--royal-700);
+  background: var(--surface-card);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-sm);
+  padding: 2px var(--space-2);
+  align-self: flex-start;
+  word-break: break-all;
+}
+
+/* Slim matte-navy phone frame for UI screenshots (per visual system). */
+.phone {
+  border: 8px solid var(--royal-800);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-lg);
+  background: var(--cream-100);
+  max-width: 320px;
+  margin-inline: auto;
+}
+.browser {
+  border: 2.5px solid var(--royal-800);
+  border-top-width: 28px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
