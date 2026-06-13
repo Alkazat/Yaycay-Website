@@ -58,6 +58,7 @@ export async function POST(request: Request) {
   const email = (body.email ?? '').trim().toLowerCase();
   const consent = Boolean(body.consent);
   const source = typeof body.source === 'string' ? body.source : undefined;
+  const trip = body.trip;
 
   // Honeypot: a hidden field no human fills. If it has a value, treat as a bot.
   // Acknowledge with a normal-looking response so the bot moves on, but never
@@ -78,13 +79,18 @@ export async function POST(request: Request) {
   const redirectUrl = demoHandoffUrl(email);
   const apiBase = process.env.NEXT_PUBLIC_API_BASE;
 
-  // Preferred path: hand the lead to BE, which owns marketing_contacts + Brevo.
+  // Preferred path: hand the lead to BE (@alkazat/contracts POST /signup-capture),
+  // which owns marketing_contacts + Brevo sync. Public endpoint: send the project
+  // anon key as the `apikey` header, no JWT.
   if (apiBase) {
     try {
-      const res = await fetch(`${apiBase.replace(/\/$/, '')}/signup/capture`, {
+      const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+      const apiKey = process.env.API_KEY;
+      if (apiKey) headers.apikey = apiKey;
+      const res = await fetch(`${apiBase.replace(/\/$/, '')}/signup-capture`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, consent, source } satisfies SignupCaptureRequest),
+        headers,
+        body: JSON.stringify({ email, consent, source, trip } satisfies SignupCaptureRequest),
       });
       if (res.ok) {
         const data = (await res.json().catch(() => ({}))) as Partial<SignupCaptureResponse>;
