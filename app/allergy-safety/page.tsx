@@ -2,9 +2,37 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Header } from '@/components/sections/Header';
 import { Footer } from '@/components/sections/Footer';
+import { ImageSlot, type ImageSlotProps } from '@/components/ui/ImageSlot';
 import { ClosingForm } from '@/components/sections/ClosingForm';
 import { allergySafety as p } from '@/lib/content';
 import s from '@/components/content/content.module.css';
+
+const TOOL_IMAGES: ImageSlotProps[] = [
+  {
+    src: '/media/allergy/ask-the-kitchen-card.png',
+    alt: 'An ask-the-kitchen card showing a tree-nut allergy question in the local language and English',
+    source: 'app-screenshot',
+    frame: 'phone',
+    ratio: '9 / 13',
+    brief: 'App screenshot. The ask-the-kitchen card for a tree-nut allergy, the question in the local language and English, sized to show at a counter. Clean, legible, one clear question. Text labels throughout, never colour alone.',
+  },
+  {
+    src: '/media/allergy/meal-time-reminder.png',
+    alt: 'A pre-meal reminder listing the flags for the chosen venue and what to confirm before eating',
+    source: 'app-screenshot',
+    frame: 'phone',
+    ratio: '9 / 13',
+    brief: "App screenshot. A meal-time reminder notification that appears before a planned meal: the venue, its flags, and a short 'confirm before you order' checklist. Amber caution row with an explicit text label. The 'more useful on day six' tool.",
+  },
+  {
+    src: '/media/allergy/on-the-ground-check.png',
+    alt: 'The companion suggesting nearby places to eat, each already carrying the family allergy flags and confirm-on-the-day notes',
+    source: 'app-screenshot',
+    frame: 'phone',
+    ratio: '9 / 13',
+    brief: "App screenshot. The on-the-ground check: a parent asks what is nearby, and two suggestions return with the family's tree-nut flags and confirm-on-the-day notes already applied. Shows the safety layer following them off-plan.",
+  },
+];
 
 export const metadata: Metadata = {
   title: 'Allergy and dietary safety',
@@ -52,10 +80,13 @@ export default function AllergySafetyPage() {
               </h2>
             </div>
             <div className={s.toolsRow}>
-              {p.tools.items.map((t) => (
+              {p.tools.items.map((t, i) => (
                 <article key={t.title} className={s.tool}>
                   <h3 className={s.toolTitle}>{t.title}</h3>
                   <p className={s.toolBody}>{t.body}</p>
+                  {TOOL_IMAGES[i] && (
+                    <ImageSlot {...TOOL_IMAGES[i]} className={s.stepShot} />
+                  )}
                 </article>
               ))}
             </div>
