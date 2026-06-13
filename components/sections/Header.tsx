@@ -22,8 +22,8 @@ export function Header() {
           <Link href="/homepage" aria-label="Yaycay home">
             <Logo width={108} />
           </Link>
-          <Button href="/homepage#start" variant="cta">
-            Start today, free
+          <Button href="/free-day" variant="cta">
+            Build your free day
           </Button>
         </div>
       </header>

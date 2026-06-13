@@ -1,13 +1,6 @@
 import type { Metadata } from 'next';
 import { Header } from '@/components/sections/Header';
-import { Hero } from '@/components/sections/Hero';
-import { Wedge } from '@/components/sections/Wedge';
-import { HowItWorks } from '@/components/sections/HowItWorks';
-import { ExploreSplit } from '@/components/sections/ExploreSplit';
-import { Showcase } from '@/components/sections/Showcase';
-import { Destinations } from '@/components/sections/Destinations';
-import { Proof } from '@/components/sections/Proof';
-import { FinalCta } from '@/components/sections/FinalCta';
+import { Home } from '@/components/home/Home';
 import { Footer } from '@/components/sections/Footer';
 import { SITE } from '@/lib/site';
 
@@ -19,7 +12,6 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-/** Structured data so the funnel earns rich results. */
 function JsonLd() {
   const data = {
     '@context': 'https://schema.org',
@@ -42,16 +34,7 @@ export default function HomepagePage() {
     <>
       <JsonLd />
       <Header />
-      <main id="main">
-        <Hero />
-        <Wedge />
-        <HowItWorks />
-        <ExploreSplit />
-        <Showcase />
-        <Destinations />
-        <Proof />
-        <FinalCta />
-      </main>
+      <Home />
       <Footer />
     </>
   );
