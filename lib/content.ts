@@ -237,31 +237,44 @@ export const home = {
     secondaryCta: { label: 'See a real free day', href: '/sample-day' },
   },
   // The interactive hero: types a destination, then assembles a real day with a
-  // tab per child. Copy lives here; the animation lives in components/home/HeroSim.
+  // tab per child plus the grown-ups view. Copy lives here; the animation lives
+  // in components/home/HeroSim.
   heroSim: {
     placeholder: 'Where are you taking the family?',
     query: 'Singapore',
     chips: ['Family of 5', '14 September', '4 days'],
-    caption: "A plan assembling itself, from day 2 of the Walkers' Singapore trip.",
+    card: { day: 'Day 1', date: '14 Sept' },
+    caption: "A plan assembling itself, from day one of the Walkers' Singapore trip.",
     kids: [
       {
         name: 'Sam',
         age: 9,
-        accent: 'sky' as const,
+        accent: 'sky',
         items: ['Supertree engineering hunt', 'Hawker noodle taste-test', 'Night safari: the nocturnal five'],
       },
       {
         name: 'Pip',
         age: 6,
-        accent: 'sun' as const,
+        accent: 'sun',
         allergy: true,
         items: ['Cloud Forest creature trail', 'Lunch: nut-flagged satay stalls', 'Splash park at the Bay'],
       },
       {
         name: 'Theo',
         age: 3,
-        accent: 'meadow' as const,
+        accent: 'meadow',
         items: ['Water-play garden', 'Nap protected, 1-3pm', 'Early dinner: soft rice and egg'],
+      },
+      {
+        name: 'Grown-ups',
+        age: null,
+        accent: 'royal',
+        items: [
+          'Tree-nut card ready for Pip',
+          'Hotel to Gardens by the Bay: 12 min',
+          'EpiPen and water in the day bag',
+          'Rain backup: ArtScience, 2.15pm',
+        ],
       },
     ],
     flags: [
