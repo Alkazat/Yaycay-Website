@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import type { SignupCaptureRequest, SignupCaptureResponse } from '@/lib/contracts';
+import type { SignupCaptureRequest } from '@/lib/contracts';
 import { demoHandoffUrl } from '@/lib/site';
 
 export const runtime = 'nodejs';
@@ -97,11 +97,10 @@ export async function POST(request: Request) {
         body: JSON.stringify({ email, consent, source, ref, trip } satisfies SignupCaptureRequest),
       });
       if (res.ok) {
-        const data = (await res.json().catch(() => ({}))) as Partial<SignupCaptureResponse>;
-        return NextResponse.json({
-          ok: true,
-          redirectUrl: data.redirectUrl ?? redirectUrl,
-        });
+        // BE persisted the lead. Its SignupCaptureResponse (contact id + status)
+        // is for BE's own records; the post-capture destination is the
+        // website's to own, so hand back our computed demo handoff URL.
+        return NextResponse.json({ ok: true, redirectUrl });
       }
       // fall through to Brevo fallback on a non-2xx
       console.warn(`[signup] BE capture returned ${res.status}; falling back to Brevo.`);

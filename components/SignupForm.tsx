@@ -4,11 +4,13 @@ import { useId, useState } from 'react';
 import { trackLead } from '@/lib/analytics';
 import { resolveRef } from '@/lib/ref';
 import { demoHandoffUrl, CTA_LABEL, WAITLIST_LABEL } from '@/lib/site';
-import type { SignupCaptureResponse } from '@/lib/contracts';
 import styles from './SignupForm.module.css';
 
 type Status = 'idle' | 'submitting' | 'done' | 'error';
 type Mode = 'demo' | 'waitlist';
+
+/** The website's own `/api/signup` response (distinct from the BE capture DTO). */
+type SignupApiResult = { ok: boolean; redirectUrl?: string; error?: string };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -72,7 +74,7 @@ export function SignupForm({
 
       if (!res.ok) throw new Error(`Capture failed (${res.status})`);
 
-      const data = (await res.json()) as SignupCaptureResponse;
+      const data = (await res.json()) as SignupApiResult;
 
       // The single conversion event the funnel optimises against.
       trackLead();
