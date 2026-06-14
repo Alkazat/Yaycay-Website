@@ -13,6 +13,7 @@ const LINKS = [
   { href: '/for-parents', label: 'For parents' },
   { href: '/for-kids', label: 'For kids' },
   { href: '/allergy-safety', label: 'Allergy safety' },
+  { href: '/guides', label: 'Destination guides' },
   { href: '/pricing', label: 'Pricing' },
 ];
 
