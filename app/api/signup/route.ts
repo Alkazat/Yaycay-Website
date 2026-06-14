@@ -59,6 +59,10 @@ export async function POST(request: Request) {
   const consent = Boolean(body.consent);
   const source = typeof body.source === 'string' ? body.source : undefined;
   const trip = body.trip;
+  // Affiliate referral / Stripe promotion code. Carried to the app demo handoff
+  // so it survives to Checkout; also forwarded to BE for lead attribution.
+  const ref =
+    typeof body.ref === 'string' && /^[A-Za-z0-9_-]{1,40}$/.test(body.ref) ? body.ref : undefined;
 
   // Honeypot: a hidden field no human fills. If it has a value, treat as a bot.
   // Acknowledge with a normal-looking response so the bot moves on, but never
@@ -66,7 +70,7 @@ export async function POST(request: Request) {
   const trap = typeof body.company === 'string' ? body.company.trim() : '';
   if (trap) {
     console.warn('[signup] Honeypot triggered; dropping suspected bot submission.');
-    return NextResponse.json({ ok: true, redirectUrl: demoHandoffUrl(email) });
+    return NextResponse.json({ ok: true, redirectUrl: demoHandoffUrl(email, ref) });
   }
 
   if (!EMAIL_RE.test(email)) {
@@ -76,7 +80,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: 'Consent required' }, { status: 422 });
   }
 
-  const redirectUrl = demoHandoffUrl(email);
+  const redirectUrl = demoHandoffUrl(email, ref);
   const apiBase = process.env.NEXT_PUBLIC_API_BASE;
 
   // Preferred path: hand the lead to BE (@alkazat/contracts POST /signup-capture),
@@ -90,7 +94,7 @@ export async function POST(request: Request) {
       const res = await fetch(`${apiBase.replace(/\/$/, '')}/signup-capture`, {
         method: 'POST',
         headers,
-        body: JSON.stringify({ email, consent, source, trip } satisfies SignupCaptureRequest),
+        body: JSON.stringify({ email, consent, source, ref, trip } satisfies SignupCaptureRequest),
       });
       if (res.ok) {
         const data = (await res.json().catch(() => ({}))) as Partial<SignupCaptureResponse>;
