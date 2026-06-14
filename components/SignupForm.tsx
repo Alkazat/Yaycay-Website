@@ -2,6 +2,7 @@
 
 import { useId, useState } from 'react';
 import { trackLead } from '@/lib/analytics';
+import { resolveRef } from '@/lib/ref';
 import { demoHandoffUrl, CTA_LABEL, WAITLIST_LABEL } from '@/lib/site';
 import styles from './SignupForm.module.css';
 
@@ -64,10 +65,11 @@ export function SignupForm({
     const source = utm ?? (isWaitlist ? 'waitlist' : undefined);
 
     try {
+      const ref = resolveRef();
       const res = await fetch('/api/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: trimmed, consent, source, company }),
+        body: JSON.stringify({ email: trimmed, consent, source, ref, company }),
       });
 
       if (!res.ok) throw new Error(`Capture failed (${res.status})`);
@@ -86,7 +88,7 @@ export function SignupForm({
       }
 
       setMessage('Got it. Taking you to your free day...');
-      const redirect = data.redirectUrl ?? demoHandoffUrl(trimmed);
+      const redirect = data.redirectUrl ?? demoHandoffUrl(trimmed, ref);
       // Brief beat so the success state is seen, then hand off to the app demo.
       window.setTimeout(() => {
         window.location.assign(redirect);

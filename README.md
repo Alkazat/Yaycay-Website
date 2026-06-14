@@ -20,6 +20,8 @@ hands the visitor to the app demo.
   gradients). `styles/tokens.css` is a thin site-local layer on top (fluid type
   scale, safe areas, container, and compatibility aliases). Replace the vendored
   copy with the published `@yaycay` package when it ships.
+- **Brand assets** (logos): see [`BRAND-ASSETS.md`](BRAND-ASSETS.md) — the box-art **lockup**
+  leads on the funnel; the favicon, Apple touch icon, and the other marks are catalogued there.
 - The only backend integration is the `POST /signup/capture` DTO from
   `@alkazat/contracts`, mirrored in `lib/contracts.ts` until the package is pinned.
 
@@ -88,8 +90,25 @@ See `.env.example`. All values are optional for local dev.
 - CI runs lint, typecheck, unit, build, E2E and Lighthouse on every PR.
 - `develop` -> staging, `main` -> production (Vercel).
 
+## Imagery and the image pass
+
+Every page design includes an **image pass**: a standing step, not an afterthought.
+
+- Place each desired image with `components/ui/ImageSlot`. It reserves the correct
+  space and carries the production `alt`, a **source** (`app-screenshot` or
+  `nanobanana`), and the **full brief** (a screenshot instruction or an image
+  prompt), visible on the card and in `data-src`/`data-source`/`data-brief`.
+- Honour the visual system: the **pairing rule** (every emotional photo sits within
+  a viewport of real product-UI proof), documentary photography with **no
+  identifiable minor faces**, real app screenshots of the Walker/Singapore demo in a
+  navy phone frame, flat navy-line spot illustrations, and allergy UI that uses text
+  labels (never colour alone, never "safe"/"100%").
+- Assets land in `public/media/...` at the path each slot names; swap the `ImageSlot`
+  for a `next/image` once the file exists.
+
 ## Brand guardrails
 
 - Tagline is fixed: **For families making memories.** Never reword it.
 - The single CTA is **Build your free day**.
 - Writing rule: no em-dashes; use hyphens, commas, or rewrite.
+- British/Australian English; USD prices; allergy copy never claims safety.

@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from 'next';
 import { SITE } from '@/lib/site';
 import { ConsentBanner } from '@/components/ConsentBanner';
+import { JsonLd } from '@/components/JsonLd';
+import { organization, graph } from '@/lib/schema';
 // Brand fonts (Fredoka + Nunito variable webfonts) ship with the design system.
 import './globals.css';
 
@@ -26,13 +28,14 @@ export const metadata: Metadata = {
     siteName: SITE.name,
     title: 'The holiday your kids will never stop talking about.',
     description: SITE.description,
-    images: [{ url: '/og.png', width: 1200, height: 630, alt: 'Yaycay' }],
+    // og:image is produced per-page by the file-based `opengraph-image.tsx`
+    // routes (see lib/og). No static image here.
   },
   twitter: {
     card: 'summary_large_image',
     title: 'The holiday your kids will never stop talking about.',
     description: SITE.description,
-    images: ['/og.png'],
+    // twitter:image falls back to the page's opengraph-image.
   },
   robots: { index: true, follow: true },
 };
@@ -48,6 +51,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
+        <JsonLd json={graph(organization())} />
         <a href="#main" className="skip-link">
           Skip to content
         </a>

@@ -44,7 +44,7 @@ export function Pricing() {
                 )}
                 <div className={s.tierCta}>
                   <Button
-                    href="/homepage#start"
+                    href="/free-day"
                     variant={tier.featured ? 'cta' : 'primary'}
                     className="full"
                   >
