@@ -722,6 +722,7 @@ export const footer = {
       heading: 'Learn',
       links: [
         { label: 'Destination guides', href: '/guides' },
+        { label: 'Answers', href: '/answers' },
         { label: 'Compare Yaycay', href: '/vs' },
         { label: 'vs Wanderlog', href: '/vs/wanderlog' },
         { label: 'vs Layla', href: '/vs/layla' },
@@ -1128,5 +1129,477 @@ export const guides = {
     },
     heroBrief:
       'Documentary family-travel photo, Paris: a parent and children pushing toy sailboats at the Jardin du Luxembourg pond or picnicking on the Champ de Mars with the Eiffel Tower behind, soft afternoon light, a pastry bag in hand. No identifiable minor faces. Real and warm, not stock.',
+  },
+};
+
+// ---- Answers (question-led acquisition, structured for AI citation; T9) ----
+
+export const answersHub = {
+  title: 'Family travel questions, answered properly.',
+  intro:
+    'The questions parents actually type at 11pm, answered by people who have lived them. No fluff, no gates.',
+  themes: [
+    {
+      title: 'Allergies and dietary needs',
+      questions: [
+        { label: 'How do we eat out abroad with a nut-allergic child?', slug: 'eating-out-abroad-nut-allergy' },
+        { label: 'What should an allergy translation card actually say?', slug: 'allergy-translation-card-what-to-say' },
+      ],
+    },
+    {
+      title: 'Flying with kids',
+      questions: [
+        { label: 'How do you keep kids entertained on a long-haul flight without infinite screens?', slug: 'long-haul-flight-kids-entertainment' },
+      ],
+    },
+    {
+      title: 'Planning and packing',
+      questions: [
+        { label: 'How far ahead should you plan a family holiday, honestly?', slug: 'how-far-ahead-plan-family-holiday' },
+      ],
+    },
+    {
+      title: 'On the trip',
+      questions: [
+        { label: 'What do you do when it rains and the day is ruined?', slug: 'what-to-do-when-it-rains' },
+      ],
+    },
+    {
+      title: 'Ages and stages',
+      questions: [
+        { label: 'What is the best age to take kids on their first big overseas trip?', slug: 'best-age-first-overseas-trip' },
+      ],
+    },
+  ],
+  closing: {
+    headline: 'Some questions are better answered with a plan.',
+    subhead:
+      'Tell us about your trip and we will build one free day of it, your kids\' ages and allergies included.',
+  },
+};
+
+/**
+ * Answer-post template (work-order T9). Repeatable skeleton: direct-answer box,
+ * method/prose/sober sections, one visually distinct product panel after the
+ * full answer, related reading row. The product panel never appears before the
+ * answer is complete. All allergy language follows the global liability frame.
+ */
+type AnswerSection =
+  | { kind: 'method'; head: string; items: { lead: string; body: string }[] }
+  | { kind: 'prose'; head: string; body: string }
+  | { kind: 'sober'; head: string; body: string };
+
+type AnswerImage = {
+  src: string;
+  alt: string;
+  source: 'app-screenshot' | 'nanobanana';
+  frame: 'phone' | 'browser' | 'none';
+  brief: string;
+  placement: 'intro' | 'product';
+};
+
+type AnswerPost = {
+  theme: string;
+  question: string;
+  subhead: string;
+  directAnswer: string;
+  sections: AnswerSection[];
+  product: {
+    head: string;
+    body: string;
+    primaryCta: { label: string; href: string };
+    secondaryCta: { label: string; href: string };
+  };
+  related: { label: string; href: string }[];
+  image: AnswerImage;
+};
+
+export const answers: Record<string, AnswerPost> = {
+  'eating-out-abroad-nut-allergy': {
+    theme: 'Allergies and dietary needs',
+    question: 'How do we eat out abroad with a nut-allergic child?',
+    subhead:
+      'A working method from parents who do it every trip: prepare three things before you fly, follow five steps at every meal, and know what to do if something goes wrong.',
+    directAnswer:
+      'The short answer: research your destination\'s cuisine for where nuts hide, carry a written allergy card in the local language, and confirm directly with the kitchen at every single meal, every time, even at familiar chains. No app, list or recommendation replaces that direct confirmation, ours included. The method below makes it routine instead of stressful.',
+    sections: [
+      {
+        kind: 'method',
+        head: 'Before you fly: three things to prepare',
+        items: [
+          {
+            lead: 'Learn where nuts hide in the local cuisine.',
+            body: "Every cuisine has its traps. Southeast Asia: satay sauces, noodle dishes, cooking oils. Italy: pesto, pastries, gianduja. Middle East and North Africa: tahini sits beside nut sauces, and baklava dust gets everywhere. Twenty minutes of reading about your destination's specific traps beats a hundred generic checklists.",
+          },
+          {
+            lead: 'Make a written allergy card in the local language.',
+            body: 'Not a translation app on the fly; a prepared card stating the allergy, its severity, and the question you need answered. Have a native speaker or a professional service check it; machine translation gets medical nuance wrong exactly when it matters. Print several, laminate one, photograph it.',
+          },
+          {
+            lead: 'Sort medication logistics early.',
+            body: "Adrenaline auto-injectors in original packaging, a doctor's letter for security and border checks, double the quantity you expect to need, split between two bags. Check your auto-injector brand's name in the destination country; brand names differ and a pharmacist may not recognise yours.",
+          },
+        ],
+      },
+      {
+        kind: 'method',
+        head: 'At every meal: the five-step routine',
+        items: [
+          {
+            lead: 'Choose the venue before everyone is hungry.',
+            body: 'Decision quality collapses when the family is starving on a pavement. Pick lunch at breakfast.',
+          },
+          {
+            lead: 'Show the card, do not just say the words.',
+            body: 'Spoken requests get nodded through in busy kitchens. A card gets read, and often gets walked to the chef.',
+          },
+          {
+            lead: 'Ask the cross-contact question separately.',
+            body: '"Does it contain nuts?" and "is it cooked in shared oil or on shared surfaces?" are different questions. Many kitchens will answer the first honestly and never think of the second unless asked.',
+          },
+          {
+            lead: 'Watch for the confident yes.',
+            body: 'In some food cultures, "yes it\'s fine" can be politeness rather than verification. If the answer comes back faster than anyone could have checked, ask again, differently. Trust slow answers more than fast ones.',
+          },
+          {
+            lead: 'Re-check on repeat visits.',
+            body: 'The kitchen that was careful on Tuesday may have different staff on Friday. Same card, same questions, every time. It feels excessive. It is the routine working.',
+          },
+        ],
+      },
+      {
+        kind: 'sober',
+        head: 'If something goes wrong anyway',
+        body: 'Know the local emergency number before you land; it is rarely your home country\'s number, and looking it up mid-crisis is the worst time to learn it. Know the nearest hospital with an emergency department to where you are staying. Make sure both adults, and the child if old enough, can give the auto-injector. Rehearse the sentence "my child is having an allergic reaction, we need an ambulance" in the local language; put it on the back of the allergy card. None of this means it will happen. Preparing for it is what lets you relax at every other meal.',
+      },
+    ],
+    product: {
+      head: 'This is the method. Yaycay makes it routine.',
+      body: "Everything above you can do yourself, and you should regardless of what tools you use. What Yaycay adds on a trip it plans: every meal suggestion arrives pre-flagged for your child's allergy with the reasoning shown, the ask-the-kitchen card is generated in the local language for your specific allergy, and a reminder surfaces before each meal so the routine survives day six. Flags, checks and reminders that help you stay in control. The confirming, always, stays with you.",
+      primaryCta: { label: 'How allergy checks work on a Yaycay trip', href: '/allergy-safety' },
+      secondaryCta: { label: 'Build your free day', href: '/free-day' },
+    },
+    related: [
+      { label: 'What should an allergy translation card actually say?', href: '/answers/allergy-translation-card-what-to-say' },
+      { label: 'Singapore with kids (with a full allergy-eating section)', href: '/guides/singapore-with-kids' },
+      { label: 'How allergy checks work', href: '/allergy-safety' },
+    ],
+    image: {
+      src: '/media/answers/flagged-meal-card.png',
+      alt: 'A Yaycay meal suggestion with a tree-nut allergy flag, the reasoning shown, and a confirm-on-the-day reminder',
+      source: 'app-screenshot',
+      frame: 'phone',
+      placement: 'product',
+      brief: 'Real Yaycay app screenshot in a navy phone frame: a meal card from the Walker family Singapore demo dataset showing a clear text "Tree-nut allergy: flagged" label (text, never colour alone), the reasoning line, the ask-the-kitchen card link, and a before-meal reminder. AI-readable text labels.',
+    },
+  },
+
+  'allergy-translation-card-what-to-say': {
+    theme: 'Allergies and dietary needs',
+    question: 'What should an allergy translation card actually say?',
+    subhead:
+      'The card that protects your child is specific, short, and asks a question. Here is what to put on it, what to leave off, and how to get it right in another language.',
+    directAnswer:
+      'The short answer: a good allergy card names the exact allergens, states the severity in plain terms, asks the kitchen to check for cross-contact, and is written in the local language by someone who actually speaks it. Keep it to a few lines, make the allergen names unmissable, and carry several copies. A card the chef can read beats a sentence the waiter half-hears, every time. As with any tool, ours included, the card supports the conversation, it does not replace your check on the day.',
+    sections: [
+      {
+        kind: 'method',
+        head: 'What every card must contain',
+        items: [
+          {
+            lead: 'The exact allergens, named and highlighted.',
+            body: 'List the specific foods, not a category. "Peanuts and all tree nuts (almond, cashew, walnut, hazelnut, pistachio)" is clearer than "nut allergy", which a kitchen may read narrowly. Put the allergen words in bold or a different colour so they survive a quick glance.',
+          },
+          {
+            lead: 'The severity, in plain words.',
+            body: 'State that the allergy is severe and can be life-threatening if that is true. "A tiny trace can cause a dangerous reaction" tells a kitchen why you are asking twice. Avoid medical jargon that does not translate.',
+          },
+          {
+            lead: 'The cross-contact question, asked directly.',
+            body: 'Add a line the kitchen can answer: "Please tell me if this dish, or the oil or surfaces used to cook it, may have touched these foods." You want a question, not just a warning, because a question gets a reply.',
+          },
+          {
+            lead: 'A thank-you and an honest fallback.',
+            body: 'A short courtesy line earns goodwill in a busy kitchen, and a closing "if you are not sure, please tell me and we will order something else" gives staff an honest way out instead of a risky guess.',
+          },
+        ],
+      },
+      {
+        kind: 'prose',
+        head: 'Getting the language right',
+        body: 'Do not trust a live translation app for this. Machine translation mangles medical nuance exactly where precision matters, and a confident-looking wrong word is worse than no card at all. Have a native speaker, a professional translation service, or a vetted allergy-card provider produce the local-language version, and keep the English on the same card so you can both point to the same line. Print several copies, laminate one for the inevitable spill, and photograph it in case the paper goes missing. {Founder to link the specific card-translation services Yaycay recommends.}',
+      },
+      {
+        kind: 'sober',
+        head: 'One card is not the whole job',
+        body: 'A card makes the conversation reliable; it does not end it. Hand it over rather than reading it aloud, watch that it actually reaches the person cooking, and still confirm before the food arrives. Recipes change, staff change, and a card from last year may name an auto-injector brand or a phrase that needs updating. Treat it as a living document you check before every trip. It is a tool that helps you stay in control, not a guarantee, and the final confirmation always stays with you.',
+      },
+    ],
+    product: {
+      head: 'Yaycay writes the card for your trip.',
+      body: "Tell Yaycay your child's specific allergens once, at the first chat, and every trip it plans generates an ask-the-kitchen card in the local language of where you are going, naming those exact allergens and the cross-contact question. It arrives alongside each flagged meal, with a reminder before you sit down. You still hand it over, watch it reach the kitchen, and confirm on the day. The card is the tool; the check stays yours.",
+      primaryCta: { label: 'How allergy checks work on a Yaycay trip', href: '/allergy-safety' },
+      secondaryCta: { label: 'Build your free day', href: '/free-day' },
+    },
+    related: [
+      { label: 'How do we eat out abroad with a nut-allergic child?', href: '/answers/eating-out-abroad-nut-allergy' },
+      { label: 'Singapore with kids (with a full allergy-eating section)', href: '/guides/singapore-with-kids' },
+      { label: 'How allergy checks work', href: '/allergy-safety' },
+    ],
+    image: {
+      src: '/media/answers/translation-card.png',
+      alt: 'A Yaycay-generated ask-the-kitchen card in the local language, with the allergens highlighted and the cross-contact question',
+      source: 'app-screenshot',
+      frame: 'phone',
+      placement: 'product',
+      brief: 'Real Yaycay app screenshot in a navy phone frame: an ask-the-kitchen translation card for the Walker family demo, allergens highlighted as bold text, the cross-contact question, and the English shown alongside the local language. Text labels, AI-readable, no colour-only meaning.',
+    },
+  },
+
+  'long-haul-flight-kids-entertainment': {
+    theme: 'Flying with kids',
+    question: 'How do you keep kids entertained on a long-haul flight without infinite screens?',
+    subhead:
+      'Screens will do some of the work, and that is fine. The trick is the bits between: a bag of small surprises, a loose plan for the hours, and food and sleep timed on purpose.',
+    directAnswer:
+      'The short answer: pack a small, wrapped surprise for roughly every two hours of flight, mix screens with low-tech activities (sticker books, magnetic games, audio stories) so nothing gets boring, time meals and naps to the destination where you can, and lower your own expectations a notch. The goal is not a perfectly behaved child for fourteen hours; it is a manageable flight where nobody, including you, arrives in pieces.',
+    sections: [
+      {
+        kind: 'method',
+        head: 'Before you board',
+        items: [
+          {
+            lead: 'Pack a surprise bag, rationed by the hour.',
+            body: 'A handful of small, cheap, individually wrapped things (a new sticker book, a tiny puzzle, a fresh pack of felt-tips) handed out across the flight. The wrapping buys you five minutes on its own, and novelty resets a bored child faster than anything from home.',
+          },
+          {
+            lead: 'Download everything, twice.',
+            body: 'Films, audio stories, offline games and a backup of all of it, charged and loaded before you leave home. Aircraft wifi and seat-back screens fail at the worst moment. Bring child headphones and a splitter, plus a battery pack the airline allows in the cabin.',
+          },
+          {
+            lead: 'Dress for sleep, not the gate photo.',
+            body: 'Comfortable layers, a familiar comforter, and the things that signal bedtime at home. If the flight crosses a night at your destination, the plan is sleep, and the cabin gets cold.',
+          },
+        ],
+      },
+      {
+        kind: 'method',
+        head: 'In the air',
+        items: [
+          {
+            lead: 'Run the day on the destination clock.',
+            body: 'From boarding, nudge meals and sleep towards the time zone you are flying into. It softens the jet lag for the whole family and gives the flight a loose shape instead of fourteen formless hours.',
+          },
+          {
+            lead: 'Alternate, do not marathon.',
+            body: 'Screen, then a snack, then a walk to the galley, then a sticker book, then a story. Switching activity every hour or so keeps the well from running dry before you land.',
+          },
+          {
+            lead: 'Lean into the boredom, briefly.',
+            body: 'Some staring out of the window or drawing nothing in particular is fine and even useful; it is rest. You do not have to fill every minute, and a child who learns to sit with a little boredom travels better.',
+          },
+        ],
+      },
+      {
+        kind: 'sober',
+        head: 'The honest part',
+        body: 'Long-haul with young kids is genuinely hard, and some of it is just endurance. Aim for manageable, not perfect. Accept more screen time than you would at home, keep snacks and water flowing, and be kind to yourself when a toddler melts down at hour ten; the people who matter understand, and you will all have forgotten it by the pool. Build a slow, plan-free first day at the other end so nobody has to perform on no sleep.',
+      },
+    ],
+    product: {
+      head: 'Yaycay plans the trip around the flight, not despite it.',
+      body: 'When Yaycay builds your trip, it knows the long-haul is part of it. The first day at your destination is planned gently on purpose, with low-key, nap-friendly options while everyone resets, and the days build up from there. Each child still gets their own adventures; they just do not start the morning after a fourteen-hour flight. The flight is yours to survive; the landing is where we help.',
+      primaryCta: { label: 'See how a trip is planned', href: '/how-it-works' },
+      secondaryCta: { label: 'Build your free day', href: '/free-day' },
+    },
+    related: [
+      { label: 'How far ahead should you plan a family holiday, honestly?', href: '/answers/how-far-ahead-plan-family-holiday' },
+      { label: 'What is the best age to take kids on their first big overseas trip?', href: '/answers/best-age-first-overseas-trip' },
+      { label: 'See a real sample day', href: '/sample-day' },
+    ],
+    image: {
+      src: '/media/answers/flight-activities.png',
+      alt: 'A flat line illustration of a plane tray-table with a sticker book, headphones and a wrapped surprise',
+      source: 'nanobanana',
+      frame: 'none',
+      placement: 'intro',
+      brief: 'Flat navy-line spot illustration, locked style (2px navy lines, sand-filled shapes, one blue emphasis): a plane tray-table from above with a sticker book, child headphones, a small wrapped parcel and a water bottle. No 3D, no gradients, no faces.',
+    },
+  },
+
+  'how-far-ahead-plan-family-holiday': {
+    theme: 'Planning and packing',
+    question: 'How far ahead should you plan a family holiday, honestly?',
+    subhead:
+      'Far enough to lock the things that sell out and get expensive, not so far that you burn out before you go. Here is the honest timeline most families actually need.',
+    directAnswer:
+      'The short answer: book flights and accommodation around four to six months ahead for a peak-season overseas trip, lock the one or two must-do experiences that genuinely sell out as soon as dates are firm, and leave the day-to-day plan until the last few weeks. The expensive, scarce things reward early decisions; the daily itinerary rewards waiting, because young kids and weather make a rigid four-month-old schedule worthless.',
+    sections: [
+      {
+        kind: 'method',
+        head: 'What to do early, four to six months out',
+        items: [
+          {
+            lead: 'Flights and a base to sleep in.',
+            body: 'These are the things that get pricier and scarcer the longer you wait, especially across school holidays. Pin the dates, book the flights, and secure accommodation you actually like rather than what is left.',
+          },
+          {
+            lead: 'The handful of things that truly sell out.',
+            body: 'A few experiences genuinely book out months ahead (think the Ghibli Museum, certain restaurants, popular tours). If missing one would spoil the trip for a kid, lock it now. Resist booking everything else.',
+          },
+        ],
+      },
+      {
+        kind: 'method',
+        head: 'What to leave until later, two to four weeks out',
+        items: [
+          {
+            lead: 'The day-by-day plan.',
+            body: "Build the actual daily shape close to departure, when you know the weather, the kids' current obsessions, and how much you can realistically fit. A plan made four months out gets rewritten anyway.",
+          },
+          {
+            lead: 'Restaurants, day trips and the small stuff.',
+            body: 'Most meals and minor activities can be chosen days ahead or on the ground. Over-booking early just locks you into decisions your future, tireder self will resent.',
+          },
+        ],
+      },
+      {
+        kind: 'sober',
+        head: 'The trap to avoid',
+        body: 'The mistake is not planning too little; it is planning the wrong things too early and the right things too late. Families pour months into elaborate hour-by-hour itineraries, then bin them on day two when it rains or a six-year-old refuses to move, while the one tour that mattered sold out in week three. Lock the scarce and the expensive early, hold the daily detail loosely, and leave real slack for the days the trip has its own ideas.',
+      },
+    ],
+    product: {
+      head: 'Yaycay does the late, detailed planning so you do not have to.',
+      body: 'You handle the early, big decisions: dates, flights, where you are staying. When the trip gets close, tell Yaycay the details and it builds the day-by-day around your real kids and the actual forecast, with each child\'s adventures, flagged meals and a rain plan already in place. The planning that is tedious to do late, and pointless to do early, is exactly the part we take.',
+      primaryCta: { label: 'See how a trip is planned', href: '/how-it-works' },
+      secondaryCta: { label: 'Build your free day', href: '/free-day' },
+    },
+    related: [
+      { label: 'How do you keep kids entertained on a long-haul flight without infinite screens?', href: '/answers/long-haul-flight-kids-entertainment' },
+      { label: 'What do you do when it rains and the day is ruined?', href: '/answers/what-to-do-when-it-rains' },
+      { label: 'See a real sample day', href: '/sample-day' },
+    ],
+    image: {
+      src: '/media/answers/planning-timeline.png',
+      alt: 'A flat line illustration of a planning timeline from six months out to departure',
+      source: 'nanobanana',
+      frame: 'none',
+      placement: 'intro',
+      brief: 'Flat navy-line spot illustration, locked style: a horizontal timeline with two marked anchors, "4 to 6 months: flights and stay" and "2 to 4 weeks: the daily plan", a few simple node icons. Navy lines, sand fills, one blue emphasis node. No 3D, no faces.',
+    },
+  },
+
+  'what-to-do-when-it-rains': {
+    theme: 'On the trip',
+    question: 'What do you do when it rains and the day is ruined?',
+    subhead:
+      'A wet day only ruins the plan you had, not the day itself. With one indoor anchor and a change of pace, rain often turns into the trip\'s easiest, happiest afternoon.',
+    directAnswer:
+      'The short answer: have one indoor option per day already identified before you travel, so a wet morning means switching plans, not inventing one in a downpour with hungry kids. Lean into slower indoor pleasures (a museum, a pool, a long lunch, a film in the hotel), keep spare dry clothes handy, and treat the rain as permission to rest rather than a disaster. Some of the best trip memories happen on the days the weather collapses.',
+    sections: [
+      {
+        kind: 'method',
+        head: 'Before the rain, planning ahead',
+        items: [
+          {
+            lead: 'Pick one indoor anchor for every day.',
+            body: 'When you plan, note a nearby indoor option for each day: a science museum, an aquarium, a big covered market, a pool. You may never use most of them, but having the list means a wet morning costs you a decision, not the day.',
+          },
+          {
+            lead: 'Pack for it, even in summer.',
+            body: 'Lightweight rain layers, a spare set of dry clothes per child in the day bag, and quick-dry shoes. Wet, cold kids melt down; dry kids treat puddles as a feature.',
+          },
+        ],
+      },
+      {
+        kind: 'method',
+        head: 'When it actually rains',
+        items: [
+          {
+            lead: 'Switch the pace, not just the venue.',
+            body: 'Rain is a cue to slow down. Trade the packed sightseeing morning for a long, lazy indoor one: a single museum done properly, a board-game cafe, a swim. The trip needs rest days anyway, and the weather just chose one for you.',
+          },
+          {
+            lead: 'Let little kids be loud somewhere it is allowed.',
+            body: "Indoor play centres, soft-play, a hotel pool or a hands-on children's museum burn the energy that a rainy day traps inside. Find the place where running is encouraged and the afternoon fixes itself.",
+          },
+        ],
+      },
+      {
+        kind: 'sober',
+        head: 'The reframe that helps',
+        body: 'A rained-off day feels like failure only if you measure the holiday by the itinerary. Measure it by the kids instead, and a slow wet afternoon (a film, a hot chocolate, an unplanned hour together) is often the bit they remember most fondly. You did not lose a day. You swapped one kind of good day for another, and you all got a rest you would not otherwise have taken.',
+      },
+    ],
+    product: {
+      head: 'Yaycay builds the rain plan before you leave.',
+      body: "Every Yaycay day comes with the weather already considered: an indoor anchor sits inside the plan, near your other stops, so a wet forecast triggers a ready alternative instead of a scramble. And on the trip, if the day turns, you can ask Yaycay what is nearby and dry, and the suggestions arrive with your family's allergy flags already applied. The contingency is built in, not improvised at the window.",
+      primaryCta: { label: 'See a day with the rain plan built in', href: '/sample-day' },
+      secondaryCta: { label: 'Build your free day', href: '/free-day' },
+    },
+    related: [
+      { label: 'How far ahead should you plan a family holiday, honestly?', href: '/answers/how-far-ahead-plan-family-holiday' },
+      { label: 'Singapore with kids', href: '/guides/singapore-with-kids' },
+      { label: 'See how a trip is planned', href: '/how-it-works' },
+    ],
+    image: {
+      src: '/media/answers/rain-plan.png',
+      alt: 'A flat line illustration of a rain cloud paired with an indoor-museum backup plan',
+      source: 'nanobanana',
+      frame: 'none',
+      placement: 'intro',
+      brief: 'Flat navy-line spot illustration, locked style: a rain cloud on the left with an arrow to a simple museum or pool building on the right, suggesting a swap to the indoor anchor. Navy lines, sand fills, one blue emphasis. No 3D, no faces.',
+    },
+  },
+
+  'best-age-first-overseas-trip': {
+    theme: 'Ages and stages',
+    question: 'What is the best age to take kids on their first big overseas trip?',
+    subhead:
+      'There is no perfect age, only trade-offs. Most families find the sweet spot lands somewhere around six to ten, but the honest answer depends on the trip and the child.',
+    directAnswer:
+      'The short answer: for a first big overseas trip kids will actually remember and enjoy, somewhere between six and ten is the common sweet spot, old enough to walk a day, handle new food and form lasting memories, young enough to still travel cheaply and wonder at everything. But younger and older both work with the right trip: toddlers travel fine if you go slow and have no FOMO, and teenagers come alive on a trip that respects their interests. Match the destination to the age you have, not the other way round.',
+    sections: [
+      {
+        kind: 'prose',
+        head: 'Travelling with under-fives',
+        body: "Little kids travel more easily than nervous first-timers expect, with two honest caveats: they will not remember it, and the trip must move at their pace. The wins are real (flights and entry are often free or cheap, and toddlers find joy in a pigeon and a puddle), but pack light on ambition. One thing a day, protected naps, and a base with a pool beat a grand tour. You are travelling for the family's experience now, not the child's memory, and that is a perfectly good reason to go.",
+      },
+      {
+        kind: 'prose',
+        head: 'The six-to-ten sweet spot',
+        body: 'This is the range most experienced family travellers point to. Kids can walk a reasonable day, try unfamiliar food, follow the thread of a place, and crucially form memories that last. They are still cheap to fly, still delighted by almost everything, and not yet too cool to hold your hand at the aquarium. It is the age where a big trip lands hardest and gives the most back, which is exactly why so much of Yaycay is built around it.',
+      },
+      {
+        kind: 'prose',
+        head: 'Tweens and teenagers',
+        body: 'Older kids are not too old for a family trip; they just need a different one. Give a teenager a say in the plan, a genuine interest to chase (street food, photography, history, surf), and some independence within safe limits, and they re-engage fast. The trips that fail at this age are the ones that treat a fifteen-year-old like a passenger; the ones that work hand them a role. A trip built around each child, rather than an average one, is what keeps the oldest on board.',
+      },
+      {
+        kind: 'sober',
+        head: 'The real answer',
+        body: 'The best age is the one your child is now, planned for honestly. There is no window that closes, only different trips for different stages, and the family that waits for the perfect age tends to wait forever. Pick a destination that suits the kids you actually have, plan it around them rather than an idealised average child, and go. The trip you take at the age you are is always better than the perfect one you keep postponing.',
+      },
+    ],
+    product: {
+      head: 'Yaycay plans for the age your child actually is.',
+      body: 'Whatever ages you are travelling with, Yaycay builds the trip around them: a toddler gets a slow, nap-shaped day while an older sibling gets a bigger adventure, and the plan holds both without averaging them into something that suits neither. Tell us who is coming and how old they are, and each child gets a day pitched to them. The right age to go is the one you are; we plan for it.',
+      primaryCta: { label: 'See how each child gets their own day', href: '/for-kids' },
+      secondaryCta: { label: 'Build your free day', href: '/free-day' },
+    },
+    related: [
+      { label: 'How far ahead should you plan a family holiday, honestly?', href: '/answers/how-far-ahead-plan-family-holiday' },
+      { label: 'How do you keep kids entertained on a long-haul flight without infinite screens?', href: '/answers/long-haul-flight-kids-entertainment' },
+      { label: 'See a real sample day', href: '/sample-day' },
+    ],
+    image: {
+      src: '/media/answers/ages-and-stages.png',
+      alt: 'A flat line illustration of three differently sized figures, suggesting a toddler, a school-age child and a teenager',
+      source: 'nanobanana',
+      frame: 'none',
+      placement: 'intro',
+      brief: 'Flat navy-line spot illustration, locked style: three simple figures of increasing height (toddler, school-age, teen) each with a small icon of a fitting activity (a bucket, a backpack, a camera). Navy lines, sand fills, one blue emphasis. No identifiable faces, no 3D.',
+    },
   },
 };
