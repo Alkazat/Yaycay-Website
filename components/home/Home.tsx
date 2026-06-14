@@ -11,32 +11,33 @@ const claimAccent = [s.dotSky, s.dotSun, s.dotMeadow, s.dotSky];
 export function Home() {
   return (
     <main id="main">
-      {/* 1 · Hero: a live simulation of the product building a real day */}
-      <section id="top" className={s.hero} aria-labelledby="hero-title">
+      {/* 1 · Hero: a live simulation, full-width. No headline here by design —
+          the H1 lives in the section below (per the storyboard). */}
+      <section id="top" className={s.hero} aria-label="A live demonstration of Yaycay building a Singapore trip">
         <div className="container">
-          <div className={s.heroGrid}>
-            <div className={s.heroCopy}>
-              <h1 id="hero-title" className={s.heroTitle}>
-                {home.hero.headline}
-              </h1>
-              <p className={s.heroLine}>{home.hero.line}</p>
-              <div className={s.heroCtas}>
-                <Button href="#free-day" variant="cta" size="lg">
-                  {home.hero.primaryCta.label}
-                </Button>
-                <Button href={home.hero.secondaryCta.href} variant="ghost" size="lg">
-                  {home.hero.secondaryCta.label}
-                </Button>
-              </div>
-            </div>
+          <div className={s.heroStage}>
             <HeroSim />
           </div>
         </div>
       </section>
 
-      {/* 2 · Claims strip: the value props, pushed down from the old hero subhead */}
-      <section className={`section ${s.claims}`} aria-label="What Yaycay does for your family">
+      {/* 2 · The promise: the H1 + line + CTA, then the value-prop claims */}
+      <section className={`section ${s.intro}`} aria-labelledby="hero-title">
         <div className="container">
+          <div className={s.introHead}>
+            <h1 id="hero-title" className={s.heroTitle}>
+              {home.hero.headline}
+            </h1>
+            <p className={s.heroLine}>{home.hero.line}</p>
+            <div className={s.introCtas}>
+              <Button href="#free-day" variant="cta" size="lg">
+                {home.hero.primaryCta.label}
+              </Button>
+              <Button href={home.hero.secondaryCta.href} variant="ghost" size="lg">
+                {home.hero.secondaryCta.label}
+              </Button>
+            </div>
+          </div>
           <ul className={s.claimGrid}>
             {home.claims.map((c, i) => (
               <li key={c.title} className={s.claim}>

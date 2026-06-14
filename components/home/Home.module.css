@@ -58,8 +58,15 @@
   font-size: var(--step-1);
   font-weight: 600;
   color: var(--text-body);
-  max-width: 34ch;
+  max-width: 46ch;
+  margin-inline: auto;
   margin-bottom: var(--space-6);
+}
+
+/* The hero is now just the simulation, centred and prominent. */
+.heroStage {
+  max-width: 600px;
+  margin-inline: auto;
 }
 .heroCtas {
   display: flex;
@@ -68,10 +75,22 @@
   align-items: center;
 }
 
-/* 2 · Claims strip (value props pushed down from the hero) */
-.claims {
+/* 2 · The promise: H1 + line + CTA, then the value-prop claims */
+.intro {
   background: var(--cream-100);
   border-bottom: 2.5px solid var(--sand-200);
+}
+.introHead {
+  max-width: 760px;
+  margin-inline: auto;
+  text-align: center;
+  margin-bottom: var(--space-9);
+}
+.introCtas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-4);
 }
 .claimGrid {
   list-style: none;
