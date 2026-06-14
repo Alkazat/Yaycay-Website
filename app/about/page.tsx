@@ -11,7 +11,6 @@ export const metadata: Metadata = {
   description:
     'Yaycay is built by parents who build software. The founding trip, the small team you will probably hear from, and the trade-offs we accept, including never overstating what we can verify about allergies.',
   alternates: { canonical: '/about' },
-  robots: { index: false, follow: false },
 };
 
 export default function AboutPage() {

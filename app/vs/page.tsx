@@ -9,7 +9,6 @@ export const metadata: Metadata = {
   title: 'Compare Yaycay',
   description: p.intro,
   alternates: { canonical: '/vs' },
-  robots: { index: false, follow: false },
 };
 
 export default function VsHubPage() {

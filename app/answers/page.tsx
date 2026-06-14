@@ -12,7 +12,6 @@ export const metadata: Metadata = {
   title: 'Family travel questions, answered',
   description: answersHub.intro,
   alternates: { canonical: '/answers' },
-  robots: { index: false, follow: false },
 };
 
 export default function AnswersHubPage() {

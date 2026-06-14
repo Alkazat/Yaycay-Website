@@ -39,7 +39,6 @@ export const metadata: Metadata = {
   description:
     'How Yaycay handles food allergies: flags, checks and reminders that help you stay in control, exactly what we check, and exactly where the limits are. We never claim a meal is "100% safe".',
   alternates: { canonical: '/allergy-safety' },
-  robots: { index: false, follow: false },
 };
 
 export default function AllergySafetyPage() {

@@ -18,7 +18,6 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     title: a.question,
     description: a.subhead,
     alternates: { canonical: `/answers/${slug}` },
-    robots: { index: false, follow: false },
   };
 }
 

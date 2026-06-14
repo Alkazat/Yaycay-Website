@@ -12,7 +12,6 @@ export const metadata: Metadata = {
   description:
     'One holiday, four ways to live it. Little Explorers, Explorers and Big Explorers each get their own version of the trip, pitched to their age, while grown-ups hold the plan behind a PIN. It grows with your child.',
   alternates: { canonical: '/for-kids' },
-  robots: { index: false, follow: false },
 };
 
 export default function ForKidsPage() {

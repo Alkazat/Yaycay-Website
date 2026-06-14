@@ -10,7 +10,6 @@ export const metadata: Metadata = {
   description:
     'Use the Bring your own AI plan? Connect Yaycay to ChatGPT, Claude or Gemini in about two minutes with these step-by-step instructions.',
   alternates: { canonical: '/connect' },
-  robots: { index: false, follow: false },
 };
 
 const TONE: Record<string, string> = {

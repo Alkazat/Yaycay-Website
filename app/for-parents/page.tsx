@@ -12,7 +12,6 @@ export const metadata: Metadata = {
   description:
     'For the parent who is the itinerary. Yaycay names the invisible mental load and lifts it piece by piece, with a grown-ups command centre behind a PIN: logistics, the full safety view, allergy protocol and the checklist.',
   alternates: { canonical: '/for-parents' },
-  robots: { index: false, follow: false },
 };
 
 export default function ForParentsPage() {

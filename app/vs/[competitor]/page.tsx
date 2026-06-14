@@ -18,7 +18,6 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     title: `Yaycay vs ${c.name}`,
     description: c.subhead,
     alternates: { canonical: `/vs/${competitor}` },
-    robots: { index: false, follow: false },
   };
 }
 
