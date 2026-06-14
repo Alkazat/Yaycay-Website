@@ -4,6 +4,8 @@ import { Footer } from '@/components/sections/Footer';
 import { PageHero } from '@/components/sections/PageHero';
 import { Pricing } from '@/components/sections/Pricing';
 import { FinalCta } from '@/components/sections/FinalCta';
+import { JsonLd } from '@/components/JsonLd';
+import { softwareApplication, breadcrumb, graph } from '@/lib/schema';
 
 export const metadata: Metadata = {
   title: 'Pricing',
@@ -16,6 +18,15 @@ export const metadata: Metadata = {
 export default function PricingPage() {
   return (
     <>
+      <JsonLd
+        json={graph(
+          softwareApplication(),
+          breadcrumb([
+            { name: 'Home', path: '/' },
+            { name: 'Pricing', path: '/pricing' },
+          ]),
+        )}
+      />
       <Header />
       <main id="main">
         <PageHero

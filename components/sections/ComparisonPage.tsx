@@ -4,6 +4,8 @@ import { Footer } from '@/components/sections/Footer';
 import { Button } from '@/components/ui/Button';
 import { ImageSlot } from '@/components/ui/ImageSlot';
 import { ClosingForm } from '@/components/sections/ClosingForm';
+import { JsonLd } from '@/components/JsonLd';
+import { breadcrumb, graph } from '@/lib/schema';
 import { comparisons } from '@/lib/content';
 import s from '@/components/content/content.module.css';
 
@@ -15,6 +17,15 @@ export function ComparisonPage({ slug }: { slug: Slug }) {
 
   return (
     <>
+      <JsonLd
+        json={graph(
+          breadcrumb([
+            { name: 'Home', path: '/' },
+            { name: 'Compare Yaycay', path: '/vs' },
+            { name: `Yaycay vs ${c.name}`, path: `/vs/${slug}` },
+          ]),
+        )}
+      />
       <Header />
       <main id="main">
         {/* 1 · Comparison hero */}

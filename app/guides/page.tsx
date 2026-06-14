@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { Header } from '@/components/sections/Header';
 import { Footer } from '@/components/sections/Footer';
 import { ClosingForm } from '@/components/sections/ClosingForm';
+import { JsonLd } from '@/components/JsonLd';
+import { itemList, breadcrumb, graph } from '@/lib/schema';
 import { guidesHub, guides } from '@/lib/content';
 import s from '@/components/content/content.module.css';
 
@@ -20,6 +22,19 @@ export default function GuidesHubPage() {
 
   return (
     <>
+      <JsonLd
+        json={graph(
+          itemList(
+            'Yaycay family travel guides',
+            'Destination guides for families travelling with kids, including age-by-age activities and allergy-aware food notes.',
+            slugs.map((slug) => ({ name: `${guides[slug].destination} with kids`, path: `/guides/${slug}` })),
+          ),
+          breadcrumb([
+            { name: 'Home', path: '/' },
+            { name: 'Destination guides', path: '/guides' },
+          ]),
+        )}
+      />
       <Header />
       <main id="main">
         {/* 1 · Hub header */}

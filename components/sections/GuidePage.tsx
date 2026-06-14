@@ -3,6 +3,8 @@ import { Header } from '@/components/sections/Header';
 import { Footer } from '@/components/sections/Footer';
 import { ImageSlot } from '@/components/ui/ImageSlot';
 import { ClosingForm } from '@/components/sections/ClosingForm';
+import { JsonLd } from '@/components/JsonLd';
+import { article, breadcrumb, graph } from '@/lib/schema';
 import { guides } from '@/lib/content';
 import s from '@/components/content/content.module.css';
 
@@ -14,6 +16,16 @@ export function GuidePage({ slug }: { slug: Slug }) {
 
   return (
     <>
+      <JsonLd
+        json={graph(
+          article({ headline: g.title, description: g.subhead, path: `/guides/${slug}` }),
+          breadcrumb([
+            { name: 'Home', path: '/' },
+            { name: 'Destination guides', path: '/guides' },
+            { name: `${g.destination} with kids`, path: `/guides/${slug}` },
+          ]),
+        )}
+      />
       <Header />
       <main id="main">
         {/* 1 · Guide header */}

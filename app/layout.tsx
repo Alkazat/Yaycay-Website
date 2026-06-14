@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from 'next';
 import { SITE } from '@/lib/site';
 import { ConsentBanner } from '@/components/ConsentBanner';
+import { JsonLd } from '@/components/JsonLd';
+import { organization, graph } from '@/lib/schema';
 // Brand fonts (Fredoka + Nunito variable webfonts) ship with the design system.
 import './globals.css';
 
@@ -48,6 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
+        <JsonLd json={graph(organization())} />
         <a href="#main" className="skip-link">
           Skip to content
         </a>

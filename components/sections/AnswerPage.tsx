@@ -3,6 +3,8 @@ import { Header } from '@/components/sections/Header';
 import { Footer } from '@/components/sections/Footer';
 import { Button } from '@/components/ui/Button';
 import { ImageSlot } from '@/components/ui/ImageSlot';
+import { JsonLd } from '@/components/JsonLd';
+import { qaPage, article, breadcrumb, graph } from '@/lib/schema';
 import { answers } from '@/lib/content';
 import s from '@/components/content/content.module.css';
 
@@ -11,16 +13,17 @@ type Slug = keyof typeof answers;
 export function AnswerPage({ slug }: { slug: Slug }) {
   const a = answers[slug];
 
-  // Structured for AI-assistant citation: the direct answer is the extraction unit.
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'QAPage',
-    mainEntity: {
-      '@type': 'Question',
-      name: a.question,
-      acceptedAnswer: { '@type': 'Answer', text: a.directAnswer },
-    },
-  };
+  // Structured for AI-assistant citation: QAPage (the direct answer is the
+  // extraction unit) plus Article and breadcrumbs for classic search.
+  const jsonLd = graph(
+    qaPage(a.question, a.directAnswer),
+    article({ headline: a.question, description: a.subhead, path: `/answers/${slug}` }),
+    breadcrumb([
+      { name: 'Home', path: '/' },
+      { name: 'Answers', path: '/answers' },
+      { name: a.question, path: `/answers/${slug}` },
+    ]),
+  );
 
   const introImage = a.image.placement === 'intro' ? a.image : null;
   const productImage = a.image.placement === 'product' ? a.image : null;
@@ -29,7 +32,7 @@ export function AnswerPage({ slug }: { slug: Slug }) {
     <>
       <Header />
       <main id="main">
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        <JsonLd json={jsonLd} />
 
         {/* 1 · Question header */}
         <section className={s.soberHero} aria-labelledby="answer-title">

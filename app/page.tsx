@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { Teaser } from '@/components/Teaser';
 import { SITE } from '@/lib/site';
+import { JsonLd } from '@/components/JsonLd';
+import { website, softwareApplication, graph } from '@/lib/schema';
 
 export const metadata: Metadata = {
   title: 'Join the waitlist',
@@ -18,28 +20,11 @@ export const metadata: Metadata = {
   },
 };
 
-/** Structured data: the brand, on the public teaser. */
-function JsonLd() {
-  const data = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: SITE.name,
-    url: SITE.url,
-    description: SITE.description,
-    slogan: SITE.tagline,
-  };
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-    />
-  );
-}
-
 export default function IndexPage() {
   return (
     <>
-      <JsonLd />
+      {/* Organization ships site-wide via the root layout; the homepage adds WebSite + the app offer. */}
+      <JsonLd json={graph(website(), softwareApplication())} />
       <Teaser />
     </>
   );
