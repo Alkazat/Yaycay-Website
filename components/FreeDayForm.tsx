@@ -13,14 +13,22 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
  * The free day order form (work-order C21). Three trip questions, then email.
  * Used standalone on /free-day and embedded as the closing section elsewhere.
  */
-export function FreeDayForm({ id = 'free-day', source = 'free-day' }: { id?: string; source?: string }) {
+export function FreeDayForm({
+  id = 'free-day',
+  source = 'free-day',
+  defaultDestination = '',
+}: {
+  id?: string;
+  source?: string;
+  defaultDestination?: string;
+}) {
   const destId = useId();
   const whenId = useId();
   const whoId = useId();
   const emailId = useId();
   const trapId = useId();
 
-  const [dest, setDest] = useState('');
+  const [dest, setDest] = useState(defaultDestination);
   const [when, setWhen] = useState('');
   const [who, setWho] = useState('');
   const [email, setEmail] = useState('');

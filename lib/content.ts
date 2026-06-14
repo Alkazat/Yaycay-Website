@@ -721,6 +721,7 @@ export const footer = {
     {
       heading: 'Learn',
       links: [
+        { label: 'Destination guides', href: '/guides' },
         { label: 'Compare Yaycay', href: '/vs' },
         { label: 'vs Wanderlog', href: '/vs/wanderlog' },
         { label: 'vs Layla', href: '/vs/layla' },
@@ -783,4 +784,349 @@ export const connect = {
     },
   ],
   help: 'Stuck on any step? Email hello@yaycay.ai and we will get you connected.',
+};
+
+// ---- Destination guides (organic acquisition engine; T8 template) ----
+
+export const guidesHub = {
+  title: 'Family destination guides, written by people who travel with kids.',
+  intro:
+    'Real ages, real allergy notes, real nap-time maths. Every guide is free and none of them gate anything.',
+  closing: {
+    headline: 'Reading about it is step one. Want a day of it planned?',
+    subhead:
+      'Pick your destination in the form and we will build one real day there for your family, free.',
+  },
+};
+
+/**
+ * The guide template (work-order T8). Sections 1 to 5 and 7 are the repeatable
+ * skeleton: summary box, why it works, age bands, allergy and food, practical
+ * grid, contextual CTA. Singapore is verbatim from spec; the rest follow the
+ * skeleton. {Curly-brace} items are founder-fill placeholders left as-is.
+ */
+export const guides = {
+  'singapore-with-kids': {
+    destination: 'Singapore',
+    card: {
+      ages: 'Best for ages 4 to 12',
+      hook: 'The easiest "big trip" first step. Hawker food with allergy notes included.',
+    },
+    title: "Singapore with kids: the family guide we wish we'd had",
+    subhead:
+      'Why Singapore might be the easiest big trip you ever take with children, and the handful of things that still catch parents out.',
+    summaryLabel: 'The short version',
+    summary:
+      'Best ages: 4 to 12. Ideal length: 4 to 6 days. Walkability: excellent, with the best public transport you will ever take a pram on. Food for fussy or allergic kids: very manageable with the right approach; hawker centres need care, detail below. The one mistake everyone makes: overpacking the schedule, because everything is so close together it feels free.',
+    whyHead: 'Why it works',
+    why:
+      'Singapore is the destination experienced family travellers recommend to nervous ones. English is everywhere. Tap water is drinkable. The MRT is clean, cheap, air-conditioned and a genuine attraction for transport-mad kids. Distances are tiny: you are rarely more than thirty minutes from the hotel, which changes everything when a six-year-old hits the wall. And the city takes children seriously; playgrounds, splash zones and kid-aware design show up in places that would be adults-only anywhere else. The trade-offs are honest ones: it is expensive by Southeast Asian standards, the heat is real and shapes your day, and afternoon storms are close to a daily event between November and January.',
+    ageHead: 'What to do, by the ages you are actually bringing',
+    ageBands: [
+      {
+        label: 'Ages 4 to 6',
+        body: "Gardens by the Bay's Far East Organization Children's Garden (a free water-play park; bring swimmers everywhere in Singapore, this will not be the only time). The Jacob Ballas Children's Garden, the world's first garden designed for kids. The zoo over the night safari at this age; the dark plus the late hour beats most little kids.",
+      },
+      {
+        label: 'Ages 7 to 9',
+        body: "The Cloud Forest at Gardens by the Bay, which lands like a real-life video game level. The Science Centre with the Mirror Maze. Sentosa's beaches plus the cable car, which at this age is an attraction in itself.",
+      },
+      {
+        label: 'Ages 10 to 12',
+        body: 'The Night Safari, now they can stay up for it. Hydrodash inflatable aqua park at Sentosa. The Southern Ridges treetop walk early in the morning before the heat. Hawker-centre food crawls become genuinely fun at this age rather than a logistics problem.',
+      },
+      {
+        label: 'Mixed ages',
+        body: 'Gardens by the Bay and Sentosa both split well: water play for the youngest, bigger thrills for the oldest, regroup for food. Plan your regroup points before you split; phone signal is good but agreed meeting spots are better.',
+      },
+    ],
+    foodHead: 'Eating in Singapore with allergies and fussy eaters',
+    food:
+      'Singapore is one of the better cities in Asia for allergy-aware travel, but it asks for a method. Peanuts and tree nuts are common in hawker food: satay sauce, many noodle dishes, and kaya (the breakfast jam) which is coconut but often sits alongside nut products. Shared woks and shared oil make cross-contact likely at hawker stalls, so for serious allergies, treat stalls as higher-risk and lean on sit-down restaurants, which increasingly publish allergen menus, especially in malls and hotels. Helpful locals are the norm, but stall holders are busy; a written card in English and Mandarin stating the allergy clearly gets better answers than a shouted question across a counter. For fussy eaters: chicken rice is the universal beige food, every mall food court has plain noodles, and fruit at hawker dessert stalls rescues many evenings. None of this is a guarantee; menus and kitchens change, so always confirm with the person cooking, on the day.',
+    foodCta: { label: 'How we handle allergy checks on real trips', href: '/allergy-safety' },
+    practicalHead: 'The practical bits',
+    practical:
+      "When to go: February to April for the driest stretch; avoid the December school-holiday crush unless you are in it. Getting around: MRT for almost everything; taxis and Grab are easy and air-conditioned for the wilted end of the day. Prams: the most pram-friendly city in Asia; lifts in every station. Rain: assume a storm most afternoons in the wet season and plan one indoor anchor per day (museums, the ArtScience Museum, Changi's Jewel). Heat: do the big outdoor thing before 11am, swim or go indoors from 1 to 4, re-emerge for the evening. Budget signal: expensive for the region; hawker meals are the great equaliser at a few dollars a plate.",
+    sampleHead: 'What one Yaycay day in Singapore looks like',
+    sample:
+      'We publish a full, unedited free day from a real family\'s Singapore trip: two kids, a tree-nut allergy, and an afternoon storm, all handled. If you want to see how everything above turns into an actual Tuesday, it is the best five-minute read on this site.',
+    sampleCta: { label: 'Read the Singapore sample day', href: '/sample-day' },
+    closing: {
+      headline: 'Build your free Singapore day',
+      subhead:
+        'Tell us when you are going and who is coming, ages and any allergies included. One real day of your Singapore trip, free, in your inbox within 24 hours.',
+    },
+    heroBrief:
+      'Documentary family-travel photo, Singapore: a parent and two school-age children at Gardens by the Bay with the Supertree Grove behind, mid-morning light, prams and water bottles visible. No identifiable minor faces (shot from behind or three-quarter). Warm, real, not stocky.',
+  },
+
+  'japan-with-kids': {
+    destination: 'Japan',
+    card: {
+      ages: 'Best for ages 6 to 14',
+      hook: 'Bullet trains, vending-machine novelty and the most orderly chaos your kids will ever love.',
+    },
+    title: 'Japan with kids: the family guide we wish we\'d had',
+    subhead:
+      'Why Japan is far easier with children than its reputation suggests, and the few things that genuinely catch families out.',
+    summaryLabel: 'The short version',
+    summary:
+      'Best ages: 6 to 14, when kids can walk a city day and remember it. Ideal length: 7 to 10 days, two or three bases, not a city a day. Walkability: excellent, and the trains are a destination in their own right. Food for fussy or allergic kids: easy for fussy eaters, genuinely demanding for nut and other allergies because ingredients are not always obvious, detail below. The one mistake everyone makes: trying to "do" Tokyo, Kyoto and Osaka in a week and spending the trip on platforms.',
+    whyHead: 'Why it works',
+    why:
+      'Japan rewards children with novelty at every turn: the shinkansen at 300km/h, capsule-toy machines on every corner, themed everything, and a level of public calm that makes travelling with kids feel unusually low-friction. It is exceptionally safe, spotlessly clean, and the trains run to the second, which turns logistics into something kids find thrilling rather than tedious. The trade-offs are real: the language barrier is steeper than Singapore, cash still matters in smaller places, summers are punishingly humid, and the cultural emphasis on not inconveniencing others can feel like pressure when you are travelling with a tired toddler. Spring and autumn are the kind, mild windows.',
+    ageHead: 'What to do, by the ages you are actually bringing',
+    ageBands: [
+      {
+        label: 'Ages 6 to 8',
+        body: 'teamLab Planets in Tokyo, which is wading-through-water, touch-everything wonder. The shinkansen ride itself, booked with a window seat and a station bento. Nara to feed the (very bold) deer. Keep days short and snack-led.',
+      },
+      {
+        label: 'Ages 9 to 11',
+        body: 'Ghibli Park or the Ghibli Museum if you can secure tickets (book the moment they release). Universal Studios Japan in Osaka. A go-kart or cycling afternoon along the Kyoto riverbanks. This is the age the trains stop being a novelty and start being a game.',
+      },
+      {
+        label: 'Ages 12 to 14',
+        body: 'Akihabara and Pokémon or Nintendo flagship stores. A day trip to Hakone for the pirate ship, ropeway and a first onsen experience (check tattoo and bathing rules in advance). Day-hikes around Nikko or Kamakura. Older kids can navigate the metro themselves with a prepaid IC card, which they love.',
+      },
+      {
+        label: 'Mixed ages',
+        body: 'Pick a single base per region and do day trips out, so nobody is dragging a suitcase through a station. An afternoon at an aquarium (Osaka\'s Kaiyukan, Tokyo\'s Sumida) resets everyone. Agree a meeting spot at every station; crowds are large and signage is dense.',
+      },
+    ],
+    foodHead: 'Eating in Japan with allergies and fussy eaters',
+    food:
+      'Japan is wonderful for fussy eaters and genuinely demanding for allergies, so go in with a method. For nut and tree-nut allergies, the difficulty is that allergens hide in places Western parents do not expect: dashi and sauces, fillings in wagashi sweets, and frying oils. Soy, wheat, egg, fish and shellfish run through the cuisine, so coeliac and serious allergy families should plan rather than wing it. Convenience stores (konbini) are a fussy eater\'s best friend: onigiri, plain rice, fruit, and packaged foods that carry Japanese allergen labelling. Many chain restaurants and department-store food halls now publish allergen charts; a clearly written allergy card in Japanese, naming the specific allergen and the cross-contact question, gets far better results than spoken English. {Founder to confirm the current best Japanese-language allergy-card wording with a native speaker before publishing.} None of this is a guarantee; ingredients and kitchens change, so always confirm with the person cooking, on the day.',
+    foodCta: { label: 'How we handle allergy checks on real trips', href: '/allergy-safety' },
+    practicalHead: 'The practical bits',
+    practical:
+      'When to go: late March to May for cherry blossom and mild days, or October to November for autumn colour; avoid the July and August humidity with young kids. Getting around: a prepaid IC card (Suica or Pasmo) for every family member beats paper tickets; weigh a Japan Rail Pass only if you are covering long distances. Prams: cities are pram-friendly but older stations have stairs; the konbini and station lifts save you. Cash: carry some; smaller shops and shrines are still cash-only. Connectivity: rent a pocket wifi or buy an eSIM at the airport, because navigation is the whole game. Budget signal: mid-to-high, but konbini meals and conveyor-belt sushi keep everyday eating affordable.',
+    sampleHead: 'What one Yaycay day in Japan looks like',
+    sample:
+      'The clearest way to picture a Yaycay day is the one we publish in full: a real family, two kids of different ages, an allergy in the mix, and a wet afternoon handled without anyone googling on a platform. It is a five-minute read and it is the same shape your Japan day would take.',
+    sampleCta: { label: 'Read a real Yaycay sample day', href: '/sample-day' },
+    closing: {
+      headline: 'Build your free Japan day',
+      subhead:
+        'Tell us when you are going and who is coming, ages and any allergies included. One real day of your Japan trip, free, in your inbox within 24 hours.',
+    },
+    heroBrief:
+      'Documentary family-travel photo, Japan: a parent and two children boarding or beside a shinkansen at a platform, station bento and small backpacks visible, soft daylight. No identifiable minor faces. Real and warm, not stock.',
+  },
+
+  'bali-with-kids': {
+    destination: 'Bali',
+    card: {
+      ages: 'Best for ages 3 to 12',
+      hook: 'Pools, rice-terrace walks and the gentlest first taste of Asia for little ones.',
+    },
+    title: 'Bali with kids: the family guide we wish we\'d had',
+    subhead:
+      'Why Bali is one of the softest landings for a first Asian trip with young children, and the practical bits that protect the holiday.',
+    summaryLabel: 'The short version',
+    summary:
+      'Best ages: 3 to 12, with toddlers and under-sevens especially well served. Ideal length: 7 to 10 days, one or two bases, slow pace. Walkability: low; you will use drivers and scooters, not footpaths. Food for fussy or allergic kids: easy for fussy eaters at resorts, needs care for serious allergies and for stomach safety, detail below. The one mistake everyone makes: booking a villa far from everything, then spending the trip in traffic.',
+    whyHead: 'Why it works',
+    why:
+      'Bali is built for relaxed family time: warm, affordable, and culturally gentle with children, who are genuinely welcomed everywhere. Private villas with their own pools cost a fraction of a European hotel, which changes the whole rhythm of a trip with little kids, and a day driver for a few hours is cheap enough to skip the stress of self-driving. There is real nature (rice terraces, waterfalls, monkeys) alongside resort comfort. The trade-offs are honest: traffic between hubs is slow and tiring, footpaths are poor so it is not a pram-strolling city, "Bali belly" is a genuine risk that wants water discipline, and the most famous spots are crowded and commercialised. Pick the right base and Bali is one of the easiest trips on this list; pick the wrong one and you will see a lot of road.',
+    ageHead: 'What to do, by the ages you are actually bringing',
+    ageBands: [
+      {
+        label: 'Ages 3 to 5',
+        body: 'The villa pool is the headline attraction and that is fine. Add the Bali Safari and Marine Park, gentle beach time at Sanur (calm, shallow water rather than surf), and Waterbom waterpark in Kuta for an easy big day. Keep it to one outing a day.',
+      },
+      {
+        label: 'Ages 6 to 9',
+        body: 'The Sacred Monkey Forest in Ubud (hold little hands and hide the snacks), a rice-terrace walk at Tegalalang early before the heat and crowds, and a beginner surf lesson at Kuta or Canggu with a reputable school. The Bali Zoo elephant and animal encounters land well at this age.',
+      },
+      {
+        label: 'Ages 10 to 12',
+        body: 'A sunrise-adjacent waterfall trip (Tegenungan is the easy one, Sekumpul the adventurous one), snorkelling day trips from Sanur or over on Nusa Lembongan, and a proper surf progression. This age can handle the bigger driving days that unlock the north and east.',
+      },
+      {
+        label: 'Mixed ages',
+        body: 'Base yourself in Sanur or Ubud to cut driving, and let the villa pool be the regroup point between outings. Hire a driver for full-day trips so the adults are not exhausted by the road. Build in genuine nothing-days; the heat and travel catch up with little ones fast.',
+      },
+    ],
+    foodHead: 'Eating in Bali with allergies and fussy eaters',
+    food:
+      'Bali is easy for fussy eaters and asks for real care on two fronts: allergies and stomach safety. For allergies, peanuts and tree nuts are central to Indonesian cooking; satay and gado-gado are peanut-based, and nut pastes and oils appear widely, so cross-contact at smaller warungs is likely. Resort and tourist-area restaurants increasingly understand allergies and many will adapt dishes, but a clearly written allergy card in Bahasa Indonesia, naming the allergen and the cross-contact question, gets far better answers than spoken English. {Founder to confirm current Bahasa Indonesia allergy-card wording with a native speaker.} For stomach safety, stick to bottled or filtered water (including for teeth), be wary of ice and unpeeled raw produce outside trusted kitchens, and pack rehydration sachets; "Bali belly" ends more family days here than allergies do. Fussy eaters do well: rice, plain noodles, fruit, and Western menus are everywhere in tourist areas. None of this is a guarantee; ingredients and kitchens change, so always confirm with the person cooking, on the day.',
+    foodCta: { label: 'How we handle allergy checks on real trips', href: '/allergy-safety' },
+    practicalHead: 'The practical bits',
+    practical:
+      'When to go: April to October is the dry season and the safe family bet; the November to March wet season brings daily downpours and heavier humidity. Getting around: hire a private driver for day trips and use ride apps (Grab, Gojek) in the south; self-driving a scooter with kids is not worth the risk. Prams: bring a sturdy carrier instead; footpaths are poor and uneven. Health: drink bottled water only, pack rehydration salts and any regular medication, and check travel-vaccination advice well before you fly. Money: carry cash for warungs and markets; cards work in resorts and bigger restaurants. Budget signal: low to mid; villas and food are excellent value, drivers and activities are the main spend.',
+    sampleHead: 'What one Yaycay day in Bali looks like',
+    sample:
+      'We publish one real Yaycay day in full so you can see the shape of it: two kids of different ages, an allergy handled at every meal, and a plan that bends around the weather and the nap. It is a five-minute read, and your Bali day would be built exactly the same way.',
+    sampleCta: { label: 'Read a real Yaycay sample day', href: '/sample-day' },
+    closing: {
+      headline: 'Build your free Bali day',
+      subhead:
+        'Tell us when you are going and who is coming, ages and any allergies included. One real day of your Bali trip, free, in your inbox within 24 hours.',
+    },
+    heroBrief:
+      'Documentary family-travel photo, Bali: a parent and young children at a green Tegalalang rice terrace or a calm villa pool, soft morning light, sun hats and water bottles. No identifiable minor faces. Warm and real, not stock.',
+  },
+
+  'london-with-kids': {
+    destination: 'London',
+    card: {
+      ages: 'Best for ages 5 to 14',
+      hook: 'World-class free museums, double-decker front seats and a park between every plan.',
+    },
+    title: 'London with kids: the family guide we wish we\'d had',
+    subhead:
+      'Why London is one of the best-value family city breaks in the world if you know where the free wins are, and the few things that catch families out.',
+    summaryLabel: 'The short version',
+    summary:
+      'Best ages: 5 to 14. Ideal length: 4 to 5 days, one base, neighbourhood by neighbourhood. Walkability: good, and the public transport is excellent once you have the right cards. Food for fussy or allergic kids: easy for fussy eaters and among the best cities anywhere for allergy labelling, detail below. The one mistake everyone makes: paying for big-ticket attractions while the world-class museums next door are free.',
+    whyHead: 'Why it works',
+    why:
+      'London is quietly one of the great family destinations because so much of the best of it is free: the British Museum, the Natural History Museum, the Science Museum, the Tate galleries and dozens more cost nothing to enter, and they are genuinely world-class. Everyone speaks the language, there are parks and playgrounds threaded through every district, and the top deck at the front of a red bus is a free attraction in itself. The trade-offs are real ones: it is expensive for food and paid attractions, the weather is unreliable in any season, the Underground is hot and step-heavy with a pram, and the scale of the place means a badly planned day is mostly spent in transit. Plan around free anchors and the city becomes remarkably affordable.',
+    ageHead: 'What to do, by the ages you are actually bringing',
+    ageBands: [
+      {
+        label: 'Ages 5 to 7',
+        body: 'The Natural History Museum dinosaurs (free), the playground and Diana Memorial fountain in Kensington Gardens, and a ride on the top deck of a bus going anywhere. The London Transport Museum in Covent Garden is a sleeper hit. Keep one big thing per day, plus a park.',
+      },
+      {
+        label: 'Ages 8 to 10',
+        body: 'The Science Museum\'s hands-on Wonderlab (book ahead), a Thames riverboat from Westminster to Greenwich, and the changing of the guard if the timing is easy rather than a mission. The Warner Bros. Studio Tour (Harry Potter) is a full, pricey, brilliant day for the right kid.',
+      },
+      {
+        label: 'Ages 11 to 14',
+        body: 'The Tower of London (the ravens and Crown Jewels still land at this age), a West End matinee, the View from the Shard or the cheaper Sky Garden, and letting them navigate the Tube with a contactless card. Borough Market is a genuinely fun food adventure for older kids.',
+      },
+      {
+        label: 'Mixed ages',
+        body: 'South Kensington is the cheat code: three major free museums and a park within a few minutes of each other, so you can split by interest and regroup. Big green spaces (Hyde Park, Greenwich, Hampstead Heath) reset everyone. Agree a meeting point before anyone disappears into a gift shop.',
+      },
+    ],
+    foodHead: 'Eating in London with allergies and fussy eaters',
+    food:
+      'London is one of the easiest major cities in the world for allergy-aware families, thanks to strict UK food-labelling law. Packaged foods must clearly label the 14 major allergens, restaurants are legally required to provide allergen information on request, and most chains publish detailed allergen menus online that you can check before you go. That does not remove the need for vigilance: cross-contact in busy kitchens is still real, and staff knowledge varies, so always tell the server directly and ask them to check rather than relying on the menu alone. For fussy eaters, London is effortless: every cuisine on earth, plain options everywhere, and supermarkets (Tesco, Sainsbury\'s, M&S) on every corner with clearly labelled, child-friendly food for picnic lunches that also save serious money. None of this is a guarantee; kitchens and recipes change, so always confirm with the person serving you, on the day.',
+    foodCta: { label: 'How we handle allergy checks on real trips', href: '/allergy-safety' },
+    practicalHead: 'The practical bits',
+    practical:
+      'When to go: May, June and September for the kindest weather and lighter crowds; December is cold but magic if you lean into it. Getting around: use contactless or Apple Pay to tap on and off; under-11s travel free on the Tube and buses with a paying adult, and buses are easier than the step-heavy Underground with a pram. Prams: buses over Tube where you can; many stations have no lift. Weather: pack a waterproof layer whatever the forecast and keep one indoor anchor per day. Money-saver: the free national museums are the backbone of an affordable trip; picnic from a supermarket to dodge central-London food prices. Budget signal: high for food and paid attractions, but free museums and parks bring the daily average right down.',
+    sampleHead: 'What one Yaycay day in London looks like',
+    sample:
+      'The fastest way to see how Yaycay plans a day is the real one we publish in full: two kids of different ages, an allergy managed at every meal, and a wet afternoon already handled. It is a five-minute read, and a London day would be built to exactly the same shape.',
+    sampleCta: { label: 'Read a real Yaycay sample day', href: '/sample-day' },
+    closing: {
+      headline: 'Build your free London day',
+      subhead:
+        'Tell us when you are going and who is coming, ages and any allergies included. One real day of your London trip, free, in your inbox within 24 hours.',
+    },
+    heroBrief:
+      'Documentary family-travel photo, London: a parent and two children on the front seats of a red double-decker top deck, or outside the Natural History Museum, soft grey daylight, raincoats to hand. No identifiable minor faces. Real and warm, not stock.',
+  },
+
+  'gold-coast-with-kids': {
+    destination: 'Gold Coast',
+    card: {
+      ages: 'Best for ages 2 to 14',
+      hook: 'Theme parks, patrolled beaches and koalas, almost all within a short drive.',
+    },
+    title: 'Gold Coast with kids: the family guide we wish we\'d had',
+    subhead:
+      'Why the Gold Coast is the rare destination that genuinely suits toddlers and teenagers at once, and the few things worth planning around.',
+    summaryLabel: 'The short version',
+    summary:
+      'Best ages: 2 to 14, one of the widest age spans on this list. Ideal length: 5 to 7 days, one base, theme parks rationed not bingeed. Walkability: low between hubs, easy within them; you will want a car. Food for fussy or allergic kids: very manageable, with strong Australian allergen labelling, detail below. The one mistake everyone makes: doing theme parks on back-to-back days until everyone is fried, instead of alternating with beach and pool.',
+    whyHead: 'Why it works',
+    why:
+      'The Gold Coast packs an unusual amount into a small, sunny, English-speaking strip: four major theme parks, kilometres of patrolled surf beaches, calm broadwater for little ones, and rainforest and wildlife a short drive inland. It is easy in all the ways an overseas trip is not: clean tap water, familiar food, excellent healthcare, and a culture built around families and the outdoors. The trade-offs are mild but real: theme-park tickets and school-holiday crowds add up fast, the surf beaches have real rips so swim between the flags, the summer sun is fierce and wants serious sun protection, and the resort strip can feel built-up if you were hoping for wild nature. Hire a car and the region opens right up.',
+    ageHead: 'What to do, by the ages you are actually bringing',
+    ageBands: [
+      {
+        label: 'Ages 2 to 5',
+        body: 'The calm, shallow water at the Broadwater Parklands and its free water-play area, the koalas and gentle animal encounters at Currumbin Wildlife Sanctuary, and an hour at a single theme park rather than a full day. Little ones do not need much more than sand, water and a nap.',
+      },
+      {
+        label: 'Ages 6 to 9',
+        body: 'Sea World for the animals and the smaller rides, Currumbin\'s lorikeet feeding, and a first proper boogie-board session on a patrolled beach. Tamborine Mountain\'s rainforest walks and the glow-worm caves make an easy, cooler inland day.',
+      },
+      {
+        label: 'Ages 10 to 14',
+        body: 'The big-ticket coasters at Dreamworld, Movie World and Warner Bros., a stand-up paddleboard or jet-ski session on the Broadwater, and a surf lesson with a proper school. This age can handle a SkyPoint climb and the longer rainforest hikes in the hinterland.',
+      },
+      {
+        label: 'Mixed ages',
+        body: 'Alternate a theme-park day with a beach-and-pool day so nobody burns out, and choose parks that span the ages (Sea World and Movie World both have gentle and thrilling sides). Base near Broadbeach or Main Beach for easy regroups, and agree a meeting point inside the parks before you split up.',
+      },
+    ],
+    foodHead: 'Eating on the Gold Coast with allergies and fussy eaters',
+    food:
+      'Australia is a strong environment for allergy-aware families, with clear national food-labelling laws that require the major allergens to be declared on packaged food, and a café and restaurant culture that is generally allergy-literate. Most venues will happily tell you what is in a dish and many publish allergen information, though cross-contact in busy kitchens is still a real risk, so always tell the staff directly and ask them to check rather than trusting the menu alone. Fussy eaters are very well catered for: familiar Western food everywhere, kids\' menus as standard, and supermarkets (Coles, Woolworths) with clearly labelled food for self-catering, which also tames theme-park food prices. The theme parks themselves can usually accommodate allergies if you contact guest services ahead. None of this is a guarantee; kitchens and recipes change, so always confirm with the person serving you, on the day.',
+    foodCta: { label: 'How we handle allergy checks on real trips', href: '/allergy-safety' },
+    practicalHead: 'The practical bits',
+    practical:
+      'When to go: April, May, September and October for warm, dry, less-crowded weeks; avoid the December and January school-holiday peak for theme parks unless you book everything ahead. Getting around: hire a car; the parks, beaches and hinterland are spread out and public transport is limited. Beaches: always swim between the red-and-yellow flags, where lifesavers patrol; the surf has real rips. Sun: the UV is extreme much of the year, so hats, shirts and rehydration are not optional. Tickets: buy multi-park or multi-day passes online in advance for the best price. Budget signal: mid to high once theme-park tickets stack up; beaches, parklands and self-catering keep it grounded.',
+    sampleHead: 'What one Yaycay day on the Gold Coast looks like',
+    sample:
+      'To see how a Yaycay day actually reads, look at the real one we publish in full: two kids of different ages, an allergy flagged at every meal, and a plan that flexes around energy and weather. It is a five-minute read, and a Gold Coast day would be built to the same shape.',
+    sampleCta: { label: 'Read a real Yaycay sample day', href: '/sample-day' },
+    closing: {
+      headline: 'Build your free Gold Coast day',
+      subhead:
+        'Tell us when you are going and who is coming, ages and any allergies included. One real day of your Gold Coast trip, free, in your inbox within 24 hours.',
+    },
+    heroBrief:
+      'Documentary family-travel photo, Gold Coast: a parent and children on a patrolled surf beach between the flags with boards, or feeding lorikeets at a wildlife sanctuary, bright Australian sun, hats and rash vests. No identifiable minor faces. Real and warm, not stock.',
+  },
+
+  'paris-with-kids': {
+    destination: 'Paris',
+    card: {
+      ages: 'Best for ages 5 to 13',
+      hook: 'A playground in every garden, and a pastry that ends every meltdown.',
+    },
+    title: 'Paris with kids: the family guide we wish we\'d had',
+    subhead:
+      'Why Paris is far more child-friendly than its grown-up reputation, and the handful of things that protect the day with kids in tow.',
+    summaryLabel: 'The short version',
+    summary:
+      'Best ages: 5 to 13. Ideal length: 4 to 5 days, one base, one big thing a day. Walkability: excellent and beautiful, though the Metro is step-heavy with a pram. Food for fussy or allergic kids: easy for fussy eaters, and improving for allergies under EU labelling law, detail below. The one mistake everyone makes: queuing for hours at the Eiffel Tower and Louvre instead of trading them for the gardens and smaller museums kids actually prefer.',
+    whyHead: 'Why it works',
+    why:
+      'Paris hides a brilliant children\'s city inside the romantic one: nearly every formal garden has a playground, a carousel, a puppet theatre or toy sailboats to push around a pond, and the bakeries mean a restorative pain au chocolat is never more than a block away. It is compact and walkable, the parks are everywhere, and many of the best museums for kids are small and quick rather than marathon halls. The trade-offs are honest: the headline attractions involve long queues and crowds, the older Metro stations are full of stairs and short on lifts, the city is expensive, and service can feel brisk if you arrive expecting it to revolve around your toddler. Book the big things ahead, lean on the gardens, and Paris with kids is a delight.',
+    ageHead: 'What to do, by the ages you are actually bringing',
+    ageBands: [
+      {
+        label: 'Ages 5 to 7',
+        body: 'The toy sailboats and carousel in the Jardin du Luxembourg, the puppet shows (guignol) in several parks, and the Jardin d\'Acclimatation, a proper little amusement garden. The Eiffel Tower is best admired and picnicked under from the Champ de Mars rather than queued for at this age.',
+      },
+      {
+        label: 'Ages 8 to 10',
+        body: 'The Cité des Sciences at La Villette, one of Europe\'s best hands-on science museums, with a dedicated children\'s area. A Seine boat trip (Batobus lets you hop on and off), and the menagerie or the Grande Galerie de l\'Évolution at the Jardin des Plantes. A day at Disneyland Paris is a big, separate adventure if the budget allows.',
+      },
+      {
+        label: 'Ages 11 to 13',
+        body: 'A focused Louvre visit (one wing, booked ahead, treasure-hunt style), the climb up the Arc de Triomphe for the best view in the city, the Catacombs for the ghoulishly inclined, and the street art and food of Montmartre. This age can do a half-day at the Palace of Versailles and its gardens.',
+      },
+      {
+        label: 'Mixed ages',
+        body: 'Anchor each day on a big garden so the youngest has a playground while the oldest does a museum nearby, then regroup over a picnic. Trade queue-heavy icons for smaller wins, and book any paid attraction online to skip the lines. Agree a meeting spot at every Metro change; the network is dense.',
+      },
+    ],
+    foodHead: 'Eating in Paris with allergies and fussy eaters',
+    food:
+      'Paris is straightforward for fussy eaters and steadily improving for allergies, helped by EU law that requires the 14 major allergens to be declared, including on restaurant menus or on request. Awareness among staff varies more than in the UK, and nuts, butter, eggs and gluten are woven deep into French baking and sauces, so cross-contact is a genuine consideration, especially in boulangeries and patisseries. A clearly written allergy card in French, naming the specific allergen and the cross-contact question, gets far better answers than spoken English and is worth preparing before you go. {Founder to confirm the current best French-language allergy-card wording with a native speaker.} Fussy eaters do well: baguettes, plain pasta, crêpes, ham and cheese, and supermarket (Monoprix, Franprix) picnics that also dodge restaurant prices and rigid lunch hours. None of this is a guarantee; recipes and kitchens change, so always confirm with the person serving you, on the day.',
+    foodCta: { label: 'How we handle allergy checks on real trips', href: '/allergy-safety' },
+    practicalHead: 'The practical bits',
+    practical:
+      'When to go: April to June and September to October for mild weather and gardens in their best form; August empties of locals and many small shops close. Getting around: walk the central districts, which are close together and lovely; use the Metro for distance but expect stairs, so buses are kinder with a pram. Prams: buses and a good carrier beat the step-heavy older Metro stations. Booking: reserve the Eiffel Tower, Louvre, Catacombs and any climb online well ahead to skip multi-hour queues. Money-saver: picnic from supermarkets and bakeries in the parks, a very Parisian thing to do, to tame food costs. Budget signal: high, but free parks, picnics and the under-18 free entry at national museums bring it down.',
+    sampleHead: 'What one Yaycay day in Paris looks like',
+    sample:
+      'The clearest picture of a Yaycay day is the real one we publish in full: two kids of different ages, an allergy handled at every meal, and a wet afternoon already planned for. It is a five-minute read, and your Paris day would be built to exactly the same shape.',
+    sampleCta: { label: 'Read a real Yaycay sample day', href: '/sample-day' },
+    closing: {
+      headline: 'Build your free Paris day',
+      subhead:
+        'Tell us when you are going and who is coming, ages and any allergies included. One real day of your Paris trip, free, in your inbox within 24 hours.',
+    },
+    heroBrief:
+      'Documentary family-travel photo, Paris: a parent and children pushing toy sailboats at the Jardin du Luxembourg pond or picnicking on the Champ de Mars with the Eiffel Tower behind, soft afternoon light, a pastry bag in hand. No identifiable minor faces. Real and warm, not stock.',
+  },
 };

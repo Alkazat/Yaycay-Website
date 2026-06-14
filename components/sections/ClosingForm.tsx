@@ -9,12 +9,14 @@ export function ClosingForm({
   subhead,
   source,
   secondary,
+  defaultDestination,
 }: {
   id: string;
   headline: string;
   subhead: string;
   source: string;
   secondary?: { label: string; href: string };
+  defaultDestination?: string;
 }) {
   return (
     <section id="free-day" className={`section ${s.closing}`} aria-labelledby={`${id}-title`}>
@@ -25,7 +27,7 @@ export function ClosingForm({
           </h2>
           <p className={s.closingSub}>{subhead}</p>
           <div className={s.closingFormWrap}>
-            <FreeDayForm id={`${id}-form`} source={source} />
+            <FreeDayForm id={`${id}-form`} source={source} defaultDestination={defaultDestination} />
           </div>
           {secondary && (
             <p className={s.closingSecondary}>
