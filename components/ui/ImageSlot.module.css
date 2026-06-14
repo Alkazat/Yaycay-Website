@@ -2,8 +2,13 @@
   position: relative;
   width: 100%;
   margin: 0;
-  border: 2.5px dashed var(--royal-500);
   border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+/* Placeholder-only chrome: the dashed border + checkerboard reads as "to come".
+   Dropped once the real asset exists (the .ready branch renders next/image). */
+.pending {
+  border: 2.5px dashed var(--royal-500);
   background:
     repeating-linear-gradient(
       45deg,
@@ -12,7 +17,9 @@
       var(--cream-100) 12px,
       var(--cream-100) 24px
     );
-  overflow: hidden;
+}
+.img {
+  object-fit: cover;
 }
 .inner {
   position: absolute;

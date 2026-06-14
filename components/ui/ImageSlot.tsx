@@ -1,10 +1,13 @@
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+import Image from 'next/image';
 import s from './ImageSlot.module.css';
 
 type Source = 'app-screenshot' | 'nanobanana' | 'founder-photo';
 type Frame = 'phone' | 'browser' | 'none';
 
 export interface ImageSlotProps {
-  /** Where the final asset will live once supplied, e.g. /media/home/hero-chat.png */
+  /** Where the final asset lives, e.g. /media/home/hero-chat.png */
   src: string;
   /** Final, production alt text. Written as the real definition, not the brief. */
   alt: string;
@@ -25,11 +28,22 @@ const BADGE: Record<Source, string> = {
   'founder-photo': 'Founder photo (real, with consent)',
 };
 
+/** True when the asset has actually been supplied under public/. */
+function assetExists(src: string): boolean {
+  if (!src.startsWith('/')) return false;
+  try {
+    return existsSync(join(process.cwd(), 'public', src.replace(/^\//, '')));
+  } catch {
+    return false;
+  }
+}
+
 /**
- * A self-documenting image placeholder. It reserves the correct space and
- * carries the production alt plus a full sourcing brief (data attributes +
- * visible card), so the preview reads as an annotated shot list. Swap for a
- * <next/image> once the asset exists.
+ * Renders the real image once it exists under public/, otherwise a
+ * self-documenting placeholder that reserves the correct space and carries the
+ * production alt plus the full sourcing brief (so the preview reads as an
+ * annotated shot list). Existence is resolved at build time; this is a server
+ * component, so every importer must be a server component too.
  */
 export function ImageSlot({
   src,
@@ -40,11 +54,29 @@ export function ImageSlot({
   brief,
   className,
 }: ImageSlotProps) {
+  const frameClass = frame === 'phone' ? s.phone : frame === 'browser' ? s.browser : '';
+
+  if (assetExists(src)) {
+    return (
+      <figure
+        className={[s.slot, frameClass, className].filter(Boolean).join(' ')}
+        style={{ aspectRatio: ratio }}
+        data-source={source}
+      >
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          sizes="(max-width: 768px) 100vw, 720px"
+          className={s.img}
+        />
+      </figure>
+    );
+  }
+
   return (
     <figure
-      className={[s.slot, frame === 'phone' ? s.phone : '', frame === 'browser' ? s.browser : '', className]
-        .filter(Boolean)
-        .join(' ')}
+      className={[s.slot, s.pending, frameClass, className].filter(Boolean).join(' ')}
       data-src={src}
       data-source={source}
       data-brief={brief}
