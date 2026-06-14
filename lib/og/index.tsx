@@ -58,6 +58,9 @@ export async function renderOgImage({
       : null;
 
   const { width, height } = OG_SIZE;
+  // Keep long titles (e.g. answer-post questions) on the card by easing the
+  // box-art display size down as the title grows.
+  const titleSize = title.length > 64 ? 50 : title.length > 44 ? 62 : 76;
 
   return new ImageResponse(
     (
@@ -135,7 +138,7 @@ export async function renderOgImage({
               display: 'flex',
               fontFamily: 'Fredoka',
               fontWeight: 600,
-              fontSize: 76,
+              fontSize: titleSize,
               lineHeight: 1.04,
               letterSpacing: -1,
               color: CREAM,

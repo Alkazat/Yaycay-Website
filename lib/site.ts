@@ -29,7 +29,7 @@ export function demoHandoffUrl(email: string, ref?: string): string {
  */
 export const ORG = {
   supportEmail: 'hello@yaycay.ai',
-  logoPath: '/og.png', // replace with a dedicated square logo asset when available
+  logoPath: '/brand/yaycay-app-icon.png', // square brand mark for Organization schema
   founderName: '', // {founder-fill}
   sameAs: [] as string[], // {founder-fill: LinkedIn, Instagram, Facebook URLs}
 } as const;
