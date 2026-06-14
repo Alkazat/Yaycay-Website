@@ -379,6 +379,100 @@ export const allergySafety = {
   closing: { headline: "Build a free day with your family's needs built in.", subhead: 'Tell us where you are going, who is coming, and exactly what they cannot eat. Your free day arrives with every meal flagged and the questions to ask, in your inbox within 24 hours.', secondary: { label: 'How the whole trip works', href: '/how-it-works' } },
 };
 
+// ---- About page (verbatim spec) ----
+export const aboutPage = {
+  hero: {
+    headline: 'Yaycay started on a holiday that nearly broke the person who planned it.',
+    subhead: 'We are parents who build software. This is the tool we needed and could not find.',
+  },
+  founding: {
+    headline: 'The trip that started it',
+    body: 'In {year}, {Founder name} planned a {destination} trip for {family details: partner, kids and ages, the allergy if applicable}. The planning took {N} weeks of evenings. The trip itself was good, mostly. But somewhere around day four, standing outside a restaurant translating an ingredients list on a phone while everyone waited, came the thought every planning parent has had: I am working. I am on holiday, and I am working. The spreadsheet came home with three pages of "next time" notes. Yaycay is those notes, built properly.',
+  },
+  team: {
+    headline: 'The people behind it',
+    subhead: 'A small team. You will probably get an email from one of us.',
+    members: [
+      { name: '{Name}', role: 'Founder', line: '{Two kids, one shellfish allergy, one laminated itinerary she is not proud of.}' },
+      { name: '{Name}', role: '{Role}', line: '{One real line: kids and ages, the allergy they manage, the destination they over-plan.}' },
+      { name: '{Name}', role: '{Role}', line: '{One real line: kids and ages, the allergy they manage, the destination they over-plan.}' },
+    ],
+  },
+  believe: {
+    headline: 'How we decide things',
+    items: [
+      'The kids are the spine of the plan, not a setting.',
+      'We would rather lose a sale than overstate what we can verify, especially about allergies.',
+      'One holiday, one price; we will not invent a subscription to please a spreadsheet.',
+      'The during-trip and the after matter as much as the plan, because that is where the memories actually happen.',
+    ],
+  },
+  closing: {
+    headline: 'The best introduction is a day we plan for you.',
+    subhead: 'Free, built for your actual family, in your inbox within 24 hours.',
+    secondary: { label: 'See how it works', href: '/how-it-works' },
+  },
+};
+
+// ---- FAQ page (verbatim spec; answers self-contained for AI extraction) ----
+export const faqPage = {
+  header: {
+    headline: 'Straight answers, including to the awkward ones.',
+    subhead: 'If yours is missing, email us at hello@yaycay.ai and a person will reply.',
+  },
+  groups: [
+    {
+      name: 'Getting started',
+      items: [
+        { q: 'What exactly is Yaycay?', a: "Yaycay is a family holiday companion. One chat builds your whole trip: a day-by-day plan designed around each of your kids, with every meal suggestion flagged for your family's allergies and dietary needs. It then travels with you during the trip and turns the whole thing into a keepsake book afterwards. It is paid once per holiday, not a subscription." },
+        { q: 'Is Yaycay a booking site?', a: 'No. Yaycay does not sell flights, hotels or tickets. You book wherever you prefer, forward the confirmation emails, and your bookings are woven into the plan. We plan and accompany; we do not take a cut of your bookings.' },
+        { q: 'Which destinations does Yaycay cover?', a: 'Yaycay plans trips worldwide. Coverage is deepest where families travel most, and every plan is built fresh for your trip rather than pulled from a fixed library. If you are headed somewhere unusual, build your free day for it; that is the honest test.' },
+        { q: 'How long does the chat take?', a: 'Most families finish the first chat in fifteen to twenty minutes. You can come back and add things whenever you like, including mid-trip.' },
+      ],
+    },
+    {
+      name: 'The free day',
+      items: [
+        { q: 'How does the free day arrive?', a: 'By email, within 24 hours of your request, as one fully built day from your actual trip: per-child adventures, flagged meal suggestions, a weather backup and a journal page. No card details are required.' },
+        { q: 'Is the free day just a sales sample?', a: 'It is a real day from your real holiday. If you buy the full plan, your free day is already part of it. If you do not buy, the day is yours to keep and use.' },
+        { q: 'Will you spam me after I give you my email?', a: 'No. You get your free day, one follow-up to ask how it landed, and nothing else unless you ask for it. Unsubscribe works the first time.' },
+      ],
+    },
+    {
+      name: 'Allergies and safety',
+      items: [
+        { q: "Can Yaycay guarantee a restaurant is safe for my child's allergy?", a: 'No, and you should distrust anyone who says yes. No service can see inside a kitchen on the day. What Yaycay provides is flags, checks and reminders that help you stay in control: which menu items and venues commonly involve your allergen, what we verified and what we could not, and exactly what to ask the kitchen in the local language. The final check is always yours, made on the day. Read how it works in full on our allergy and dietary safety page.' },
+        { q: 'What dietary needs can Yaycay handle?', a: 'Food allergies, coeliac disease and intolerances, vegetarian and vegan diets, halal and kosher requirements, and plain fussy eating. You tell Yaycay once in the first chat and every meal suggestion on the trip carries it.' },
+        { q: 'What if Yaycay gets something wrong?', a: 'Tell us, in the chat, at any point including mid-trip. Suggestions get corrected and replaced in moments. If something material was wrong with your plan, our refund policy applies; see pricing and refunds below.' },
+      ],
+    },
+    {
+      name: 'Pricing and refunds',
+      items: [
+        { q: 'How much does Yaycay cost?', a: 'US$129 once for the full done-for-you holiday, or US$59 once if you connect your own ChatGPT or Claude account. Both are one-off payments for one holiday. There is no subscription and nothing renews.' },
+        { q: 'Why is Yaycay not free like some AI travel apps?', a: 'Because our model is you, not your data or your bookings. Free travel tools generally earn money from booking commissions or advertising. We charge a one-off price and work only for the family paying it.' },
+        { q: 'What is your refund policy?', a: 'If your full plan arrives and does not deliver what we promised, tell us within {14} days of delivery for a refund. The free day is free regardless.' },
+        { q: 'What counts as one holiday?', a: 'One trip, one destination region, up to {21} days, including stopovers. A separate later trip is a new purchase.' },
+      ],
+    },
+    {
+      name: 'Your data',
+      items: [
+        { q: "What do you do with my family's information?", a: "We use it to build and run your trip, and that is it. We do not sell personal data, we do not run advertising, and details like your children's ages and allergies are used only to build their plan. You can ask us to delete your data at any time at hello@yaycay.ai." },
+        { q: 'If I connect my own AI account, what do you see?', a: 'Yaycay supplies the trip structure and family layer; your conversations run through your own assistant account under your provider\'s terms. We store what is needed to maintain your trip plan, journals and keepsake. Full details are in our privacy policy.' },
+      ],
+    },
+    {
+      name: 'During the trip',
+      items: [
+        { q: 'Does Yaycay work offline?', a: 'Your day-by-day plan, journal pages and key information like ask-the-kitchen cards are available offline. Live questions ("what is near us now?") need a connection.' },
+        { q: 'What happens when plans change mid-trip?', a: 'Tell Yaycay what changed: a closure, a sick kid, a surprise invitation. The rest of the day, and the days after it, reshape around the change. This is most of what "travels with you" means.' },
+        { q: 'What is the keepsake book, exactly?', a: "After your trip, each child's journal pages, your day plans and your photos are brought together into a printed memory book. It is part of both tiers, not an upsell." },
+      ],
+    },
+  ],
+};
+
 // ---- For parents page (verbatim spec + the Grown Ups command centre) ----
 export const forParentsPage = {
   hero: {
@@ -526,13 +620,16 @@ export const footer = {
         { label: 'For parents', href: '/for-parents' },
         { label: 'For kids', href: '/for-kids' },
         { label: 'Allergy and dietary safety', href: '/allergy-safety' },
+        { label: 'FAQ', href: '/faq' },
       ],
     },
     {
       heading: 'Company',
       links: [
+        { label: 'About', href: '/about' },
+        { label: 'Contact', href: '/contact' },
         { label: 'Privacy', href: '/legal/privacy' },
-        { label: 'Contact', href: 'mailto:hello@yaycay.ai' },
+        { label: 'Terms', href: '/terms' },
       ],
     },
   ],

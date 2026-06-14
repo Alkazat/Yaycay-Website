@@ -1,6 +1,6 @@
 import s from './ImageSlot.module.css';
 
-type Source = 'app-screenshot' | 'nanobanana';
+type Source = 'app-screenshot' | 'nanobanana' | 'founder-photo';
 type Frame = 'phone' | 'browser' | 'none';
 
 export interface ImageSlotProps {
@@ -22,6 +22,7 @@ export interface ImageSlotProps {
 const BADGE: Record<Source, string> = {
   'app-screenshot': 'App screenshot',
   nanobanana: 'Nanobanana image',
+  'founder-photo': 'Founder photo (real, with consent)',
 };
 
 /**
@@ -52,7 +53,15 @@ export function ImageSlot({
       aria-label={alt}
     >
       <div className={s.inner}>
-        <span className={`${s.badge} ${source === 'nanobanana' ? s.badgeNano : s.badgeApp}`}>
+        <span
+          className={`${s.badge} ${
+            source === 'nanobanana'
+              ? s.badgeNano
+              : source === 'founder-photo'
+                ? s.badgeFounder
+                : s.badgeApp
+          }`}
+        >
           {BADGE[source]}
         </span>
         <p className={s.alt}>{alt}</p>

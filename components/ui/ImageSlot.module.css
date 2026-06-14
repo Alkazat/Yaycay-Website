@@ -40,6 +40,10 @@
   background: var(--sun-400);
   color: var(--royal-800);
 }
+.badgeFounder {
+  background: var(--coral-400);
+  color: #fff;
+}
 .alt {
   margin: var(--space-1) 0 0;
   font-family: var(--font-display);
