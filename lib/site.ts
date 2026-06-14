@@ -18,6 +18,24 @@ export function demoHandoffUrl(email: string): string {
   return url.toString();
 }
 
+/**
+ * Organisation details for JSON-LD schema. Founder-fill the optional fields
+ * (name, socials) before the go-public flip; empty values are omitted from the
+ * emitted schema rather than published as placeholders.
+ */
+export const ORG = {
+  supportEmail: 'hello@yaycay.ai',
+  logoPath: '/og.png', // replace with a dedicated square logo asset when available
+  founderName: '', // {founder-fill}
+  sameAs: [] as string[], // {founder-fill: LinkedIn, Instagram, Facebook URLs}
+} as const;
+
+/** Launch/content dates for Article schema. Founder may refine per piece. */
+export const CONTENT_DATES = {
+  published: '2026-06-14',
+  modified: '2026-06-14',
+} as const;
+
 export const CTA_LABEL = 'Build your free day';
 
 /** Pre-launch waitlist capture label (teaser index). */

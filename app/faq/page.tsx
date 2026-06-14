@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Header } from '@/components/sections/Header';
 import { Footer } from '@/components/sections/Footer';
 import { ClosingForm } from '@/components/sections/ClosingForm';
+import { JsonLd } from '@/components/JsonLd';
+import { faqPage as faqSchema, breadcrumb, graph } from '@/lib/schema';
 import { faqPage as p } from '@/lib/content';
 import s from '@/components/content/content.module.css';
 
@@ -15,28 +17,19 @@ export const metadata: Metadata = {
 
 const slug = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 
-/** FAQPage schema so AI assistants and search can extract each answer. */
-function FaqSchema() {
-  const data = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: p.groups.flatMap((g) =>
-      g.items.map((it) => ({
-        '@type': 'Question',
-        name: it.q,
-        acceptedAnswer: { '@type': 'Answer', text: it.a },
-      })),
-    ),
-  };
-  return (
-    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
-  );
-}
-
 export default function FaqPage() {
+  const qas = p.groups.flatMap((g) => g.items.map((it) => ({ q: it.q, a: it.a })));
   return (
     <>
-      <FaqSchema />
+      <JsonLd
+        json={graph(
+          faqSchema(qas),
+          breadcrumb([
+            { name: 'Home', path: '/' },
+            { name: 'FAQ', path: '/faq' },
+          ]),
+        )}
+      />
       <Header />
       <main id="main">
         <section className={s.soberHero} aria-labelledby="faq-title">

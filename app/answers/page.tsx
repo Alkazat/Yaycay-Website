@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { Header } from '@/components/sections/Header';
 import { Footer } from '@/components/sections/Footer';
 import { ClosingForm } from '@/components/sections/ClosingForm';
+import { JsonLd } from '@/components/JsonLd';
+import { itemList, breadcrumb, graph } from '@/lib/schema';
 import { answersHub } from '@/lib/content';
 import s from '@/components/content/content.module.css';
 
@@ -14,8 +16,25 @@ export const metadata: Metadata = {
 };
 
 export default function AnswersHubPage() {
+  const allQuestions = answersHub.themes.flatMap((t) =>
+    t.questions.map((q) => ({ name: q.label, path: `/answers/${q.slug}` })),
+  );
+
   return (
     <>
+      <JsonLd
+        json={graph(
+          itemList(
+            'Yaycay family travel answers',
+            'Practical, parent-to-parent answers to the questions families ask about travelling with kids.',
+            allQuestions,
+          ),
+          breadcrumb([
+            { name: 'Home', path: '/' },
+            { name: 'Answers', path: '/answers' },
+          ]),
+        )}
+      />
       <Header />
       <main id="main">
         {/* 1 · Hub header */}
