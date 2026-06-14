@@ -7,7 +7,6 @@ export const metadata: Metadata = {
   title: 'Terms of service',
   description: 'The terms that apply when you use Yaycay.',
   alternates: { canonical: '/terms' },
-  robots: { index: false, follow: false },
 };
 
 // {Founder/legal to supply final wording. The structure stands; the words are placeholder.}

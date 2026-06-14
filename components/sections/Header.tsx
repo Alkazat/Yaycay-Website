@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/Button';
 import s from './sections.module.css';
 
 const LINKS = [
-  { href: '/homepage', label: 'Home' },
+  { href: '/', label: 'Home' },
   { href: '/how-it-works', label: 'How it works' },
   { href: '/sample-day', label: 'Sample day' },
   { href: '/for-parents', label: 'For parents' },
@@ -23,7 +23,7 @@ export function Header() {
     <div className={s.navStack}>
       <header className={s.header}>
         <div className={`container ${s.headerInner}`}>
-          <Link href="/homepage" aria-label="Yaycay home">
+          <Link href="/" aria-label="Yaycay home">
             <Logo width={108} />
           </Link>
           <Button href="/free-day" variant="cta">

@@ -16,7 +16,7 @@ export default function FreeDayRequestedPage() {
     <div className={s.page}>
       <header className={s.header}>
         <div className={`container ${s.headerInner}`}>
-          <Link href="/homepage" aria-label="Yaycay home">
+          <Link href="/" aria-label="Yaycay home">
             <Logo width={108} />
           </Link>
         </div>
@@ -28,7 +28,7 @@ export default function FreeDayRequestedPage() {
             <h1 className={s.title}>{freeDayRequested.headline}</h1>
             <p className={s.sub}>{freeDayRequested.body}</p>
             {/* Spec CTA target is /how-it-works (Phase 2); routes home until built. */}
-            <Button href="/homepage" variant="cta" size="lg">
+            <Button href="/" variant="cta" size="lg">
               Back to Yaycay
             </Button>
           </div>

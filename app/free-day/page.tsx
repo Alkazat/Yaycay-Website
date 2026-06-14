@@ -10,7 +10,6 @@ export const metadata: Metadata = {
   description:
     'Tell us three things about your trip and we will build one full day, free, so you can judge Yaycay on the real thing. It arrives in your inbox within 24 hours.',
   alternates: { canonical: '/free-day' },
-  robots: { index: false, follow: false },
 };
 
 /** Conversion form page (T9): logo + one reassurance line, no nav, nothing competing. */
@@ -19,7 +18,7 @@ export default function FreeDayPage() {
     <div className={s.page}>
       <header className={s.header}>
         <div className={`container ${s.headerInner}`}>
-          <Link href="/homepage" aria-label="Yaycay home">
+          <Link href="/" aria-label="Yaycay home">
             <Logo width={108} />
           </Link>
           <span className={s.reassure}>Your free day arrives within 24 hours.</span>

@@ -18,7 +18,6 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     title: g.title,
     description: g.subhead,
     alternates: { canonical: `/guides/${destination}` },
-    robots: { index: false, follow: false },
   };
 }
 

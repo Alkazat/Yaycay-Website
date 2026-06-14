@@ -12,7 +12,6 @@ export const metadata: Metadata = {
   description:
     'One holiday, two ways to buy. Done for you with our AI, or bring the ChatGPT, Claude or Gemini you already use. Pay once per holiday, no subscription.',
   alternates: { canonical: '/pricing' },
-  robots: { index: false, follow: false },
 };
 
 export default function PricingPage() {

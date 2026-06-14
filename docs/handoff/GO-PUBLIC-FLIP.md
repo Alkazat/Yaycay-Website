@@ -1,6 +1,21 @@
 # Go-public flip runbook
 
-The whole site is built and staged **behind the waitlist**: `/` is the indexable waitlist teaser, and the full marketing site lives at `/homepage` and the other routes with `robots: { index: false, follow: false }`. This document is the deliberate, single-sitting checklist to take it public. **Do not run any of this until the founder decides to launch.** Nothing here happens automatically.
+> **STATUS: the code-side flip was EXECUTED on 2026-06-14.** `/` is now the full
+> homepage, `/homepage` 301s to `/`, `noindex` is stripped from every public
+> page (kept only on `/free-day-requested` and `/go/*`), the apex host 301s to
+> `https://www.yaycay.ai`, robots.txt welcomes AI crawlers, the sitemap lists all
+> public URLs, and HSTS is set. The remaining items below are **host/manual
+> steps the code cannot do** (Vercel domain config, Search Console, founder-fill).
+
+The history below is kept as the record of what the flip involved.
+
+The whole site was built and staged **behind the waitlist**: `/` was the indexable waitlist teaser, and the full marketing site lived at `/homepage` and the other routes with `robots: { index: false, follow: false }`.
+
+## Remaining manual / host steps (not code)
+- **Set `NEXT_PUBLIC_SITE_URL=https://www.yaycay.ai`** in Vercel production (the code default already matches, but set it explicitly so it is intentional).
+- **Vercel domain config:** add `www.yaycay.ai` as the primary domain and point the apex `yaycay.ai` at it (the in-app 301 covers requests that still reach the apex). Confirm HTTPS certs.
+- **Search Console + Bing Webmaster Tools:** verify the domain, submit `https://www.yaycay.ai/sitemap.xml`, request indexing on the 8 priority pages (`/`, `/sample-day`, `/how-it-works`, `/pricing`, `/allergy-safety`, `/for-parents`, `/vs/wanderlog`, `/faq`).
+- **Founder-fill (cosmetic, not blocking indexation):** generate the images from the two image-brief docs, fill the remaining `{curly brace}` copy placeholders, and set `ORG.founderName` / `ORG.sameAs` / a dedicated square logo in `lib/site.ts`.
 
 ## What is already prepared (no flip needed)
 - **JSON-LD schema** is live on every page now (Organization site-wide; WebSite + SoftwareApplication on the homepage; FAQPage on `/faq`; QAPage + Article + BreadcrumbList on answers; Article + BreadcrumbList on guides; ItemList on both hubs; BreadcrumbList on pricing and comparisons). Emitting schema while noindex is harmless and means the site is citation-ready the moment it opens.

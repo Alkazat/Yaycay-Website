@@ -11,7 +11,6 @@ export const metadata: Metadata = {
   description:
     "A real, unpolished free day: the Walker family's day 2 in Singapore. Per-child morning adventures, an allergy-vetted hawker lunch with the reasoning shown, a rain plan loaded in advance, and the journal page.",
   alternates: { canonical: '/sample-day' },
-  robots: { index: false, follow: false },
 };
 
 export default function SampleDayPage() {

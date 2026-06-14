@@ -12,7 +12,6 @@ export const metadata: Metadata = {
   title: 'Family destination guides',
   description: guidesHub.intro,
   alternates: { canonical: '/guides' },
-  robots: { index: false, follow: false },
 };
 
 type Slug = keyof typeof guides;

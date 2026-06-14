@@ -12,7 +12,6 @@ export const metadata: Metadata = {
   description:
     'Straight answers about Yaycay, including the awkward ones: what it is, how the free day works, allergies and safety, pricing and refunds, your data, and during the trip.',
   alternates: { canonical: '/faq' },
-  robots: { index: false, follow: false },
 };
 
 const slug = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, '-');

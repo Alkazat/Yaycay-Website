@@ -8,7 +8,6 @@ export const metadata: Metadata = {
   title: 'Contact',
   description: 'Get in touch with Yaycay. We are a small team and a real person will reply.',
   alternates: { canonical: '/contact' },
-  robots: { index: false, follow: false },
 };
 
 export default function ContactPage() {

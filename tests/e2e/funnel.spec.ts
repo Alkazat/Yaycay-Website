@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('homepage and free day', () => {
   test('homepage loads with the hero promise and the CTA', async ({ page }) => {
-    await page.goto('/homepage');
+    await page.goto('/');
     await expect(
       page.getByRole('heading', {
         name: /the holiday your kids will never stop talking about/i,

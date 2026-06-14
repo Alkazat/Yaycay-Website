@@ -49,7 +49,6 @@ export const metadata: Metadata = {
   description:
     'Exactly what happens, from first chat to keepsake: one conversation in, a holiday built around each child out, Yaycay alongside you the whole trip, and a memory book after.',
   alternates: { canonical: '/how-it-works' },
-  robots: { index: false, follow: false },
 };
 
 export default function HowItWorksPage() {
