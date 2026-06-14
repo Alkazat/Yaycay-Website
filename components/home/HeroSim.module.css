@@ -1,6 +1,8 @@
-/* Interactive hero simulation. Box-art design system: royal outlines, gloss,
-   pill chips. All motion is opt-in (prefers-reduced-motion: no-preference) and
-   every state reserves its space so the build never shifts layout. */
+/* Interactive hero simulation. Two stacked layers in one grid cell: a floating
+   query (destination + people/date/days) and a full-width plan pane that slides
+   up and over it. Box-art design system. All motion is opt-in
+   (prefers-reduced-motion: no-preference) and the cell sizes to the plan, so the
+   build never shifts layout. */
 
 .wrap {
   margin: 0;
@@ -9,27 +11,37 @@
   gap: var(--space-3);
 }
 
-.frame {
-  background: var(--surface-card);
-  border: 2.5px solid var(--royal-600);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--card-lift);
-  padding: var(--space-5);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
+/* The stage stacks both layers in a single grid cell (sized to the plan). */
+.stage {
+  display: grid;
+}
+.query,
+.plan {
+  grid-area: 1 / 1;
 }
 
-/* Search bar */
+/* ---- Layer 1: the floating query ---- */
+.query {
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding-top: var(--space-7);
+}
+
 .bar {
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  background: var(--sky-50);
+  width: 100%;
+  max-width: 420px;
+  background: var(--surface-card);
   border: 2.5px solid var(--royal-600);
   border-radius: var(--radius-pill);
-  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
-  min-height: 52px;
+  box-shadow: var(--card-lift);
+  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-5);
+  min-height: 56px;
 }
 .barIcon {
   flex: none;
@@ -62,62 +74,79 @@
   vertical-align: text-bottom;
   background: var(--royal-600);
 }
-.barCta {
+.goBtn {
   flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   background: var(--sun-400);
   color: var(--royal-800);
   border: 2.5px solid var(--royal-700);
+  box-shadow: var(--gloss-top);
+  transition: background 0.3s ease;
+}
+.goBtn svg {
+  width: 18px;
+  height: 18px;
+}
+.goBtnDone {
+  background: var(--meadow-400);
+}
+
+/* The people / date / days selector fields */
+.fields {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+  opacity: 0;
+  transform: translateY(6px);
+}
+.fields.in {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .fields {
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+}
+.field {
+  display: inline-flex;
+  align-items: center;
+  background: var(--surface-card);
+  border: 2.5px solid var(--royal-600);
   border-radius: var(--radius-pill);
   box-shadow: var(--gloss-top);
   padding: var(--space-2) var(--space-4);
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: var(--step--1);
-  transition: background 0.3s ease;
-}
-.barCtaDone {
-  background: var(--meadow-400);
-  color: var(--royal-800);
-}
-
-/* Trip chips */
-.chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-  min-height: 30px;
-}
-.chip {
-  background: var(--cream-100);
-  border: 2px solid var(--royal-600);
-  border-radius: var(--radius-pill);
-  padding: 2px var(--space-3);
   font-weight: 700;
   font-size: var(--step--1);
   color: var(--royal-800);
 }
 
-/* The plan card */
+/* ---- Layer 2: the plan pane (slides up over the query) ---- */
 .plan {
+  z-index: 2;
+  background: var(--surface-card);
+  border: 2.5px solid var(--royal-600);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--card-lift);
+  padding: var(--space-5);
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
-}
-
-/* Reveal transition shared by chips + plan */
-.chips,
-.plan {
+  transform: translateY(101%);
   opacity: 0;
-  transform: translateY(8px);
 }
-.in {
+.plan.in {
+  transform: translateY(0);
   opacity: 1;
-  transform: none;
 }
 @media (prefers-reduced-motion: no-preference) {
-  .chips,
   .plan {
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition: transform 0.6s ease, opacity 0.3s ease;
   }
 }
 
@@ -188,7 +217,7 @@
   color: var(--royal-700);
 }
 
-/* Day items for the active child */
+/* Day items for the active tab */
 .items {
   list-style: none;
   margin: 0;
@@ -207,17 +236,14 @@
 }
 @media (prefers-reduced-motion: no-preference) {
   .item {
-    opacity: 0;
-    animation: itemIn 0.4s ease forwards;
+    animation: itemIn 0.4s ease both;
   }
 }
 @keyframes itemIn {
   from {
-    opacity: 0;
     transform: translateX(-8px);
   }
   to {
-    opacity: 1;
     transform: none;
   }
 }

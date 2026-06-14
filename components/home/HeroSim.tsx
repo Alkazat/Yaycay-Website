@@ -27,17 +27,22 @@ function useReducedMotion(): boolean {
 }
 
 /**
- * The hero simulation. Server-renders the *complete* frame (full destination,
- * the plan, Sam's tab active) so it is meaningful with no JS and paints fast.
- * After hydration, and only when motion is allowed, it replays the build once
- * (types the destination, reveals the plan) and then auto-cycles the tabs
- * (Sam → Pip → Theo → Grown-ups) until the visitor takes control by clicking.
+ * The hero simulation. Two layers: a floating query (a destination field plus
+ * the people / date / days selectors) and a full-width plan pane that slides up
+ * and over the query to demonstrate the result.
+ *
+ * Server-renders the *complete* frame (destination typed, plan covering, Sam's
+ * tab active) so it is meaningful with no JS and paints fast. After hydration,
+ * and only when motion is allowed, it replays the build (types the destination,
+ * fills the fields, slides the plan up) and then auto-cycles the tabs until the
+ * visitor takes control by clicking.
  */
 export function HeroSim() {
   const reduced = useReducedMotion();
   // SSR/initial = complete frame (no hydration mismatch, good LCP).
   const [typed, setTyped] = useState(sim.query);
-  const [revealed, setRevealed] = useState(true);
+  const [fieldsIn, setFieldsIn] = useState(true);
+  const [planUp, setPlanUp] = useState(true);
   const [active, setActive] = useState(0);
   const [userControlled, setUserControlled] = useState(false);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
@@ -49,12 +54,14 @@ export function HeroSim() {
     const push = (fn: () => void, ms: number) => t.push(setTimeout(fn, ms));
 
     setTyped('');
-    setRevealed(false);
+    setFieldsIn(false);
+    setPlanUp(false);
     setActive(0);
     const q = sim.query;
     for (let i = 1; i <= q.length; i++) push(() => setTyped(q.slice(0, i)), 320 + i * 90);
-    const afterType = 320 + q.length * 90 + 260;
-    push(() => setRevealed(true), afterType);
+    const afterType = 320 + q.length * 90 + 200;
+    push(() => setFieldsIn(true), afterType);
+    push(() => setPlanUp(true), afterType + 950);
 
     return () => {
       t.forEach(clearTimeout);
@@ -62,12 +69,12 @@ export function HeroSim() {
     };
   }, [reduced]);
 
-  // Auto-cycle the tabs once the plan is revealed, until the visitor takes over.
+  // Auto-cycle the tabs once the plan is up, until the visitor takes over.
   useEffect(() => {
-    if (reduced || !revealed || userControlled) return;
+    if (reduced || !planUp || userControlled) return;
     const id = setInterval(() => setActive((a) => (a + 1) % sim.kids.length), 2600);
     return () => clearInterval(id);
-  }, [reduced, revealed, userControlled]);
+  }, [reduced, planUp, userControlled]);
 
   const selectKid = (i: number) => {
     setUserControlled(true);
@@ -85,32 +92,32 @@ export function HeroSim() {
         .map(label)
         .join(', ')}, with every meal allergy-checked.`}
     >
-      <div className={s.frame}>
-        {/* Search bar that types the destination */}
-        <div className={s.bar} aria-hidden="true">
-          <span className={s.barIcon}>
-            <Icon name="map" />
-          </span>
-          <span className={s.barText}>
-            {typed || <span className={s.placeholder}>{sim.placeholder}</span>}
-            {caretOn && <span className={s.caret} />}
-          </span>
-          <span className={`${s.barCta} ${revealed ? s.barCtaDone : ''}`}>
-            {revealed ? 'Done' : 'Build'}
-          </span>
-        </div>
-
-        {/* Trip chips */}
-        <div className={`${s.chips} ${revealed ? s.in : ''}`} aria-hidden="true">
-          {sim.chips.map((c) => (
-            <span key={c} className={s.chip}>
-              {c}
+      <div className={s.stage}>
+        {/* Layer 1 — the floating query the plan is built from */}
+        <div className={s.query} aria-hidden="true">
+          <div className={s.bar}>
+            <span className={s.barIcon}>
+              <Icon name="map" />
             </span>
-          ))}
+            <span className={s.barText}>
+              {typed || <span className={s.placeholder}>{sim.placeholder}</span>}
+              {caretOn && <span className={s.caret} />}
+            </span>
+            <span className={`${s.goBtn} ${planUp ? s.goBtnDone : ''}`}>
+              <Icon name="compass" />
+            </span>
+          </div>
+          <div className={`${s.fields} ${fieldsIn ? s.in : ''}`}>
+            {sim.chips.map((c) => (
+              <span key={c} className={s.field}>
+                {c}
+              </span>
+            ))}
+          </div>
         </div>
 
-        {/* The plan: a day card with a tab per child plus the grown-ups view */}
-        <div className={`${s.plan} ${revealed ? s.in : ''}`}>
+        {/* Layer 2 — the plan pane that slides up and over the query */}
+        <div className={`${s.plan} ${planUp ? s.in : ''}`}>
           <div className={s.cardHead} aria-hidden="true">
             <span className={s.cardDay}>{sim.card.day}</span>
             <span className={s.cardDate}>{sim.card.date}</span>
