@@ -51,7 +51,7 @@
 
 /* Sky primary. */
 .primary {
-  background: var(--sky-500);
+  background: var(--sky-700);
   border-color: var(--royal-600);
   color: #fff;
   box-shadow: var(--pop-sky), var(--gloss-top);
