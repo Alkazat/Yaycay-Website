@@ -20,6 +20,8 @@ hands the visitor to the app demo.
   gradients). `styles/tokens.css` is a thin site-local layer on top (fluid type
   scale, safe areas, container, and compatibility aliases). Replace the vendored
   copy with the published `@yaycay` package when it ships.
+- **Brand assets** (logos): see [`BRAND-ASSETS.md`](BRAND-ASSETS.md) — the box-art **lockup**
+  leads on the funnel; the favicon, Apple touch icon, and the other marks are catalogued there.
 - The only backend integration is the `POST /signup/capture` DTO from
   `@alkazat/contracts`, mirrored in `lib/contracts.ts` until the package is pinned.
 

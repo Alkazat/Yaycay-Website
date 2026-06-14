@@ -28,13 +28,14 @@ export const metadata: Metadata = {
     siteName: SITE.name,
     title: 'The holiday your kids will never stop talking about.',
     description: SITE.description,
-    images: [{ url: '/og.png', width: 1200, height: 630, alt: 'Yaycay' }],
+    // og:image is produced per-page by the file-based `opengraph-image.tsx`
+    // routes (see lib/og). No static image here.
   },
   twitter: {
     card: 'summary_large_image',
     title: 'The holiday your kids will never stop talking about.',
     description: SITE.description,
-    images: ['/og.png'],
+    // twitter:image falls back to the page's opengraph-image.
   },
   robots: { index: true, follow: true },
 };

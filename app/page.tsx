@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     title: 'Yaycay is coming. Join the waitlist.',
     description:
       'Shared itineraries, packing lists, and a countdown the whole family loves. Be first in when Yaycay opens.',
-    images: [{ url: '/og.png', width: 1200, height: 630, alt: 'Yaycay' }],
+    // og:image comes from the root opengraph-image.tsx route (see lib/og).
   },
 };
 
