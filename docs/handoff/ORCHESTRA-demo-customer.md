@@ -26,17 +26,19 @@ Per the four user types / explorer modes:
 | Name | Role / mode | Age | Notes |
 |---|---|---|---|
 | {Parent name} | Grown Up (`standard`), PIN holder | adult | The account owner. |
+| {Parent name 2} | Grown Up (`standard`) | adult | Second guardian (the family is a household of 5). |
 | Sam | Explorer (`explorer`) | 9 | Engineering/discovery-leaning adventures. |
 | Pip | Little Explorer (`little`) | 6 | **Tree-nut allergy** (the allergy that threads through every meal artefact). |
+| Theo | Little Explorer (`little`) | 3 | Toddler pace: water play, a protected nap block, an early soft-food dinner. |
 
 - **Grown-ups view PIN:** set a 4-digit PIN (`pin_set: true`). Record it in the vault. It must unlock the guardian command-centre view. Child profiles must **never** see the grown-ups view.
 - Allergy data must be structured (not free-text only) so the app can render flags, ask-the-kitchen cards, and reminders for **tree nuts** specifically.
 
 ## The trip (the heart of the seed)
-A **completed 4-day Singapore trip** for the Walker family, matching the published sample day so the marketing copy and the screenshots agree.
+A **completed 4-day Singapore trip from 14 September** for the Walker family, matching the published sample day so the marketing copy and the screenshots agree.
 
 **Day 2 is the hero day** (most screenshots come from it). It must contain:
-- **Per-child morning blocks:** Sam (9) — a Supertree/engineering discovery at Gardens by the Bay; Pip (6) — a Hidden Creatures / Cloud Forest trail. Same place, two different adventures.
+- **Per-child morning blocks:** Sam (9) — a Supertree/engineering discovery at Gardens by the Bay; Pip (6) — a Hidden Creatures / Cloud Forest trail; Theo (3) — the water-play garden and dragonfly bridge at toddler pace. Same place, three different adventures.
 - **Lunch at Satay by the Bay** with allergy handling:
   - meal card with a **"Tree-nut allergy: flagged"** text label (never colour alone),
   - the "what we checked / confirm on the day" reasoning,

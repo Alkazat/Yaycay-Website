@@ -232,11 +232,51 @@ export const forParents = {
 export const home = {
   hero: {
     headline: 'The holiday your kids will never stop talking about',
-    subhead:
-      'One chat builds the whole trip. Yaycay plans around your kids, checks every meal against their allergies, travels with you, and turns it all into a keepsake. Paid once, for this holiday only.',
+    line: 'Tell us where. Watch the days build themselves: one for every kid, every meal checked.',
     primaryCta: { label: 'Build your free day', href: '/free-day' },
-    secondaryCta: { label: 'See a real free day first', href: '/sample-day' },
+    secondaryCta: { label: 'See a real free day', href: '/sample-day' },
   },
+  // The interactive hero: types a destination, then assembles a real day with a
+  // tab per child. Copy lives here; the animation lives in components/home/HeroSim.
+  heroSim: {
+    placeholder: 'Where are you taking the family?',
+    query: 'Singapore',
+    chips: ['Family of 5', '14 September', '4 days'],
+    caption: "A plan assembling itself, from day 2 of the Walkers' Singapore trip.",
+    kids: [
+      {
+        name: 'Sam',
+        age: 9,
+        accent: 'sky' as const,
+        items: ['Supertree engineering hunt', 'Hawker noodle taste-test', 'Night safari: the nocturnal five'],
+      },
+      {
+        name: 'Pip',
+        age: 6,
+        accent: 'sun' as const,
+        allergy: true,
+        items: ['Cloud Forest creature trail', 'Lunch: nut-flagged satay stalls', 'Splash park at the Bay'],
+      },
+      {
+        name: 'Theo',
+        age: 3,
+        accent: 'meadow' as const,
+        items: ['Water-play garden', 'Nap protected, 1-3pm', 'Early dinner: soft rice and egg'],
+      },
+    ],
+    flags: [
+      { icon: 'shield', label: "Tree-nut allergy flagged on Pip's every meal" },
+      { icon: 'compass', label: 'Rain plan ready for the afternoon storm' },
+    ],
+  },
+  // The five value props, pushed below the fold as a scannable strip (they used
+  // to be a 41-word hero subhead).
+  claims: [
+    { icon: 'sparkle', title: 'Built around each kid', body: 'Every child gets their own day, matched to their age and what they love.' },
+    { icon: 'shield', title: 'Every meal checked', body: 'Allergy flags, checks, and the words to ask, in the local language.' },
+    { icon: 'compass', title: 'With you on the trip', body: 'Rain plans and good food near you, while you are actually there.' },
+    { icon: 'star', title: 'Paid once', body: 'One price for one holiday. No subscription quietly renewing.' },
+  ],
   recognition: {
     headline: 'You know how this usually goes.',
     body: 'Twenty browser tabs. A spreadsheet nobody else opens. Screenshots in the family chat. And on the trip itself, you are the one holding it all: the bookings, the backup plans, the "is this restaurant safe for her". Everyone else relaxes. You navigate.',
@@ -247,7 +287,7 @@ export const home = {
     cards: [
       {
         title: 'Built around your kids',
-        body: "Every child gets their own adventures, matched to their age and what makes them light up. A nine-year-old's day and a six-year-old's day, woven into one family plan. They even get their own travel journal.",
+        body: "Every child gets their own adventures, matched to their age and what makes them light up. A nine-year-old's, a six-year-old's and a three-year-old's day, woven into one family plan. They even get their own travel journal.",
       },
       {
         title: 'With you the whole way',
@@ -263,23 +303,23 @@ export const home = {
   proofTeaser: {
     headline: "Don't take our word for it. Read a real day.",
     subhead:
-      "Here is one full day from a family's Singapore trip: two kids, one tree-nut allergy, one rainy afternoon, fully handled.",
-    body: 'Morning adventures for each child. Lunch chosen with the allergy reasoning shown, not hidden. A rain plan that was ready before the clouds were. This is exactly what your free day looks like.',
+      "One full day from a family's Singapore trip: three kids, one tree-nut allergy, one rainy afternoon, all handled.",
+    body: 'Per-child mornings. A lunch with the allergy reasoning shown, not hidden. A rain plan ready before the clouds. This is your free day.',
     cta: { label: 'See the full sample day', href: '/sample-day' },
   },
   steps: {
     headline: 'One chat builds the whole trip.',
     items: [
-      { n: 1, title: 'Tell us about your crew', body: 'Where you are going, when, who is coming, ages, allergies, what they love. One conversation, not a form marathon.' },
-      { n: 2, title: 'Your plan arrives', body: "A day-by-day holiday built around each child, with every meal suggestion checked against your family's dietary needs." },
-      { n: 3, title: 'Yaycay travels with you', body: 'Answers on the ground, rain plans, "what is near us right now", without you re-researching at 9pm in the hotel.' },
-      { n: 4, title: 'Keep the memories', body: "After the trip, the kids' journals and your days become a keepsake book the family will actually look at again." },
+      { n: 1, title: 'Tell us about your crew', body: 'Where, when, who is coming, ages, allergies, what they love. One conversation, not a form.' },
+      { n: 2, title: 'Your plan arrives', body: 'A day-by-day holiday built around each child, every meal checked against your allergies.' },
+      { n: 3, title: 'Yaycay travels with you', body: 'Rain plans, what is good nearby, answers on the ground. No 9pm re-researching.' },
+      { n: 4, title: 'Keep the memories', body: "The kids' journals become a keepsake book the family actually reopens." },
     ],
     cta: { label: 'See the full picture', href: '/how-it-works' },
   },
   allergyBlock: {
     headline: 'Travelling with an allergy? We take that as seriously as you do.',
-    body: 'Every meal suggestion comes with flags, checks and reminders that help you stay in control: what we have checked, what you should confirm on the day, and how to ask in the local language. We will never tell you a restaurant is "100% safe", because no one honestly can. We will make sure you are never guessing.',
+    body: 'Every meal carries flags, checks and the words to ask in the local language: what we checked, what to confirm on the day. We never say "100% safe". We make sure you are never guessing.',
     cta: { label: 'How allergy checks work', href: '/allergy-safety' },
   },
   testimonials: {
@@ -331,7 +371,7 @@ export const howItWorksPage = {
     { n: 1, title: 'One chat. Tell us about your crew.', body: "You talk, Yaycay listens. Where you are going, when, who is coming, their ages, their allergies and dietary needs, what each kid is obsessed with this month, how much walking grandad's knees can take. If you already have flights or a hotel booked, forward the confirmation emails and they are in the plan. Got a screenshot of a place someone recommended? Send that too. The chat takes most families fifteen to twenty minutes, and you can come back and add things any time." },
     { n: 2, title: 'Your holiday arrives, built around each child.', body: "A day-by-day plan for the whole trip. Each child gets their own adventures inside the family's shared day, matched to their age and interests. Days are routed sensibly, so you are not crossing the city twice before lunch. Energy is balanced across the trip: big days, slow days, and rest built in on purpose. Mixed group? Toddlers, teens and grandparents get balanced too; nobody's day is an afterthought. Every meal suggestion carries allergy flags and the reasoning behind them. And every day has a weather contingency already attached.", cta: { label: 'See a real day', href: '/sample-day' } },
     { n: 3, title: 'Tweak anything. It is your holiday.', body: 'Swap a museum for a beach. Tell Yaycay the kids hated the idea of the night safari, or that you have booked a cooking class on Thursday. The plan reshapes around your changes, and everything downstream (routes, meals, energy balance) adjusts with it. You stay the decision-maker. Yaycay does the reshuffling.' },
-    { n: 4, title: 'On the trip, Yaycay is in your pocket.', body: "This is where most planners go quiet. Yaycay does not. It rains: your wet-weather plan is one tap away. Everyone is hungry now: ask what is good near here, and the suggestions arrive with your family's allergy flags already applied. The six-year-old has hit the wall at 2pm: ask for a quiet hour nearby. You are never the only one holding the trip together, because the trip is being held for you." },
+    { n: 4, title: 'On the trip, Yaycay is in your pocket.', body: "This is where most planners go quiet. Yaycay does not. It rains: your wet-weather plan is one tap away. Everyone is hungry now: ask what is good near here, and the suggestions arrive with your family's allergy flags already applied. The three-year-old has hit the wall at 2pm: ask for a quiet hour nearby. You are never the only one holding the trip together, because the trip is being held for you." },
     { n: 5, title: 'The holiday becomes a book.', body: 'Through the trip, each child fills their own journal: stamps, drawings, one question a day. Afterwards, the journals, your days and your photos come together as a keepsake memory book. It is the bit nobody expects and nobody forgets. Holidays end. This does not.', cta: { label: 'What the kids get', href: '/for-kids' } },
   ],
   faqHead: 'The questions sceptics ask. Fair enough.',
@@ -346,12 +386,12 @@ export const howItWorksPage = {
 
 export const sampleDay = {
   contextHeadline: 'This is a real free day.',
-  contextSub: "Built for the Walker family: Singapore, four days, Sam (9), Pip (6), and Pip's tree-nut allergy. Nothing below has been polished for marketing. This is what arrives in your inbox.",
+  contextSub: "Built for the Walker family: Singapore, four days from 14 September, with Sam (9), Pip (6) and her tree-nut allergy, and Theo (3). Nothing below has been polished for marketing. This is what arrives in your inbox.",
   artefact: {
     title: 'Day 2 in Singapore: Gardens, hawkers and one very good rain plan',
     sub: 'Tuesday. Forecast: 31°C, likely afternoon storm. Energy plan: big morning, slow middle, gentle evening.',
     blocks: [
-      { time: '8.30am', title: 'Gardens by the Bay, two adventures running side by side.', body: ['For Sam (9): the Supertree Grove engineering hunt. Six questions on his journal page, including "find the tree that breathes for the building". He is looking for the exhaust vents, though he will not know that yet.', 'For Pip (6): the Hidden Creatures trail through the Cloud Forest. Seven animals to spot and stamp. The seventh is genuinely hard to find. That is deliberate.'], note: 'Each child gets their own version of the same morning. Same place, same family, two different adventures.' },
+      { time: '8.30am', title: 'Gardens by the Bay, three adventures running side by side.', body: ['For Sam (9): the Supertree Grove engineering hunt. Six questions on his journal page, including "find the tree that breathes for the building". He is looking for the exhaust vents, though he will not know that yet.', 'For Pip (6): the Hidden Creatures trail through the Cloud Forest. Seven animals to spot and stamp. The seventh is genuinely hard to find. That is deliberate.', 'For Theo (3): the water-play garden and the dragonfly bridge, at toddler pace. No agenda beyond getting happily soaked before the heat builds.'], note: 'Each child gets their own version of the same morning. Same place, same family, three different adventures.' },
       { time: '12.30pm', title: 'Lunch at Satay by the Bay.', body: ['Why this one: open-air hawker centre, five minutes\' walk, and we have flagged the stalls where satay sauce contains peanuts and cross-contact is likely. Three stalls are flagged as lower-risk for tree nuts based on their published menus, but please confirm with the stall holder on the day. Here is the question to show them, in English and Mandarin: "Does this dish contain any nuts or nut oils? My daughter has a serious tree-nut allergy."'], note: 'Every meal comes with flags, checks and reminders that help you stay in control. We show our reasoning. You make the call, and you confirm on the day.', allergy: true },
       { time: '2pm', title: 'The rain plan, already loaded.', body: ['The forecast says afternoon storm, so the afternoon is indoors by design: the Future World galleries at ArtScience Museum. Pre-book the 2.15pm entry (link in your plan). If the storm misses, swap to the Marina Barrage kite lawn. Both options are seven minutes from lunch. Either way, nobody is standing in rain googling "things to do Singapore wet weather".'], note: 'Contingencies are built in before you leave, not improvised on the day.' },
       { time: '4.30pm', title: 'Hotel pool. That is it. That is the plan.', body: ['Six-year-olds have a battery. Day 2 of a four-day trip is exactly when it runs out. The evening is deliberately empty except for one easy dinner suggestion nearby (allergy flags included).'], note: 'A good family plan includes doing less. We schedule the rest, too.' },
@@ -850,7 +890,7 @@ export const guides = {
       "When to go: February to April for the driest stretch; avoid the December school-holiday crush unless you are in it. Getting around: MRT for almost everything; taxis and Grab are easy and air-conditioned for the wilted end of the day. Prams: the most pram-friendly city in Asia; lifts in every station. Rain: assume a storm most afternoons in the wet season and plan one indoor anchor per day (museums, the ArtScience Museum, Changi's Jewel). Heat: do the big outdoor thing before 11am, swim or go indoors from 1 to 4, re-emerge for the evening. Budget signal: expensive for the region; hawker meals are the great equaliser at a few dollars a plate.",
     sampleHead: 'What one Yaycay day in Singapore looks like',
     sample:
-      'We publish a full, unedited free day from a real family\'s Singapore trip: two kids, a tree-nut allergy, and an afternoon storm, all handled. If you want to see how everything above turns into an actual Tuesday, it is the best five-minute read on this site.',
+      'We publish a full, unedited free day from a real family\'s Singapore trip: three kids, a tree-nut allergy, and an afternoon storm, all handled. If you want to see how everything above turns into an actual Tuesday, it is the best five-minute read on this site.',
     sampleCta: { label: 'Read the Singapore sample day', href: '/sample-day' },
     closing: {
       headline: 'Build your free Singapore day',

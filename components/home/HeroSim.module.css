@@ -1,0 +1,281 @@
+/* Interactive hero simulation. Box-art design system: royal outlines, gloss,
+   pill chips. All motion is opt-in (prefers-reduced-motion: no-preference) and
+   every state reserves its space so the build never shifts layout. */
+
+.wrap {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.frame {
+  background: var(--surface-card);
+  border: 2.5px solid var(--royal-600);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--card-lift);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* Search bar */
+.bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  background: var(--sky-50);
+  border: 2.5px solid var(--royal-600);
+  border-radius: var(--radius-pill);
+  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
+  min-height: 52px;
+}
+.barIcon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  color: var(--royal-600);
+}
+.barIcon svg {
+  width: 20px;
+  height: 20px;
+}
+.barText {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step-1);
+  color: var(--royal-800);
+  white-space: nowrap;
+  overflow: hidden;
+}
+.placeholder {
+  color: var(--muted);
+}
+.caret {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  margin-left: 1px;
+  vertical-align: text-bottom;
+  background: var(--royal-600);
+}
+.barCta {
+  flex: none;
+  background: var(--sun-400);
+  color: var(--royal-800);
+  border: 2.5px solid var(--royal-700);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--gloss-top);
+  padding: var(--space-2) var(--space-4);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step--1);
+  transition: background 0.3s ease;
+}
+.barCtaDone {
+  background: var(--meadow-400);
+  color: #fff;
+}
+
+/* Trip chips */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  min-height: 30px;
+}
+.chip {
+  background: var(--cream-100);
+  border: 2px solid var(--royal-600);
+  border-radius: var(--radius-pill);
+  padding: 2px var(--space-3);
+  font-weight: 700;
+  font-size: var(--step--1);
+  color: var(--royal-800);
+}
+
+/* The plan card */
+.plan {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* Reveal transition shared by chips + plan */
+.chips,
+.plan {
+  opacity: 0;
+  transform: translateY(8px);
+}
+.in {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .chips,
+  .plan {
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+}
+
+/* Tabs, one per child */
+.tabs {
+  display: flex;
+  gap: var(--space-2);
+}
+.tab {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  background: var(--cream-100);
+  border: 2.5px solid var(--royal-600);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-3);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step--1);
+  color: var(--royal-800);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+.tabAge {
+  color: var(--muted);
+  font-weight: 600;
+}
+.tabDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--royal-700);
+  background: var(--accent, var(--sky-500));
+}
+.tabActive {
+  background: #fff;
+  box-shadow: 0 4px 0 var(--royal-600), var(--gloss-top);
+  transform: translateY(-2px);
+}
+.tabActive .tabAge {
+  color: var(--royal-700);
+}
+
+/* Day items for the active child */
+.items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+  min-height: 150px;
+  align-content: start;
+}
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-weight: 600;
+  color: var(--text-body);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .item {
+    opacity: 0;
+    animation: itemIn 0.4s ease forwards;
+  }
+}
+@keyframes itemIn {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.itemDot {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--royal-600);
+  background: var(--accent, var(--sky-500));
+}
+.itemText {
+  flex: 1;
+}
+.itemFlag {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--sun-400);
+  color: var(--royal-800);
+  border: 2px solid var(--royal-700);
+  border-radius: var(--radius-pill);
+  padding: 1px var(--space-2);
+  font-size: var(--step--2, 0.72rem);
+  font-weight: 700;
+}
+.itemFlag svg {
+  width: 13px;
+  height: 13px;
+}
+
+/* Persistent trust flags */
+.flags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  border-top: 2px dashed var(--sand-200);
+  padding-top: var(--space-3);
+}
+.flag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--meadow-300);
+  border: 2px solid var(--meadow-600);
+  border-radius: var(--radius-pill);
+  padding: 2px var(--space-3);
+  font-weight: 700;
+  font-size: var(--step--1);
+  color: var(--royal-800);
+}
+.flag svg {
+  width: 15px;
+  height: 15px;
+  color: var(--meadow-600);
+}
+
+.caption {
+  text-align: center;
+  font-weight: 700;
+  font-size: var(--step--1);
+  color: var(--royal-700);
+}
+
+/* Accent colours fed to the dots via a CSS variable. */
+.sky {
+  --accent: var(--sky-500);
+}
+.sun {
+  --accent: var(--sun-400);
+}
+.meadow {
+  --accent: var(--meadow-400);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .caret {
+    animation: blink 1s steps(1) infinite;
+  }
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
