@@ -123,22 +123,24 @@ export function HeroSim() {
             ))}
           </div>
 
-          <ul key={active} className={s.items} role="tabpanel" aria-label={`${kid.name}'s day`}>
-            {kid.items.map((it, i) => {
-              const flagged = /flag/i.test(it);
-              return (
-                <li key={it} className={s.item} style={{ animationDelay: `${i * 90}ms` }}>
-                  <span className={`${s.itemDot} ${ACCENT[kid.accent]}`} aria-hidden="true" />
-                  <span className={s.itemText}>{it}</span>
-                  {flagged && (
-                    <span className={s.itemFlag}>
-                      <Icon name="shield" /> flagged
-                    </span>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
+          <div role="tabpanel" aria-label={`${kid.name}'s day`}>
+            <ul key={active} className={s.items}>
+              {kid.items.map((it, i) => {
+                const flagged = /flag/i.test(it);
+                return (
+                  <li key={it} className={s.item} style={{ animationDelay: `${i * 90}ms` }}>
+                    <span className={`${s.itemDot} ${ACCENT[kid.accent]}`} aria-hidden="true" />
+                    <span className={s.itemText}>{it}</span>
+                    {flagged && (
+                      <span className={s.itemFlag}>
+                        <Icon name="shield" /> flagged
+                      </span>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
 
           <div className={s.flags}>
             {sim.flags.map((f) => (
