@@ -236,44 +236,70 @@ export const home = {
     primaryCta: { label: 'Build your free day', href: '/free-day' },
     secondaryCta: { label: 'See a real free day', href: '/sample-day' },
   },
-  // The interactive hero: types a destination, then assembles a real day with a
-  // tab per child plus the grown-ups view. Copy lives here; the animation lives
-  // in components/home/HeroSim.
+  // The interactive hero: types a destination, shows the AI building the trip,
+  // then reveals a real day with a tab per child plus the grown-ups view. Copy
+  // lives here; the animation lives in components/home/HeroSim.
   heroSim: {
     placeholder: 'Where are you taking the family?',
     query: 'Singapore',
     chips: ['Family of 5', '14 September', '4 days'],
-    card: { day: 'Day 1', date: '14 Sept' },
-    caption: "A plan assembling itself, from day one of the Walkers' Singapore trip.",
+    // The AI "building" phase shown while the plan is generated.
+    building: {
+      title: "Building the Walkers' day",
+      lines: [
+        'Finding the best spots',
+        'Checking every menu for allergies',
+        "Matching each kid's age",
+        'Planning around the weather',
+      ],
+    },
+    card: { day: 'Day 1', place: 'Singapore', builtBy: 'Built by Yaycay AI' },
+    // "Bring your own AI" trust banner; logos resolve from /brand/partners/<slug>.
+    works: {
+      label: 'Works with',
+      partners: [
+        { name: 'ChatGPT', slug: 'chatgpt' },
+        { name: 'Claude', slug: 'claude' },
+        { name: 'Gemini', slug: 'gemini' },
+      ],
+    },
+    caption: "A real Yaycay day, built live — day one of the Walkers' Singapore trip.",
     kids: [
       {
         name: 'Sam',
         age: 9,
         accent: 'sky',
-        items: ['Supertree engineering hunt', 'Hawker noodle taste-test', 'Night safari: the nocturnal five'],
+        day: [
+          { time: 'Morning', title: 'Supertree engineering hunt', desc: 'Find the vents that cool the domes below.', wow: '18 Supertrees; the tallest is 50m.', tag: 'Spot it' },
+          { time: 'Evening', title: 'Garden Rhapsody light show', desc: 'The Supertrees turn into music and light.', wow: 'Free, nightly at 7.45 and 8.45.', tag: 'Quiz' },
+        ],
       },
       {
         name: 'Pip',
         age: 6,
         accent: 'sun',
         allergy: true,
-        items: ['Cloud Forest creature trail', 'Lunch: nut-flagged satay stalls', 'Splash park at the Bay'],
+        day: [
+          { time: 'Morning', title: 'Cloud Forest creature trail', desc: 'Seven hidden animals to find and stamp.', wow: 'A 35m waterfall, indoors.', tag: 'Spot it' },
+          { time: 'Midday', title: 'Lunch at Satay by the Bay', desc: 'Nut-flagged stalls marked, ask-the-kitchen card ready.', wow: null, tag: 'Allergy' },
+        ],
       },
       {
         name: 'Theo',
         age: 3,
         accent: 'meadow',
-        items: ['Water-play garden', 'Nap protected, 1-3pm', 'Early dinner: soft rice and egg'],
+        day: [
+          { time: 'Morning', title: 'Water-play garden', desc: 'Splash about before the heat builds.', wow: 'Free entry; bring swimmers.', tag: 'Photo' },
+          { time: 'Afternoon', title: 'Nap, protected', desc: 'A quiet hour back at the hotel, 1-3pm.', wow: null, tag: null },
+        ],
       },
       {
         name: 'Grown-ups',
         age: null,
         accent: 'royal',
-        items: [
-          'Tree-nut card ready for Pip',
-          'Hotel to Gardens by the Bay: 12 min',
-          'EpiPen and water in the day bag',
-          'Rain backup: ArtScience, 2.15pm',
+        day: [
+          { time: 'Safety', title: 'Allergy and protocol', desc: "Pip's tree-nut card ready; EpiPen and water packed.", wow: null, tag: null },
+          { time: 'Logistics', title: "Today's transfers", desc: 'Hotel to Gardens by the Bay, 12 min; rain backup booked 2.15pm.', wow: null, tag: null },
         ],
       },
     ],

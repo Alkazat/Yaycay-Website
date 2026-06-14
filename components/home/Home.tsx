@@ -3,6 +3,7 @@ import { Icon } from '@/components/ui/Icon';
 import { ImageSlot } from '@/components/ui/ImageSlot';
 import { FreeDayForm } from '@/components/FreeDayForm';
 import { HeroSim } from './HeroSim';
+import { WorksWith } from './WorksWith';
 import { home } from '@/lib/content';
 import s from './Home.module.css';
 
@@ -18,6 +19,7 @@ export function Home() {
           <div className={s.heroStage}>
             <HeroSim />
           </div>
+          <WorksWith />
         </div>
       </section>
 

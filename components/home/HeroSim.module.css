@@ -1,8 +1,7 @@
-/* Interactive hero simulation. Two stacked layers in one grid cell: a floating
-   query (destination + people/date/days) and a full-width plan pane that slides
-   up and over it. Box-art design system. All motion is opt-in
-   (prefers-reduced-motion: no-preference) and the cell sizes to the plan, so the
-   build never shifts layout. */
+/* Interactive hero simulation. Three phases cross-fade inside one grid cell
+   (sized to the finished plan, so the build never shifts layout): a floating
+   query, the AI "building" orb, then the finished day plan. All motion is opt-in
+   (prefers-reduced-motion: no-preference). Box-art design system. */
 
 .wrap {
   margin: 0;
@@ -11,25 +10,41 @@
   gap: var(--space-3);
 }
 
-/* The stage stacks both layers in a single grid cell (sized to the plan). */
 .stage {
   display: grid;
 }
-.query,
-.plan {
+.layer {
   grid-area: 1 / 1;
+  opacity: 0;
+  pointer-events: none;
+}
+.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .layer {
+    transition: opacity 0.45s ease;
+  }
 }
 
-/* ---- Layer 1: the floating query ---- */
+/* ---- Phase 1: the floating query ---- */
+.query,
+.building {
+  align-self: center;
+  justify-self: center;
+  width: 100%;
+}
+.plan {
+  align-self: stretch;
+}
+
 .query {
-  align-self: start;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--space-4);
-  padding-top: var(--space-7);
 }
-
 .bar {
   display: flex;
   align-items: center;
@@ -85,17 +100,11 @@
   color: var(--royal-800);
   border: 2.5px solid var(--royal-700);
   box-shadow: var(--gloss-top);
-  transition: background 0.3s ease;
 }
 .goBtn svg {
   width: 18px;
   height: 18px;
 }
-.goBtnDone {
-  background: var(--meadow-400);
-}
-
-/* The people / date / days selector fields */
 .fields {
   display: flex;
   flex-wrap: wrap;
@@ -126,9 +135,78 @@
   color: var(--royal-800);
 }
 
-/* ---- Layer 2: the plan pane (slides up over the query) ---- */
+/* ---- Phase 2: the AI building the trip ---- */
+.building {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+  text-align: center;
+}
+.buildTitle {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--step-2);
+  color: var(--royal-800);
+}
+.orb {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 36% 30%, #cdeff4 0%, var(--aqua-400, #2bc3d0) 48%, var(--sky-600) 100%);
+  border: 3px solid var(--royal-700);
+  box-shadow: 0 0 0 6px rgba(43, 195, 208, 0.14), 0 8px 30px rgba(43, 195, 208, 0.45), var(--gloss-top);
+  color: #fff;
+}
+.orb svg {
+  width: 30px;
+  height: 30px;
+}
+.orb::before {
+  content: '';
+  position: absolute;
+  inset: -7px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: var(--sun-400);
+  border-right-color: var(--sun-400);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .orb {
+    animation: orbPulse 1.6s ease-in-out infinite;
+  }
+  .orb::before {
+    animation: spin 1s linear infinite;
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes orbPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+.buildLine {
+  margin: 0;
+  min-height: 1.4em;
+  font-weight: 700;
+  font-size: var(--step-0);
+  color: var(--royal-700);
+}
+
+/* ---- Phase 3: the finished plan ---- */
 .plan {
-  z-index: 2;
   background: var(--surface-card);
   border: 2.5px solid var(--royal-600);
   border-radius: var(--radius-xl);
@@ -137,40 +215,46 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
-  transform: translateY(101%);
-  opacity: 0;
+  transform: translateY(8px) scale(0.99);
 }
-.plan.in {
-  transform: translateY(0);
-  opacity: 1;
+.plan.show {
+  transform: none;
 }
 @media (prefers-reduced-motion: no-preference) {
   .plan {
-    transition: transform 0.6s ease, opacity 0.3s ease;
+    transition: opacity 0.45s ease, transform 0.45s ease;
   }
 }
 
-/* Day-card header */
 .cardHead {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   gap: var(--space-3);
-  padding-bottom: var(--space-2);
+  padding-bottom: var(--space-3);
   border-bottom: 2px solid var(--sand-200);
-  font-family: var(--font-display);
-  font-weight: 600;
 }
-.cardDay {
+.cardTitle {
+  font-family: var(--font-display);
+  font-weight: 700;
   font-size: var(--step-1);
   color: var(--royal-800);
 }
-.cardDate {
-  font-size: var(--step--1);
-  color: var(--royal-700);
+.builtBy {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  background: var(--aqua-400, #2bc3d0);
+  color: var(--royal-800);
+  border: 2px solid var(--royal-700);
+  border-radius: var(--radius-pill);
+  padding: 1px var(--space-3);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step--2, 0.72rem);
 }
 
-/* Tabs: one per child plus the grown-ups view (scroll if they overflow) */
+/* Tabs */
 .tabs {
   display: flex;
   gap: var(--space-2);
@@ -217,63 +301,98 @@
   color: var(--royal-700);
 }
 
-/* Day items for the active tab */
-.items {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: var(--space-3);
-  min-height: 150px;
-  align-content: start;
-}
-.item {
+/* The day: rich activity cards */
+.day {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: var(--space-3);
-  font-weight: 600;
-  color: var(--text-body);
+  min-height: 256px;
+}
+.act {
+  background: var(--cream-100);
+  border: 2px solid var(--sand-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
 }
 @media (prefers-reduced-motion: no-preference) {
-  .item {
-    animation: itemIn 0.4s ease both;
+  .act {
+    animation: actIn 0.4s ease both;
   }
 }
-@keyframes itemIn {
+@keyframes actIn {
   from {
-    transform: translateX(-8px);
+    opacity: 0;
+    transform: translateY(6px);
   }
   to {
+    opacity: 1;
     transform: none;
   }
 }
-.itemDot {
-  flex: none;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  border: 2px solid var(--royal-600);
-  background: var(--accent, var(--sky-500));
-}
-.itemText {
-  flex: 1;
-}
-.itemFlag {
-  flex: none;
-  display: inline-flex;
+.actTop {
+  display: flex;
   align-items: center;
-  gap: 4px;
-  background: var(--sun-400);
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+.actTime {
+  background: var(--aqua-400, #2bc3d0);
   color: var(--royal-800);
   border: 2px solid var(--royal-700);
   border-radius: var(--radius-pill);
   padding: 1px var(--space-2);
-  font-size: var(--step--2, 0.72rem);
+  font-family: var(--font-display);
   font-weight: 700;
+  font-size: var(--step--2, 0.72rem);
 }
-.itemFlag svg {
-  width: 13px;
-  height: 13px;
+.actTitle {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step-0);
+  color: var(--royal-800);
+}
+.actDesc {
+  margin: 0;
+  font-size: var(--step--1);
+  color: var(--text-body);
+  font-weight: 600;
+  line-height: 1.4;
+}
+.actWow {
+  margin: 0;
+  font-size: var(--step--1);
+  font-weight: 700;
+  color: var(--sky-700);
+}
+.actTag {
+  align-self: flex-start;
+  margin-top: 2px;
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--royal-600);
+  padding: 1px var(--space-2);
+  font-weight: 700;
+  font-size: var(--step--2, 0.72rem);
+  color: var(--royal-800);
+}
+.tagSpot {
+  border-color: var(--sky-600);
+  background: var(--sky-50);
+}
+.tagQuiz {
+  border-color: var(--sun-600);
+  background: #fff4dc;
+}
+.tagPhoto {
+  border-color: var(--coral-500, #ff6f4d);
+  background: #ffe9e3;
+}
+.tagAllergy {
+  border-color: var(--meadow-600);
+  background: var(--meadow-300);
 }
 
 /* Persistent trust flags */
