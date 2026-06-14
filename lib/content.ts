@@ -379,6 +379,101 @@ export const allergySafety = {
   closing: { headline: "Build a free day with your family's needs built in.", subhead: 'Tell us where you are going, who is coming, and exactly what they cannot eat. Your free day arrives with every meal flagged and the questions to ask, in your inbox within 24 hours.', secondary: { label: 'How the whole trip works', href: '/how-it-works' } },
 };
 
+// ---- Comparison pages (verbatim spec; matrices as real tables) ----
+export const comparisons = {
+  wanderlog: {
+    name: 'Wanderlog',
+    title: 'Wanderlog organises the trip. Yaycay is built for the family taking it.',
+    subhead: 'An honest comparison for parents deciding between them, written by people who think Wanderlog is genuinely good at what it does.',
+    heroCta: { label: 'See a Yaycay day', href: '/sample-day' },
+    creditHead: 'Where Wanderlog shines',
+    credit: 'Wanderlog is an excellent travel logistics tool. The itinerary and map live in one view. You can forward booking emails and they file themselves. Routes optimise, budgets split across the group, offline maps work, and over a million travellers use it. If you want a powerful free organiser for an adult trip, Wanderlog is a strong choice, and its Pro tier is about US$40 a year.',
+    forkHead: 'The difference is who the trip is for.',
+    fork: "Wanderlog organises the logistics of a trip, and does it well. But the itinerary is written for the adults; the kids appear in it as passengers. Yaycay starts from the other end: each child's age, interests and dietary needs shape the plan itself. Wanderlog can hold a restaurant booking; Yaycay flags whether that restaurant's menu is risky for your daughter's nut allergy and gives you the question to ask the kitchen. Wanderlog's job largely finishes when the plan is built; Yaycay travels with you (rain plans, nearby answers, live changes) and then turns the trip into the kids' keepsake book afterwards. Different jobs. Honestly, some families could use both.",
+    matrix: {
+      rows: [
+        { label: 'Itinerary and map in one place', a: 'Yes', b: 'Yes' },
+        { label: 'Forward bookings by email', a: 'Yes', b: 'Yes' },
+        { label: 'Route and day optimisation', a: 'Yes', b: 'Yes' },
+        { label: 'Group planning', a: 'Yes, shared editing and budgets', b: 'Yes, balanced for ages and energy, grandparents included' },
+        { label: 'Built around each child', a: 'Not its focus', b: 'Yes, per-child adventures and explorer modes' },
+        { label: 'Allergy and dietary flags on meals', a: 'Not its focus', b: 'Yes, flags, checks and reminders on every suggestion' },
+        { label: 'During-trip companion', a: 'Offline maps and saved plans', b: 'Live answers, rain plans, mid-trip re-planning' },
+        { label: "Kids' journals and keepsake book", a: 'No', b: 'Yes, included in both tiers' },
+        { label: 'Price', a: 'Free, Pro about US$40/year', b: 'US$129 once, or US$59 once with your own AI' },
+      ],
+    },
+    recHead: 'Our honest recommendation',
+    rec: 'Pick Wanderlog if you want a free, capable organiser for adult or group logistics and you enjoy doing the planning yourself. Pick Yaycay if you are the parent carrying a family trip: kids of different ages, maybe an allergy in the mix, and you want the plan built around them, company during the trip, and the book at the end. If that is you, start with the free day and judge the difference yourself.',
+    primaryCta: { label: 'Build your free day', href: '/free-day' },
+    secondaryCta: { label: 'See pricing', href: '/pricing' },
+    diagramBrief: 'Nanobanana flat diagram, locked style (2px navy lines, sand-filled rounded nodes, one blue emphasis). A two-panel fork: left "organising a trip" (a tidy map and itinerary), right "carrying a family through one" (per-child strands, an allergy flag, a rain cloud with a plan, a keepsake book). No 3D, no gradients.',
+  },
+  layla: {
+    name: 'Layla',
+    title: 'Layla gets you from chat to checkout. Yaycay stays for the holiday.',
+    subhead: 'Both start with a conversation. The difference is where each one ends.',
+    heroCta: { label: 'See where ours ends', href: '/sample-day' },
+    creditHead: 'Where Layla shines',
+    credit: 'Layla is a polished AI trip planner used by millions. The chat is quick and genuinely pleasant, it connects to booking partners like Skyscanner, Booking.com and GetYourGuide so you can go from idea to booked trip in one flow, and it has the press coverage to match. Premium is about US$49 a year. If you want fast inspiration that flows straight into bookings, Layla does that well.',
+    forkHead: '"From chat to checkout" is the whole difference.',
+    fork: 'Layla\'s journey is designed to end at the booking, because bookings are how a free-to-cheap planner earns its keep. That is a fair model. It is just not the part of the holiday that parents struggle with. The hard part starts after checkout: the day-by-day with two kids of different ages, the meal-by-meal allergy vigilance, the rain on Wednesday, the 2pm meltdown, and remembering any of it clearly a year later. That after-checkout stretch is the entire product at Yaycay. We do not sell bookings at all; you book wherever you like and forward the confirmations. We charge one price, once, and we work for the family rather than the transaction.',
+    matrix: {
+      rows: [
+        { label: 'Chat-built itinerary', a: 'Yes', b: 'Yes' },
+        { label: 'Flight and hotel booking', a: 'Yes, via partners', b: 'No, by design; forward your bookings instead' },
+        { label: 'Built around each child', a: 'General trips, family templates available', b: 'Yes, per-child adventures, explorer modes, journals' },
+        { label: 'Allergy and dietary flags on meals', a: 'Not its focus', b: 'Yes, flags, checks and reminders on every suggestion' },
+        { label: 'During-trip companion', a: 'Limited after booking', b: 'Live answers, rain plans, mid-trip re-planning' },
+        { label: 'Keepsake memory book', a: 'No', b: 'Yes, included' },
+        { label: 'Business model', a: 'Free plus about US$49/year premium, partner bookings', b: 'US$129 once, or US$59 once with your own AI' },
+      ],
+    },
+    recHead: 'Our honest recommendation',
+    rec: 'Pick Layla if your main job is getting a trip imagined and booked quickly, and the on-the-ground part tends to take care of itself. Pick Yaycay if the on-the-ground part is exactly what never takes care of itself: kids to keep delighted, an allergy to manage at every meal, and a trip you want to remember in more than photos. The free day shows you precisely what the after-checkout product looks like.',
+    primaryCta: { label: 'Build your free day', href: '/free-day' },
+    secondaryCta: { label: 'How the whole trip works', href: '/how-it-works' },
+    diagramBrief: 'Nanobanana flat diagram, locked style. A horizontal timeline: Layla\'s line runs "chat -> plan -> checkout" and stops at a flag marked Checkout; Yaycay\'s line continues past checkout through "during the trip -> the keepsake book". Navy lines, one blue emphasis node, sand nodes. No 3D.',
+  },
+  mindtrip: {
+    name: 'Mindtrip',
+    title: 'Mindtrip is free and starts in seconds. Here is why we ask three questions first.',
+    subhead: 'A straight comparison, including the parts where Mindtrip wins.',
+    heroCta: { label: 'See what the questions buy you', href: '/sample-day' },
+    creditHead: 'Where Mindtrip shines',
+    credit: 'Mindtrip is an impressive, mostly free AI travel platform. You can start chatting instantly with no sign-up, turn screenshots and PDFs into itinerary items, import Google Maps pins, plan with a group in one chat, and carry it all in a polished iOS app. It is backed by serious partners and press. As a general travel tool at the price of nothing, it is genuinely hard to beat.',
+    forkHead: 'Free-and-general is a different product to paid-and-built-around-your-kids.',
+    fork: 'Mindtrip starts instantly because it starts generally; it learns about your trip as you go, and the kid-specific, allergy-specific layer is yours to assemble through prompting. Yaycay asks three questions before anything else (where, when, and exactly who is coming, ages and allergies included) because the plan is built around the answers. Your free day takes up to 24 hours to arrive, not three seconds, because per-child adventures and checked meal suggestions are slower to make than general suggestions. And yes, we charge: US$129 once, or US$59 with your own AI, because our income is the family\'s payment rather than bookings or volume. We think the trade is worth it for one specific kind of traveller: the parent carrying a family trip. For most other travellers, honestly, Mindtrip is excellent.',
+    matrix: {
+      rows: [
+        { label: 'Start instantly, no sign-up', a: 'Yes', b: 'No; three trip questions, free day within 24 hours' },
+        { label: 'Price', a: 'Mostly free', b: 'US$129 once, or US$59 once with your own AI' },
+        { label: 'Screenshots and PDFs into the plan', a: 'Yes', b: 'Yes' },
+        { label: 'Group planning', a: 'Yes, shared chat', b: 'Yes, balanced for ages, energy and dietary needs' },
+        { label: 'Built around each child', a: 'General; you prompt for it', b: 'The default; per-child adventures, modes, journals' },
+        { label: 'Allergy and dietary flags on meals', a: 'Not its focus', b: 'Yes, flags, checks and reminders on every suggestion' },
+        { label: 'During-trip companion', a: 'App with saved plans', b: 'Live answers, rain plans, mid-trip re-planning' },
+        { label: 'Keepsake memory book', a: 'No', b: 'Yes, included' },
+      ],
+    },
+    recHead: 'Our honest recommendation',
+    rec: 'If you want a free, instant, general travel assistant, use Mindtrip; it is very good. If you are planning a family holiday where the kids\' experience and a dietary need are the whole game, and you would rather pay once than assemble it all yourself, that is the trip Yaycay was built for. The sample day is the fastest way to see whether the difference is worth US$129 to your family.',
+    primaryCta: { label: 'See the sample day', href: '/sample-day' },
+    secondaryCta: { label: 'Build your free day', href: '/free-day' },
+    diagramBrief: 'Nanobanana flat diagram, locked style. Two panels: "instant and general" (a generic suggestion appearing fast) versus "considered and yours" (three question chips feeding a per-child, allergy-flagged plan). Navy lines, sand nodes, one blue emphasis. Honest, not gloating.',
+  },
+};
+
+export const comparisonHub = {
+  title: 'Comparing family trip planners?',
+  intro: 'Honest, generous comparisons between Yaycay and the tools parents weigh it against. We concede what each does well, then show the fork.',
+  cards: [
+    { slug: 'wanderlog', name: 'Yaycay vs Wanderlog', line: 'The adult logistics tool, versus the family trip itself.' },
+    { slug: 'layla', name: 'Yaycay vs Layla', line: 'A planner that ends at checkout, versus one that stays for the holiday.' },
+    { slug: 'mindtrip', name: 'Yaycay vs Mindtrip', line: 'Free and instant, versus paid and built around your kids.' },
+  ],
+};
+
 // ---- About page (verbatim spec) ----
 export const aboutPage = {
   hero: {
@@ -621,6 +716,15 @@ export const footer = {
         { label: 'For kids', href: '/for-kids' },
         { label: 'Allergy and dietary safety', href: '/allergy-safety' },
         { label: 'FAQ', href: '/faq' },
+      ],
+    },
+    {
+      heading: 'Learn',
+      links: [
+        { label: 'Compare Yaycay', href: '/vs' },
+        { label: 'vs Wanderlog', href: '/vs/wanderlog' },
+        { label: 'vs Layla', href: '/vs/layla' },
+        { label: 'vs Mindtrip', href: '/vs/mindtrip' },
       ],
     },
     {
