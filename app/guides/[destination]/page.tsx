@@ -10,19 +10,21 @@ export function generateStaticParams(): Params[] {
   return (Object.keys(guides) as Slug[]).map((destination) => ({ destination }));
 }
 
-export function generateMetadata({ params }: { params: Params }): Metadata {
-  const g = guides[params.destination as Slug];
+export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
+  const { destination } = await params;
+  const g = guides[destination as Slug];
   if (!g) return {};
   return {
     title: g.title,
     description: g.subhead,
-    alternates: { canonical: `/guides/${params.destination}` },
+    alternates: { canonical: `/guides/${destination}` },
     robots: { index: false, follow: false },
   };
 }
 
-export default function GuideRoute({ params }: { params: Params }) {
-  const slug = params.destination as Slug;
+export default async function GuideRoute({ params }: { params: Promise<Params> }) {
+  const { destination } = await params;
+  const slug = destination as Slug;
   if (!guides[slug]) notFound();
   return <GuidePage slug={slug} />;
 }
