@@ -18,6 +18,8 @@ export interface SignupCaptureRequest {
   consent: boolean;
   /** Where the lead came from, for attribution (e.g. utm_source or source_page). */
   source?: string;
+  /** Affiliate referral / Stripe promotion code from a /go/<slug> landing, when present. */
+  ref?: string;
   /** Free-day trip context from the order form, when present. */
   trip?: {
     destination?: string;

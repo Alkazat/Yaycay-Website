@@ -10,11 +10,15 @@ export const SITE = {
   appUrl: process.env.NEXT_PUBLIC_APP_URL ?? 'https://app.yaycay.ai',
 } as const;
 
-/** The free-demo handoff. Param agreed with the FE thread (app reads ?email=). */
-export function demoHandoffUrl(email: string): string {
+/**
+ * The free-demo handoff. Param agreed with the FE thread (app reads ?email=).
+ * An affiliate `ref` rides along (app reads ?ref=) so it reaches Checkout.
+ */
+export function demoHandoffUrl(email: string, ref?: string): string {
   const base = `${SITE.appUrl.replace(/\/$/, '')}/demo`;
   const url = new URL(base);
   if (email) url.searchParams.set('email', email);
+  if (ref) url.searchParams.set('ref', ref);
   return url.toString();
 }
 

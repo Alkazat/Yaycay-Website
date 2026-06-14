@@ -2,6 +2,7 @@
 
 import { useId, useState } from 'react';
 import { trackLead } from '@/lib/analytics';
+import { resolveRef } from '@/lib/ref';
 import { freeDayForm } from '@/lib/content';
 import styles from './FreeDayForm.module.css';
 
@@ -17,10 +18,12 @@ export function FreeDayForm({
   id = 'free-day',
   source = 'free-day',
   defaultDestination = '',
+  refCode,
 }: {
   id?: string;
   source?: string;
   defaultDestination?: string;
+  refCode?: string;
 }) {
   const destId = useId();
   const whenId = useId();
@@ -60,6 +63,7 @@ export function FreeDayForm({
           email: trimmed,
           consent: true,
           source: utm ?? source,
+          ref: resolveRef(refCode),
           company,
           trip: { destination: dest.trim(), when: when.trim(), party: who.trim() },
         }),
