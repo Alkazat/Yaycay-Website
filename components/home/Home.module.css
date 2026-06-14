@@ -54,11 +54,67 @@
   max-width: 38ch;
   margin-bottom: var(--space-6);
 }
+.heroLine {
+  font-size: var(--step-1);
+  font-weight: 600;
+  color: var(--text-body);
+  max-width: 34ch;
+  margin-bottom: var(--space-6);
+}
 .heroCtas {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-4);
   align-items: center;
+}
+
+/* 2 · Claims strip (value props pushed down from the hero) */
+.claims {
+  background: var(--cream-100);
+  border-bottom: 2.5px solid var(--sand-200);
+}
+.claimGrid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-7);
+}
+.claim {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.claimIcon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-lg);
+  border: 2.5px solid var(--royal-600);
+  box-shadow: 0 4px 0 var(--royal-600), var(--gloss-top);
+  color: #fff;
+  margin-bottom: var(--space-2);
+}
+.claimIcon.dotSun {
+  color: var(--royal-800);
+}
+.claimIcon svg {
+  width: 24px;
+  height: 24px;
+}
+.claimTitle {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step-1);
+  color: var(--royal-800);
+  margin: 0;
+}
+.claimBody {
+  margin: 0;
+  color: var(--text-body);
+  font-weight: 600;
 }
 
 /* Preview card (decorative free-day artefact) */

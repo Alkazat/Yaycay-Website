@@ -16,7 +16,7 @@ const STEP_IMAGES: Record<number, ImageSlotProps> = {
     source: 'app-screenshot',
     frame: 'phone',
     ratio: '9 / 16',
-    brief: 'App screenshot. The opening chat: Yaycay asking the three trip questions, the parent answering with the Walker crew (Sam 9, Pip 6, Pip tree-nut allergy) and a forwarded hotel confirmation appearing as an imported chip. Shows reservation + screenshot import inside the conversation.',
+    brief: 'App screenshot. The opening chat: Yaycay asking the three trip questions, the parent answering with the Walker crew (Sam 9, Pip 6, Theo 3, Pip tree-nut allergy) and a forwarded hotel confirmation appearing as an imported chip. Shows reservation + screenshot import inside the conversation.',
   },
   2: {
     src: '/media/how/step-itinerary.png',

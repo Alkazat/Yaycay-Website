@@ -17,15 +17,11 @@ All screenshots are taken from the **customer app (`Yaycay-FE`)** while logged i
 
 ---
 
-## 1. Home hero — the planning chat
-- **Save as:** `public/media/home/hero-chat.png`
-- **Used on:** `/` and `/homepage` hero · **Frame:** phone · **Ratio:** 9 / 17 (tall)
-- **Walkthrough:**
-  1. Log in as the demo account on a phone viewport (390 × 844).
-  2. Open **{New trip / Plan a trip}** to start the planning chat.
-  3. Scroll the conversation to the point where the three trip questions are answered and a day card is just starting to render beneath.
-- **Must show:** 2–3 Yaycay chat bubbles (blue) + one parent reply; the Walker answers visible (Singapore; Sam 9; Pip 6; Pip tree-nut allergy); a day card beginning to render below with a per-child morning block and an allergy flag chip.
-- **Must not show:** a fully finished plan (we want it mid-build), any personal data beyond the demo family.
+## 1. Home hero — the planning chat — **SUPERSEDED (no longer required)**
+> The homepage hero is now a live, interactive in-page **simulation** (`components/home/HeroSim.tsx`): it types the destination, then assembles Day 2 with a tab per child. This static screenshot is **no longer used on `/`** and does not need to be captured. Kept here for reference only.
+- **Save as:** `public/media/home/hero-chat.png` (only if reused elsewhere)
+- **Frame:** phone · **Ratio:** 9 / 17 (tall)
+- **Must show (if ever captured):** 2–3 Yaycay chat bubbles (blue) + one parent reply; the Walker answers visible (Singapore; Sam 9; Pip 6; Theo 3; Pip tree-nut allergy); a day card beginning to render below with a per-child morning block and an allergy flag chip.
 
 ## 2. Home — sample day crop (lunch proof)
 - **Save as:** `public/media/home/sample-day-crop.png`
@@ -52,7 +48,7 @@ All screenshots are taken from the **customer app (`Yaycay-FE`)** while logged i
 - **Walkthrough:**
   1. Start (or reopen) the Walker planning chat at the very beginning.
   2. Show Yaycay asking the three trip questions and the parent answering with the Walker crew, plus a **forwarded hotel confirmation appearing as an imported chip**.
-- **Must show:** the three-question opening; the Walker answers (Sam 9, Pip 6, tree-nut allergy); a reservation/screenshot import chip inside the conversation.
+- **Must show:** the three-question opening; the Walker answers (Sam 9, Pip 6, Theo 3, tree-nut allergy); a reservation/screenshot import chip inside the conversation.
 
 ## 5. How it works (step 2) — the full itinerary
 - **Save as:** `public/media/how/step-itinerary.png`

@@ -2,13 +2,16 @@ import { Button } from '@/components/ui/Button';
 import { Icon } from '@/components/ui/Icon';
 import { ImageSlot } from '@/components/ui/ImageSlot';
 import { FreeDayForm } from '@/components/FreeDayForm';
+import { HeroSim } from './HeroSim';
 import { home } from '@/lib/content';
 import s from './Home.module.css';
+
+const claimAccent = [s.dotSky, s.dotSun, s.dotMeadow, s.dotSky];
 
 export function Home() {
   return (
     <main id="main">
-      {/* 1 · Hero, split media */}
+      {/* 1 · Hero: a live simulation of the product building a real day */}
       <section id="top" className={s.hero} aria-labelledby="hero-title">
         <div className="container">
           <div className={s.heroGrid}>
@@ -16,7 +19,7 @@ export function Home() {
               <h1 id="hero-title" className={s.heroTitle}>
                 {home.hero.headline}
               </h1>
-              <p className={s.heroSub}>{home.hero.subhead}</p>
+              <p className={s.heroLine}>{home.hero.line}</p>
               <div className={s.heroCtas}>
                 <Button href="#free-day" variant="cta" size="lg">
                   {home.hero.primaryCta.label}
@@ -26,19 +29,29 @@ export function Home() {
                 </Button>
               </div>
             </div>
-            <ImageSlot
-              src="/media/home/hero-chat.png"
-              alt="The Yaycay planning chat building the Walkers' Singapore trip, three trip questions answered and a day taking shape"
-              source="app-screenshot"
-              frame="phone"
-              ratio="9 / 17"
-              brief="App screenshot. The live planning chat mid-conversation for the Walker family (Singapore, Sam 9, Pip 6, tree-nut allergy). Show 2-3 Yaycay chat bubbles in blue and one parent reply, with a day card just beginning to render beneath (per-child morning, an allergy flag chip). Clean status bar, no personal data. This is the hero 'UI proof' panel of the photo+UI pairing."
-            />
+            <HeroSim />
           </div>
         </div>
       </section>
 
-      {/* 2 · Recognition strip */}
+      {/* 2 · Claims strip: the value props, pushed down from the old hero subhead */}
+      <section className={`section ${s.claims}`} aria-label="What Yaycay does for your family">
+        <div className="container">
+          <ul className={s.claimGrid}>
+            {home.claims.map((c, i) => (
+              <li key={c.title} className={s.claim}>
+                <span className={`${s.claimIcon} ${claimAccent[i]}`} aria-hidden="true">
+                  <Icon name={c.icon} />
+                </span>
+                <p className={s.claimTitle}>{c.title}</p>
+                <p className={s.claimBody}>{c.body}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* 3 · Recognition strip */}
       <section className={`section ${s.recognition}`} aria-labelledby="rec-title">
         <div className="container">
           <div className={s.recognitionInner}>
@@ -46,34 +59,6 @@ export function Home() {
               {home.recognition.headline}
             </h2>
             <p className={s.recBody}>{home.recognition.body}</p>
-          </div>
-        </div>
-      </section>
-
-      {/* 3 · Three-leg pillars */}
-      <section className={`section ${s.pillars}`} aria-labelledby="pillars-title">
-        <div className="container">
-          <div className={s.sectionHead}>
-            <h2 id="pillars-title" className={s.sectionTitle}>
-              {home.pillars.headline}
-            </h2>
-            <p className={s.lead}>{home.pillars.subhead}</p>
-          </div>
-          <div className={s.pillarGrid}>
-            {home.pillars.cards.map((c, i) => (
-              <article key={c.title} className={s.pillar}>
-                <span className={`${s.pillarIcon} ${[s.dotSky, s.dotSun, s.dotMeadow][i]}`} aria-hidden="true">
-                  <Icon name={['sparkle', 'compass', 'star'][i]} />
-                </span>
-                <h3 className={s.pillarTitle}>{c.title}</h3>
-                <p className={s.pillarBody}>{c.body}</p>
-              </article>
-            ))}
-          </div>
-          <div className={s.centerCta}>
-            <Button href={home.pillars.cta.href} variant="primary">
-              {home.pillars.cta.label}
-            </Button>
           </div>
         </div>
       </section>
