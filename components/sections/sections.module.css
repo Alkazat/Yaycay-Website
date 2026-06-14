@@ -295,7 +295,7 @@
   display: grid;
   place-items: center;
   border-radius: var(--radius-lg);
-  background: var(--sky-500);
+  background: var(--sky-700);
   color: #fff;
   border: 2.5px solid var(--royal-600);
   box-shadow: 0 4px 0 var(--royal-600), var(--gloss-top);
@@ -404,7 +404,7 @@
   width: 48px;
   height: 48px;
   border-radius: var(--radius-md);
-  background: var(--sky-500);
+  background: var(--sky-700);
   color: #fff;
   border: 2.5px solid var(--royal-600);
   box-shadow: 0 3px 0 var(--royal-600), var(--gloss-top);
@@ -484,7 +484,7 @@
   border-color: var(--sun-600);
 }
 .badgeSky {
-  background: var(--sky-500);
+  background: var(--sky-700);
   color: #fff;
 }
 .badgeMeadow {
