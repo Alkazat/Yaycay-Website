@@ -14,9 +14,4 @@ test.describe('homepage (index)', () => {
     // Tagline present, never reworded.
     await expect(page.getByText('For families making memories.')).toBeVisible();
   });
-
-  test('the retired /homepage 301-redirects to /', async ({ page }) => {
-    await page.goto('/homepage');
-    await expect(page).toHaveURL(/\/$/);
-  });
 });

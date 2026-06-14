@@ -7,11 +7,10 @@ const nextConfig = {
   outputFileTracingIncludes: {
     '/**': ['./lib/og/**'],
   },
-  // Go-public redirects: retire the staged /homepage, and canonicalise the
-  // apex host to www (the exact-host match leaves preview domains untouched).
+  // Canonicalise the apex host to www (the exact-host match leaves preview
+  // domains untouched).
   async redirects() {
     return [
-      { source: '/homepage', destination: '/', statusCode: 301 },
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'yaycay.ai' }],
