@@ -54,78 +54,61 @@ export function Home() {
         </div>
       </section>
 
-      {/* 3 · Recognition strip */}
-      <section className={`section ${s.recognition}`} aria-labelledby="rec-title">
+      {/* 3 · The pain, as one oversized typographic moment (left-aligned) */}
+      <section className={`section ${s.painSection}`} aria-labelledby="rec-title">
         <div className="container">
-          <div className={s.recognitionInner}>
-            <h2 id="rec-title" className={s.recTitle}>
+          <div className={s.painWrap}>
+            <h2 id="rec-title" className={s.painTitle}>
               {home.recognition.headline}
             </h2>
-            <p className={s.recBody}>{home.recognition.body}</p>
+            <p className={s.painBody}>{home.recognition.body}</p>
           </div>
         </div>
       </section>
 
-      {/* Documentary photo band (pairing rule: warmth beside the UI proof) */}
-      <section className="section">
-        <div className="container">
-          <ImageSlot
-            src="/media/home/present-parent.jpg"
-            alt="A parent fully present on holiday with their kids at golden hour, not buried in a phone"
-            source="nanobanana"
-            ratio="16 / 7"
-            brief="Nanobanana image. Documentary family-travel photograph, warm cream/sand grade, golden-hour available light. A parent walking a sunlit street or beach with two children mid-activity (one holding a gelato, one a map), shot from behind or over the shoulder. NO identifiable minor faces (back views, motion blur, or cropped above the face). The feeling is 'I am actually on this holiday', the opposite of being the walking itinerary. No posed smiles, no stock look."
-          />
-        </div>
-      </section>
-
-      {/* 4 · Proof teaser */}
-      <section className={`section ${s.proof}`} aria-labelledby="proof-title">
-        <div className="container">
-          <div className={s.proofGrid}>
-            <div>
-              <h2 id="proof-title" className={s.sectionTitle}>
-                {home.proofTeaser.headline}
-              </h2>
-              <p className={s.lead}>{home.proofTeaser.subhead}</p>
-              <p className={s.proofBody}>{home.proofTeaser.body}</p>
-              <Button href={home.proofTeaser.cta.href} variant="cta">
-                {home.proofTeaser.cta.label}
-              </Button>
-            </div>
-            <div className={s.proofArt}>
-              <ImageSlot
-                src="/media/home/sample-day-crop.png"
-                alt="A cropped view of the Walkers' sample free day, showing the allergy-vetted lunch card with its reasoning"
-                source="app-screenshot"
-                frame="browser"
-                ratio="4 / 3"
-                brief="App screenshot. A cropped section of the rendered free-day document for the Walker family (Singapore day 2), centred on the Satay by the Bay lunch block: the venue, the flagged stalls, and the visible 'what we checked / confirm on the day' reasoning. One margin annotation visible. This is the proof-teaser artwork."
-              />
-              <p className={s.proofAnnotation}>
-                The allergy reasoning is shown on the card, not hidden.
-              </p>
-            </div>
+      {/* 4 · Proof — editorial split, the screenshot bleeding off the right edge */}
+      <section className={s.editorialSection} aria-labelledby="proof-title">
+        <div className={s.editorial}>
+          <div className={s.editorialText}>
+            <h2 id="proof-title" className={s.sectionTitle}>
+              {home.proofTeaser.headline}
+            </h2>
+            <p className={s.lead}>{home.proofTeaser.subhead}</p>
+            <p className={s.proofBody}>{home.proofTeaser.body}</p>
+            <Button href={home.proofTeaser.cta.href} variant="cta">
+              {home.proofTeaser.cta.label}
+            </Button>
+          </div>
+          <div className={s.editorialMedia}>
+            <ImageSlot
+              src="/media/home/sample-day-crop.png"
+              alt="A cropped view of the Walkers' sample free day, showing the allergy-vetted lunch card with its reasoning"
+              source="app-screenshot"
+              frame="browser"
+              ratio="4 / 3"
+              brief="App screenshot. A cropped section of the rendered free-day document for the Walker family (Singapore day 2), centred on the Satay by the Bay lunch block: the venue, the flagged stalls, and the visible 'what we checked / confirm on the day' reasoning. One margin annotation visible. This is the proof-teaser artwork."
+            />
+            <p className={s.proofAnnotation}>The allergy reasoning is shown on the card, not hidden.</p>
           </div>
         </div>
       </section>
 
-      {/* 5 · How it works, compressed */}
-      <section className={`section ${s.steps}`} aria-labelledby="steps-title">
+      {/* 5 · How it works, as a horizontal numbered timeline (not cards) */}
+      <section className={`section ${s.stepsSection}`} aria-labelledby="steps-title">
         <div className="container">
           <div className={s.sectionHead}>
             <h2 id="steps-title" className={s.sectionTitle}>
               {home.steps.headline}
             </h2>
           </div>
-          <ol className={s.stepGrid}>
+          <ol className={s.timeline}>
             {home.steps.items.map((step) => (
-              <li key={step.n} className={s.step}>
-                <span className={s.stepNum} aria-hidden="true">
+              <li key={step.n} className={s.tlStep}>
+                <span className={s.tlNum} aria-hidden="true">
                   {step.n}
                 </span>
-                <h3 className={s.stepTitle}>{step.title}</h3>
-                <p className={s.stepBody}>{step.body}</p>
+                <h3 className={s.tlTitle}>{step.title}</h3>
+                <p className={s.tlBody}>{step.body}</p>
               </li>
             ))}
           </ol>
@@ -137,10 +120,10 @@ export function Home() {
         </div>
       </section>
 
-      {/* 6 · Allergy trust block */}
-      <section className={s.allergy} aria-labelledby="allergy-title">
-        <div className="container">
-          <div className={s.allergyInner}>
+      {/* 6 · Allergy trust — editorial split, image on the left, calm green */}
+      <section className={`${s.editorialSection} ${s.allergyEditorial}`} aria-labelledby="allergy-title">
+        <div className={`${s.editorial} ${s.reverse}`}>
+          <div className={s.editorialText}>
             <span className={s.allergyIcon} aria-hidden="true">
               <Icon name="shield" />
             </span>
@@ -151,8 +134,9 @@ export function Home() {
             <Button href={home.allergyBlock.cta.href} variant="primary">
               {home.allergyBlock.cta.label}
             </Button>
+          </div>
+          <div className={`${s.editorialMedia} ${s.mediaPhone}`}>
             <ImageSlot
-              className={s.allergyShot}
               src="/media/home/allergy-meal-card.png"
               alt="An allergy-checked meal suggestion card flagging tree-nut risk, with what was checked and what to confirm on the day"
               source="app-screenshot"
@@ -164,24 +148,29 @@ export function Home() {
         </div>
       </section>
 
-      {/* 7 · Social proof */}
-      <section className={`section ${s.testimonials}`} aria-labelledby="tst-title">
+      {/* 7 · Social proof — one oversized featured quote, then a quiet pair */}
+      <section className={`section ${s.tstSection}`} aria-labelledby="tst-title">
         <div className="container">
-          <div className={s.sectionHead}>
-            <h2 id="tst-title" className={s.sectionTitle}>
-              {home.testimonials.headline}
-            </h2>
-          </div>
-          <div className={s.tstGrid}>
-            {home.testimonials.items.map((t) => (
-              <figure key={t.who} className={s.tst}>
+          <p id="tst-title" className={s.tstKicker}>
+            {home.testimonials.headline}
+          </p>
+          <figure className={s.featuredQuote}>
+            <span className={s.quoteMark} aria-hidden="true">
+              &ldquo;
+            </span>
+            <blockquote className={s.quoteBig}>{home.testimonials.items[0]!.quote}</blockquote>
+            <figcaption className={s.quoteWho}>{home.testimonials.items[0]!.who}</figcaption>
+          </figure>
+          <div className={s.tstPair}>
+            {home.testimonials.items.slice(1).map((t) => (
+              <figure key={t.who} className={s.tstSmall}>
                 <span className={s.tstStars} aria-hidden="true">
                   {[0, 1, 2, 3, 4].map((i) => (
                     <Icon key={i} name="star" />
                   ))}
                 </span>
-                <blockquote className={s.tstQuote}>&ldquo;{t.quote}&rdquo;</blockquote>
-                <figcaption className={s.tstWho}>{t.who}</figcaption>
+                <blockquote className={s.tstSmallQuote}>&ldquo;{t.quote}&rdquo;</blockquote>
+                <figcaption className={s.tstSmallWho}>{t.who}</figcaption>
               </figure>
             ))}
           </div>
