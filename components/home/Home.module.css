@@ -42,8 +42,8 @@
   align-items: center;
 }
 .heroTitle {
-  font-size: var(--step-4);
-  line-height: 1.05;
+  font-size: var(--step-3);
+  line-height: 1.08;
   color: #fff;
   margin-bottom: var(--space-5);
 }
@@ -93,12 +93,14 @@
     )
       center / cover no-repeat;
   border-bottom: 3px solid var(--royal-700);
+  /* Keep the promise band within a scrolled viewport. */
+  padding-block: clamp(var(--space-8), 6vh, var(--space-10));
 }
 .introHead {
   max-width: 760px;
   margin-inline: auto;
   text-align: center;
-  margin-bottom: var(--space-9);
+  margin-bottom: var(--space-7);
 }
 .introCtas {
   display: flex;
@@ -471,6 +473,32 @@
   text-shadow: 0 1px 4px rgba(4, 34, 63, 0.3);
   margin-bottom: var(--space-6);
 }
+.priceCtas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-4);
+}
+/* "Bring your own AI" white ribbon with the partner logos */
+.byoai {
+  margin-top: var(--space-7);
+  background: var(--surface-card);
+  border: 2.5px solid var(--royal-600);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--card-lift);
+  padding: var(--space-6) var(--space-7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+.byoaiText {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step-1);
+  color: var(--royal-800);
+}
 
 /* 9 · Closing form */
 .closing {
@@ -523,11 +551,11 @@
 }
 .painTitle {
   margin: 0;
-  font-size: clamp(2rem, 6vw, 3.4rem);
-  line-height: 1.04;
+  font-size: var(--step-3);
+  line-height: 1.08;
   letter-spacing: -0.01em;
   color: var(--royal-800);
-  max-width: 18ch;
+  max-width: 22ch;
 }
 .painBody {
   margin: var(--space-7) 0 0;
@@ -538,7 +566,7 @@
   max-width: 54ch;
 }
 
-/* 4 & 6 · Editorial split with a one-sided bleed */
+/* 4 & 6 · Editorial split (contained in the page gutter; image one side) */
 .editorialSection {
   overflow: hidden;
   border-bottom: 2.5px solid var(--sand-200);
@@ -547,12 +575,11 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
-  gap: clamp(var(--space-6), 4vw, var(--space-10));
+  gap: clamp(var(--space-6), 4vw, var(--space-9));
 }
 .editorialText {
-  padding-block: var(--space-10);
-  padding-inline: clamp(var(--space-5), 6vw, var(--space-12));
-  max-width: 640px;
+  padding-block: var(--space-9);
+  max-width: 620px;
 }
 .editorialMedia {
   align-self: stretch;
@@ -649,14 +676,14 @@
   color: var(--muted);
 }
 .featuredQuote {
-  max-width: 20ch;
+  max-width: 32rem;
   margin: 0 auto var(--space-10);
   text-align: center;
 }
 .quoteMark {
   display: block;
   font-family: var(--font-display);
-  font-size: clamp(3rem, 9vw, 5rem);
+  font-size: var(--step-4);
   line-height: 0.6;
   color: var(--coral-400);
 }
@@ -664,7 +691,7 @@
   margin: var(--space-2) 0 var(--space-4);
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: clamp(1.6rem, 4.4vw, 2.7rem);
+  font-size: var(--step-3);
   line-height: 1.18;
   color: var(--royal-800);
 }

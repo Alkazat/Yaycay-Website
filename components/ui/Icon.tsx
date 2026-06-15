@@ -6,6 +6,13 @@ const paths: Record<string, JSX.Element> = {
   sparkle: (
     <path d="M12 3l2.2 5.3L20 10l-5.3 2.2L12 18l-2.2-5.8L4 10l5.8-1.7L12 3z" />
   ),
+  // Shield with a medical cross — allergy / medical safety.
+  medical: (
+    <>
+      <path d="M12 3l7 3v5c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6l7-3z" />
+      <path d="M12 8.5v6M9 11.5h6" />
+    </>
+  ),
   compass: (
     <>
       <circle cx="12" cy="12" r="9" />

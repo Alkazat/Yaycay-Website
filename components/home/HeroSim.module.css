@@ -462,7 +462,7 @@
   flex-direction: column;
   gap: var(--space-3);
   height: clamp(330px, 48vh, 432px);
-  overflow: hidden;
+  overflow-y: auto;
   -webkit-mask-image: linear-gradient(180deg, #000 90%, transparent 100%);
   mask-image: linear-gradient(180deg, #000 90%, transparent 100%);
 }
@@ -738,7 +738,7 @@
   flex-direction: column;
   gap: var(--space-3);
   height: clamp(330px, 48vh, 432px);
-  overflow: hidden;
+  overflow-y: auto;
   -webkit-mask-image: linear-gradient(180deg, #000 92%, transparent 100%);
   mask-image: linear-gradient(180deg, #000 92%, transparent 100%);
 }

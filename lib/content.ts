@@ -421,9 +421,9 @@ export const home = {
   testimonials: {
     headline: 'For families making memories',
     items: [
-      { quote: 'I read the plan on the plane and realised I had nothing to hold in my head. First time ever.', who: '{Name}, mum of two (7 and 10), {destination} trip' },
-      { quote: 'Our daughter has a nut allergy. Having the questions to ask written out in Japanese changed the whole trip.', who: '{Name}, dad of {kids}, Japan' },
-      { quote: 'The keepsake book made my eight-year-old cry happy tears. Worth it for that alone.', who: '{Name}, parent of {kids}, {destination}' },
+      { quote: 'I read the plan on the plane and realised I had nothing to hold in my head. First time ever.', who: 'Steph M, mum of two (7 and 10), Singapore' },
+      { quote: 'Our daughter has a nut allergy. Having the questions to ask written out in Japanese changed the whole trip.', who: 'Marcus T, dad of three, Japan' },
+      { quote: 'The keepsake book made my eight-year-old cry happy tears. Worth it for that alone.', who: 'Priya R, mum of two, Gold Coast' },
     ],
   },
   pricingTeaser: {
