@@ -237,23 +237,37 @@ export const home = {
     secondaryCta: { label: 'See a real free day', href: '/sample-day' },
   },
   // The interactive hero: types a destination, shows the AI building the trip,
-  // then reveals a real day with a tab per child plus the grown-ups view. Copy
-  // lives here; the animation lives in components/home/HeroSim.
+  // then reveals the real thing - the FE trip view itself, rebuilt as a live
+  // demo. Seed data mirrors the Walkers' Singapore trip from the FE
+  // (lib/contract-mock/data.ts): the Explorers/Grown-ups toggle, a profile per
+  // child with their age band, a real day (Gardens by the Bay, the Satay lunch
+  // allergy card, the Supertrees), and the grown-ups logistics view. Copy lives
+  // here; the animation lives in components/home/HeroSim.
   heroSim: {
     placeholder: 'Where are you taking the family?',
     query: 'Singapore',
-    chips: ['Family of 5', '14 September', '4 days'],
-    // The AI "building" phase shown while the plan is generated.
+    chips: ['Family of 5', '14-18 September', '1 tree-nut allergy'],
+    // The AI "building" phase (mirrors the FE GeneratingOverlay steps + orb).
     building: {
       title: "Building the Walkers' day",
       lines: [
+        'Packing the explorer bags',
         'Finding the best spots',
-        'Checking every menu for allergies',
-        "Matching each kid's age",
-        'Planning around the weather',
+        'Building the day, hour by hour',
+        "Checking every menu for Pip's tree-nut allergy",
+        'Sprinkling the yay',
       ],
     },
-    card: { day: 'Day 1', place: 'Singapore', builtBy: 'Built by Yaycay AI' },
+    // The finished plan, framed like the real FE trip view.
+    trip: { destination: 'Singapore', when: 'Day 2 of 3', builtBy: 'Built by Yaycay AI' },
+    views: { kid: 'Explorers', grownups: 'Grown-ups' },
+    day: {
+      label: 'Day 2',
+      hotel: 'Village Hotel Sentosa',
+      summary: 'A big day out among gardens, clouds and very tall trees.',
+      didYouKnow: 'The Cloud Forest has the tallest indoor waterfall in the world.',
+      weather: 'Warm and humid. High 32°C / Low 27°C',
+    },
     // "Bring your own AI" trust banner; logos resolve from /brand/partners/<slug>.
     works: {
       label: 'Works with',
@@ -263,46 +277,89 @@ export const home = {
         { name: 'Gemini', slug: 'gemini' },
       ],
     },
-    caption: "A real Yaycay day, built live — day one of the Walkers' Singapore trip.",
+    caption: "A real Yaycay day, built live: day two of the Walkers' Singapore trip.",
+    // One profile per child, each with their own age band and adventure. Every
+    // moment carries the same keys (null where unused) so the shape stays uniform.
     kids: [
       {
         name: 'Sam',
         age: 9,
+        mode: 'Explorer',
+        emoji: '🧭',
         accent: 'sky',
-        day: [
-          { time: 'Morning', title: 'Supertree engineering hunt', desc: 'Find the vents that cool the domes below.', wow: '18 Supertrees; the tallest is 50m.', tag: 'Spot it' },
-          { time: 'Evening', title: 'Garden Rhapsody light show', desc: 'The Supertrees turn into music and light.', wow: 'Free, nightly at 7.45 and 8.45.', tag: 'Quiz' },
+        allergy: false,
+        moments: [
+          { slot: 'Morning', place: 'Gardens by the Bay', time: '09:30', title: 'Cloud Forest mountain', desc: 'Ride to the top, then walk down through the mist and waterfalls.', wow: 'The waterfall is 35m tall, taller than ten giraffes.', challenge: { type: 'Quiz', prompt: 'Why is it so misty inside the Cloud Forest?' }, meal: null, readAloud: false },
+          { slot: 'Evening', place: 'Supertree Grove', time: '19:45', title: 'Garden Rhapsody light show', desc: 'Lie back on the lawn and watch the trees sing in light.', wow: '18 Supertrees, and the tallest is 50m.', challenge: { type: 'Spot it', prompt: 'Spot three different colours in the show.' }, meal: null, readAloud: false },
         ],
       },
       {
         name: 'Pip',
         age: 6,
+        mode: 'Explorer',
+        emoji: '🧭',
         accent: 'sun',
         allergy: true,
-        day: [
-          { time: 'Morning', title: 'Cloud Forest creature trail', desc: 'Seven hidden animals to find and stamp.', wow: 'A 35m waterfall, indoors.', tag: 'Spot it' },
-          { time: 'Midday', title: 'Lunch at Satay by the Bay', desc: 'Nut-flagged stalls marked, ask-the-kitchen card ready.', wow: null, tag: 'Allergy' },
+        moments: [
+          {
+            slot: 'Lunch',
+            place: 'Satay by the Bay',
+            time: '12:30',
+            title: 'Lunch at Satay by the Bay',
+            desc: 'An open-air food garden by the water, with lots of stalls to pick from.',
+            wow: null,
+            challenge: null,
+            readAloud: false,
+            // The allergy meal card: the showpiece of the real FE renderer.
+            meal: {
+              venue: 'Satay by the Bay',
+              allergyLabel: 'Tree-nut allergy: flagged',
+              checked: [
+                'Satay peanut sauce is on the menu across several stalls.',
+                'Seafood and chicken-rice stalls do not list nut sauces.',
+              ],
+              confirm: [
+                'Ask each stall before ordering. Recipes and oils change.',
+                "Keep Pip's antihistamine and EpiPen on you, not in the bag.",
+              ],
+              stalls: [
+                { name: 'Satay stalls (peanut sauce)', label: 'flagged', risk: 'flagged' },
+                { name: 'Hainanese chicken rice', label: 'lower risk', risk: 'lower' },
+              ],
+              ask: {
+                phrase: '请问这道菜里有坚果或坚果油吗?',
+                english: 'Does this dish have any nuts or nut oils? My daughter has a serious tree-nut allergy.',
+                language: 'Mandarin + English',
+              },
+            },
+          },
         ],
       },
       {
         name: 'Theo',
         age: 3,
+        mode: 'Little Explorer',
+        emoji: '🐣',
         accent: 'meadow',
-        day: [
-          { time: 'Morning', title: 'Water-play garden', desc: 'Splash about before the heat builds.', wow: 'Free entry; bring swimmers.', tag: 'Photo' },
-          { time: 'Afternoon', title: 'Nap, protected', desc: 'A quiet hour back at the hotel, 1-3pm.', wow: null, tag: null },
-        ],
-      },
-      {
-        name: 'Grown-ups',
-        age: null,
-        accent: 'royal',
-        day: [
-          { time: 'Safety', title: 'Allergy and protocol', desc: "Pip's tree-nut card ready; EpiPen and water packed.", wow: null, tag: null },
-          { time: 'Logistics', title: "Today's transfers", desc: 'Hotel to Gardens by the Bay, 12 min; rain backup booked 2.15pm.', wow: null, tag: null },
+        allergy: false,
+        moments: [
+          { slot: 'Morning', place: 'Gardens by the Bay', time: '09:30', title: 'Water-play garden', desc: 'Splash about before the heat of the day builds.', wow: 'Free entry, so just bring swimmers.', challenge: null, meal: null, readAloud: true },
+          { slot: 'Afternoon', place: 'Back at the hotel', time: '13:00', title: 'Nap, protected', desc: 'A quiet hour at the hotel, 1 to 3pm, so the afternoon stays happy.', wow: null, challenge: null, meal: null, readAloud: false },
         ],
       },
     ],
+    // The Grown-ups view (PIN-locked in the real app): the day's logistics and
+    // the allergy protocol, mirroring the FE GrownupsGuide + allergy banner.
+    grownups: {
+      lockNote: 'PIN-locked in the app',
+      protocol: 'Pip: tree nuts, anaphylaxis. Carry the EpiPen at all times and confirm every dish with the kitchen.',
+      logistics: [
+        { icon: 'calendar', label: 'Bookings', value: 'Gardens by the Bay tickets (Cloud Forest + Flower Dome).' },
+        { icon: 'compass', label: 'Transport', value: 'MRT to Bayfront, exit B. Rain backup booked for 14:15.' },
+        { icon: 'star', label: 'Costs', value: 'Garden tickets about S$53 / A$58 for the whole family.' },
+      ],
+      allergy: 'Satay by the Bay: peanut sauce on the satay stalls. Confirm every stall before ordering.',
+    },
     flags: [
       { icon: 'shield', label: "Tree-nut allergy flagged on Pip's every meal" },
       { icon: 'compass', label: 'Rain plan ready for the afternoon storm' },
