@@ -375,7 +375,13 @@ export const home = {
   ],
   recognition: {
     headline: 'You know how this usually goes.',
-    body: 'Twenty browser tabs. A spreadsheet nobody else opens. Screenshots in the family chat. And on the trip itself, you are the one holding it all: the bookings, the backup plans, the "is this restaurant safe for her". Everyone else relaxes. You navigate.',
+    pairs: [
+      { pain: 'Twenty browser tabs and a spreadsheet nobody else opens', held: 'One chat that already knows your kids.' },
+      { pain: 'Reading ingredient lists in a language you do not speak', held: 'Every meal flagged for your allergies, with the words to ask.' },
+      { pain: 'Re-planning at 9pm when the forecast turns', held: 'A rain plan attached to every day before you leave.' },
+      { pain: 'Being the only one who knows what happens next', held: 'Everyone sees the plan. You are on the holiday, not running it.' },
+      { pain: 'A subscription quietly renewing in March', held: 'One price, one holiday. Nothing renewing.' },
+    ],
   },
   pillars: {
     headline: 'Yaycay carries the trip, so you can be on it.',

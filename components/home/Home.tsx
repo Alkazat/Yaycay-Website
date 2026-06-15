@@ -7,8 +7,6 @@ import { WorksWith } from './WorksWith';
 import { home } from '@/lib/content';
 import s from './Home.module.css';
 
-const claimAccent = [s.dotSky, s.dotSun, s.dotMeadow, s.dotSky];
-
 export function Home() {
   return (
     <main id="main">
@@ -23,7 +21,7 @@ export function Home() {
         </div>
       </section>
 
-      {/* 2 · The promise: the H1 + line + CTA, then the value-prop claims */}
+      {/* 2 · The promise: a tight darkened photo band — H1 + line + CTA only */}
       <section className={`section ${s.intro}`} aria-labelledby="hero-title">
         <div className="container">
           <div className={s.introHead}>
@@ -40,29 +38,28 @@ export function Home() {
               </Button>
             </div>
           </div>
-          <ul className={s.claimGrid}>
-            {home.claims.map((c, i) => (
-              <li key={c.title} className={s.claim}>
-                <span className={`${s.claimIcon} ${claimAccent[i]}`} aria-hidden="true">
-                  <Icon name={c.icon} />
-                </span>
-                <p className={s.claimTitle}>{c.title}</p>
-                <p className={s.claimBody}>{c.body}</p>
-              </li>
-            ))}
-          </ul>
         </div>
       </section>
 
-      {/* 3 · The pain, as one oversized typographic moment (left-aligned) */}
+      {/* 3 · The recognition, stepped out as a pain → relief ledger */}
       <section className={`section ${s.painSection}`} aria-labelledby="rec-title">
         <div className="container">
           <div className={s.painWrap}>
             <h2 id="rec-title" className={s.painTitle}>
               {home.recognition.headline}
             </h2>
-            <p className={s.painBody}>{home.recognition.body}</p>
           </div>
+          <ul className={s.ledger}>
+            {home.recognition.pairs.map((p) => (
+              <li key={p.pain} className={s.ledgerRow}>
+                <span className={s.ledgerPain}>{p.pain}</span>
+                <span className={s.ledgerArrow} aria-hidden="true">
+                  &rarr;
+                </span>
+                <span className={s.ledgerHeld}>{p.held}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
