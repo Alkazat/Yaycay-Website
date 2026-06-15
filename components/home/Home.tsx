@@ -66,8 +66,9 @@ export function Home() {
         </div>
       </section>
 
-      {/* 4 · Proof — editorial split, the screenshot bleeding off the right edge */}
+      {/* 4 · Proof — editorial split (image right) */}
       <section className={s.editorialSection} aria-labelledby="proof-title">
+        <div className="container">
         <div className={s.editorial}>
           <div className={s.editorialText}>
             <h2 id="proof-title" className={s.sectionTitle}>
@@ -90,6 +91,7 @@ export function Home() {
             />
             <p className={s.proofAnnotation}>The allergy reasoning is shown on the card, not hidden.</p>
           </div>
+        </div>
         </div>
       </section>
 
@@ -122,10 +124,11 @@ export function Home() {
 
       {/* 6 · Allergy trust — editorial split, image on the left, calm green */}
       <section className={`${s.editorialSection} ${s.allergyEditorial}`} aria-labelledby="allergy-title">
+        <div className="container">
         <div className={`${s.editorial} ${s.reverse}`}>
           <div className={s.editorialText}>
             <span className={s.allergyIcon} aria-hidden="true">
-              <Icon name="shield" />
+              <Icon name="medical" />
             </span>
             <h2 id="allergy-title" className={s.allergyTitle}>
               {home.allergyBlock.headline}
@@ -145,6 +148,7 @@ export function Home() {
               brief="App screenshot. A single meal-suggestion card from the Walker plan: venue name, a soft-green 'checked' row and an amber 'confirm on the day' caution row (text labels, never colour alone), the tree-nut flag, and the 'ask the kitchen' line in English and Mandarin. Shows flags-checks-reminders without ever saying 'safe' or '100%'."
             />
           </div>
+        </div>
         </div>
       </section>
 
@@ -185,11 +189,15 @@ export function Home() {
               {home.pricingTeaser.headline}
             </h2>
             <p className={s.priceBody}>{home.pricingTeaser.body}</p>
-            <div className={s.heroCtas}>
+            <div className={s.priceCtas}>
               <Button href={home.pricingTeaser.primaryCta.href} variant="cta" size="lg">
                 {home.pricingTeaser.primaryCta.label}
               </Button>
-              <Button href={home.pricingTeaser.secondaryCta.href} variant="ghost" size="lg">
+            </div>
+            <div className={s.byoai}>
+              <p className={s.byoaiText}>Already pay for an AI assistant? Bring it, and pay less.</p>
+              <WorksWith />
+              <Button href={home.pricingTeaser.secondaryCta.href} variant="primary">
                 {home.pricingTeaser.secondaryCta.label}
               </Button>
             </div>
