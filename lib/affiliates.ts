@@ -28,9 +28,17 @@ export type Affiliate = {
 /**
  * Optional build-time map. Leave empty to rely solely on BE. Admin/founder can
  * paste entries here if the programme is small and BE is not wired yet.
+ *
+ * NOTE: `code` must be a real **Stripe promotion code** (applied at Checkout) and
+ * `discountPercent` should match it; set both per the live Stripe dashboard. The
+ * influencer email is recorded in a comment for attribution only — it is not used
+ * by the site.
  */
 export const STATIC_AFFILIATES: Record<string, Affiliate> = {
-  // 'sunnytravels': { code: 'SUNNY15', discountPercent: 15, name: 'Sunny Travels', status: 'active' },
+  // Dave — @hustlecoffeegrind — dyeates@dwhy.com.au
+  hustlecoffeegrind: { code: 'HUSTLE15', discountPercent: 15, name: 'Hustle Coffee Grind', status: 'active' },
+  // Carmen — @carmsyeates — carmen@dwhy.com.au
+  carmsyeates: { code: 'CARMS15', discountPercent: 15, name: 'Carmen Yeates', status: 'active' },
 };
 
 function isUsable(a: Affiliate | null | undefined): a is Affiliate {
