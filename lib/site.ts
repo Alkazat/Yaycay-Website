@@ -8,6 +8,8 @@ export const SITE = {
     'One chat builds your whole family holiday. Every child gets a personalised adventure, grown-ups get a calm plan, and the family keeps a memory book. Build your free day.',
   url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.yaycay.ai',
   appUrl: process.env.NEXT_PUBLIC_APP_URL ?? 'https://app.yaycay.ai',
+  // Existing customers log in to the app. Driven by NEXT_PUBLIC_APP_URL.
+  loginUrl: `${(process.env.NEXT_PUBLIC_APP_URL ?? 'https://app.yaycay.ai').replace(/\/$/, '')}/auth`,
 } as const;
 
 /**

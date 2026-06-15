@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Logo } from '@/components/ui/Logo';
 import { Button } from '@/components/ui/Button';
+import { SITE } from '@/lib/site';
 import s from './sections.module.css';
 
 const LINKS = [
@@ -26,9 +27,14 @@ export function Header() {
           <Link href="/" aria-label="Yaycay home">
             <Logo width={108} />
           </Link>
-          <Button href="/free-day" variant="cta">
-            Build your free day
-          </Button>
+          <div className={s.headerActions}>
+            <a href={SITE.loginUrl} className={s.loginLink}>
+              Log in
+            </a>
+            <Button href="/free-day" variant="cta">
+              Build your free day
+            </Button>
+          </div>
         </div>
       </header>
       {/* Sticky sub-nav: menu items stay visible (scrolls horizontally on phones). */}
