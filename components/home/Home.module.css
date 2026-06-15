@@ -33,7 +33,8 @@
 .hero {
   background: linear-gradient(180deg, var(--sky-50) 0%, var(--cream-100) 70%);
   border-bottom: 2.5px solid var(--sand-200);
-  padding-block: var(--space-12) var(--space-12);
+  /* Keep the sim + the "works with" logos within a typical laptop viewport. */
+  padding-block: clamp(var(--space-6), 4vh, var(--space-10));
 }
 .heroGrid {
   display: grid;
