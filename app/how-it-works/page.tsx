@@ -56,7 +56,11 @@ export default function HowItWorksPage() {
     <>
       <Header />
       <main id="main">
-        <section className={s.soberHero} aria-labelledby="hiw-title">
+        <section
+          className={`${s.soberHero} ${s.photoHero}`}
+          style={{ ['--hero-photo' as string]: "url('/media/how/planning-from-the-sofa.jpg')" }}
+          aria-labelledby="hiw-title"
+        >
           <div className="container">
             <div className={s.soberInner}>
               <h1 id="hiw-title" className={s.heroTitle}>
@@ -68,15 +72,6 @@ export default function HowItWorksPage() {
                   Build your free day
                 </Button>
               </div>
-            </div>
-            <div className={s.heroPhoto}>
-              <ImageSlot
-                src="/media/how/planning-from-the-sofa.jpg"
-                alt="A parent planning the family holiday from the sofa on a laptop, relaxed, a child playing nearby"
-                source="nanobanana"
-                ratio="16 / 10"
-                brief="Nanobanana image. Documentary photo, warm soft indoor light: a parent on the sofa with a laptop, relaxed rather than frazzled, a mug nearby, a child playing in soft focus in the background. NO identifiable minor faces. The feeling is 'the planning is easy now'. Cream/sand grade, no stock gloss."
-              />
             </div>
           </div>
         </section>

@@ -32,6 +32,98 @@
   align-items: center;
 }
 
+/* Photo hero: a darkened cover photo with white text. Set the image with the
+   --hero-photo custom property on the section. */
+.photoHero {
+  background:
+    linear-gradient(rgba(4, 34, 63, 0.72), rgba(4, 34, 63, 0.82)),
+    var(--hero-photo) center / cover no-repeat;
+  border-bottom: 3px solid var(--royal-700);
+  padding-block: var(--space-12);
+}
+.photoHero .heroTitle {
+  color: #fff;
+}
+.photoHero .heroSub {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* Two modes (for-parents): planning + travelling */
+.modeGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-6);
+  margin-top: var(--space-8);
+}
+.mode {
+  background: var(--surface-card);
+  border: 2.5px solid var(--royal-600);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--card-lift);
+  padding: var(--space-7);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.modeIcon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-lg);
+  background: var(--sky-700);
+  color: #fff;
+  border: 2.5px solid var(--royal-600);
+  box-shadow: 0 4px 0 var(--royal-600), var(--gloss-top);
+  margin-bottom: var(--space-3);
+}
+.modeIcon svg {
+  width: 28px;
+  height: 28px;
+}
+.modeTag {
+  align-self: flex-start;
+  background: var(--sun-400);
+  color: var(--royal-800);
+  border: 2px solid var(--royal-700);
+  border-radius: var(--radius-pill);
+  padding: 1px var(--space-3);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step--1);
+}
+.modeTitle {
+  font-size: var(--step-2);
+  color: var(--royal-800);
+  margin: var(--space-1) 0 0;
+}
+.modeBody {
+  margin: 0;
+  font-weight: 600;
+  color: var(--text-body);
+}
+
+/* Conversational + connectors panel */
+.connectSection {
+  background: var(--sky-50);
+  border-block: 2.5px solid var(--sand-200);
+}
+.connect {
+  max-width: 820px;
+  margin-inline: auto;
+  background: var(--surface-card);
+  border: 2.5px solid var(--royal-600);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--card-lift);
+  padding: var(--space-9);
+  text-align: center;
+}
+.connect .commandList {
+  display: inline-block;
+  text-align: left;
+  margin-top: var(--space-5);
+}
+
 /* Step blocks (how-it-works) */
 .stepList {
   list-style: none;

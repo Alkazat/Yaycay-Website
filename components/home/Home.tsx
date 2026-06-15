@@ -35,7 +35,7 @@ export function Home() {
               <Button href="#free-day" variant="cta" size="lg">
                 {home.hero.primaryCta.label}
               </Button>
-              <Button href={home.hero.secondaryCta.href} variant="ghost" size="lg">
+              <Button href={home.hero.secondaryCta.href} variant="ghost" size="lg" className={s.ctaGhostOnDark}>
                 {home.hero.secondaryCta.label}
               </Button>
             </div>
