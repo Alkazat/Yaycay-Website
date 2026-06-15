@@ -74,9 +74,9 @@ Reply on the website thread when the screens are ready so screenshot capture can
 
 ---
 
-## Issue C — `Yaycay-BE` — Confirm the affiliate + signup-capture contract the website depends on
+## Issue C — `Yaycay-BE` (+ `Yaycay-Admin`) — Confirm the affiliate + signup-capture contract, and automate affiliate creation through Admin
 
-**Title:** Confirm the affiliate + signup-capture contract the marketing site calls
+**Title:** Confirm the affiliate + signup-capture contract, and automate affiliate creation (Admin → Stripe → BE)
 
 **Body:**
 
@@ -106,13 +106,27 @@ attribution and discounts.
 - After capture the visitor is sent to `{APP_URL}/...?ref=<code>&email=<email>`.
 - Confirm (likely an `Yaycay-FE`/Checkout concern, cross-link as needed): the app reads `?ref=` and applies it as the **Stripe promotion code** at Checkout **and** records influencer attribution on the resulting session/order.
 
-**Deliverable:** a yes/confirmed or the corrected shape for each of the three, so the
-website can adjust `lib/affiliates.ts`, `lib/contracts.ts`, and the signup route if anything has drifted.
+**4. Affiliate creation must be automated through Admin — no manual Stripe.**
+The founder must **never** hand-create Stripe codes or edit the website to add an
+influencer. The required pipeline (build in **BE + Admin**):
+- **Yaycay-Admin** — an "Affiliates" screen: enter handle/slug, display name, discount %, status (active/paused). No Stripe knowledge required of the operator.
+- On save, **Yaycay-BE**:
+  1. Creates (or reuses) the matching **Stripe Coupon + Promotion Code via the Stripe API** — the `code` returned is what rides through as `ref`. Never typed by hand.
+  2. Persists the affiliate record (`slug`, `code`, `discountPercent`, `name`, `status`) in Supabase.
+  3. Serves it at `GET /affiliates/by-slug/<slug>` (point 1 above), so the website reads it live.
+  4. Pausing/deleting in Admin flips `status` (and deactivates the Stripe promo code) so `/go/<slug>` degrades to the homepage.
+- **Website side (already done):** reads BE live; the hardcoded `STATIC_AFFILIATES` map in `lib/affiliates.ts` is only a stopgap (currently `hustlecoffeegrind`, `carmsyeates`). Once BE serves real records, those static entries are removed/demoted to a pure fallback.
+
+**Deliverable:** a yes/confirmed or the corrected shape for points 1–3, plus a plan for
+point 4 (the Admin → Stripe-API → BE automation), so the website can drop the static
+map once the live source is serving.
 
 ---
 
 ## How to dispatch
-Open A + C in `Alkazat/Yaycay-BE` and B in `Alkazat/Yaycay-FE` (or raise them as a
-single cross-repo Orchestra task scoped to BE + FE, pointed at this file and
-`ORCHESTRA-demo-customer.md`). The website repo needs nothing further until the
+Open A + C in `Alkazat/Yaycay-BE` and B in `Alkazat/Yaycay-FE`; point C at
+`Alkazat/Yaycay-Admin` as well, since its point 4 (the Admin → Stripe-API → BE
+affiliate automation) spans BE + Admin. Or raise them as a single cross-repo
+Orchestra task scoped to BE + FE + Admin, pointed at this file and
+`ORCHESTRA-demo-customer.md`. The website repo needs nothing further until the
 screenshots and the affiliate confirmation come back.
