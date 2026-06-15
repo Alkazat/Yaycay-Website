@@ -40,32 +40,37 @@ function useReducedMotion(): boolean {
  *   2. the AI "building" the trip (an animated orb + cycling status lines),
  *   3. the finished plan: a day card with a tab per child plus the grown-ups view.
  *
- * Server-renders the *complete* plan (so it is meaningful with no JS and paints
- * fast). After hydration, and only when motion is allowed, it replays the whole
- * sequence and then auto-cycles the tabs until the visitor clicks one.
+ * Starts in the query phase and only ever animates *forward* (query → building
+ * → plan), so the finished plan fades *in* and is never shown then reset. The
+ * plan's content is always in the DOM (for SEO / no-JS); under reduced motion it
+ * is revealed immediately with no animation.
  */
 export function HeroSim() {
   const reduced = useReducedMotion();
-  // SSR/initial = the finished plan (no hydration mismatch, good LCP).
-  const [typed, setTyped] = useState(sim.query);
-  const [fieldsIn, setFieldsIn] = useState(true);
-  const [phase, setPhase] = useState<Phase>('plan');
+  // SSR/initial = the query phase (the animation's first frame), so there is no
+  // visible "show the plan then reset" flash on load.
+  const [typed, setTyped] = useState('');
+  const [fieldsIn, setFieldsIn] = useState(false);
+  const [phase, setPhase] = useState<Phase>('query');
   const [buildLine, setBuildLine] = useState(0);
   const [active, setActive] = useState(0);
   const [userControlled, setUserControlled] = useState(false);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
 
-  // The build replay. Skipped entirely under reduced motion.
+  // Reduced motion / no animation: jump straight to the finished plan.
+  useEffect(() => {
+    if (!reduced) return;
+    setTyped(sim.query);
+    setFieldsIn(true);
+    setPhase('plan');
+  }, [reduced]);
+
+  // The forward build sequence. Skipped entirely under reduced motion.
   useEffect(() => {
     if (reduced) return;
     const t = timers.current;
     const push = (fn: () => void, ms: number) => t.push(setTimeout(fn, ms));
 
-    setTyped('');
-    setFieldsIn(false);
-    setPhase('query');
-    setActive(0);
-    setBuildLine(0);
     const q = sim.query;
     for (let i = 1; i <= q.length; i++) push(() => setTyped(q.slice(0, i)), 320 + i * 90);
     const afterType = 320 + q.length * 90 + 200;
