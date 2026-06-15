@@ -81,9 +81,17 @@
 
 /* 2 · The promise: a darkened present-parent photo with white text */
 .intro {
+  /* jpeg base for older browsers, webp via image-set for modern ones */
   background:
     linear-gradient(rgba(4, 34, 63, 0.74), rgba(4, 34, 63, 0.82)),
     url('/media/home/present-parent.jpg') center / cover no-repeat;
+  background:
+    linear-gradient(rgba(4, 34, 63, 0.74), rgba(4, 34, 63, 0.82)),
+    image-set(
+      url('/media/home/present-parent.webp') type('image/webp'),
+      url('/media/home/present-parent.jpg') type('image/jpeg')
+    )
+      center / cover no-repeat;
   border-bottom: 3px solid var(--royal-700);
 }
 .introHead {
