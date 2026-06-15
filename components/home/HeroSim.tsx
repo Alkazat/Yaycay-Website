@@ -12,6 +12,14 @@ const ACCENT: Record<string, string> = {
   meadow: s.meadow,
   royal: s.royal,
 };
+const TAG: Record<string, string> = {
+  'Spot it': s.tagSpot,
+  Quiz: s.tagQuiz,
+  Photo: s.tagPhoto,
+  Allergy: s.tagAllergy,
+};
+
+type Phase = 'query' | 'building' | 'plan';
 
 /** Reads prefers-reduced-motion at mount; SSR-safe (assumes motion until known). */
 function useReducedMotion(): boolean {
@@ -27,22 +35,22 @@ function useReducedMotion(): boolean {
 }
 
 /**
- * The hero simulation. Two layers: a floating query (a destination field plus
- * the people / date / days selectors) and a full-width plan pane that slides up
- * and over the query to demonstrate the result.
+ * The hero simulation, in three cross-fading phases:
+ *   1. a floating query (destination + people / date / days),
+ *   2. the AI "building" the trip (an animated orb + cycling status lines),
+ *   3. the finished plan: a day card with a tab per child plus the grown-ups view.
  *
- * Server-renders the *complete* frame (destination typed, plan covering, Sam's
- * tab active) so it is meaningful with no JS and paints fast. After hydration,
- * and only when motion is allowed, it replays the build (types the destination,
- * fills the fields, slides the plan up) and then auto-cycles the tabs until the
- * visitor takes control by clicking.
+ * Server-renders the *complete* plan (so it is meaningful with no JS and paints
+ * fast). After hydration, and only when motion is allowed, it replays the whole
+ * sequence and then auto-cycles the tabs until the visitor clicks one.
  */
 export function HeroSim() {
   const reduced = useReducedMotion();
-  // SSR/initial = complete frame (no hydration mismatch, good LCP).
+  // SSR/initial = the finished plan (no hydration mismatch, good LCP).
   const [typed, setTyped] = useState(sim.query);
   const [fieldsIn, setFieldsIn] = useState(true);
-  const [planUp, setPlanUp] = useState(true);
+  const [phase, setPhase] = useState<Phase>('plan');
+  const [buildLine, setBuildLine] = useState(0);
   const [active, setActive] = useState(0);
   const [userControlled, setUserControlled] = useState(false);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
@@ -55,13 +63,15 @@ export function HeroSim() {
 
     setTyped('');
     setFieldsIn(false);
-    setPlanUp(false);
+    setPhase('query');
     setActive(0);
+    setBuildLine(0);
     const q = sim.query;
     for (let i = 1; i <= q.length; i++) push(() => setTyped(q.slice(0, i)), 320 + i * 90);
     const afterType = 320 + q.length * 90 + 200;
     push(() => setFieldsIn(true), afterType);
-    push(() => setPlanUp(true), afterType + 950);
+    push(() => setPhase('building'), afterType + 800);
+    push(() => setPhase('plan'), afterType + 800 + 2300);
 
     return () => {
       t.forEach(clearTimeout);
@@ -69,12 +79,22 @@ export function HeroSim() {
     };
   }, [reduced]);
 
-  // Auto-cycle the tabs once the plan is up, until the visitor takes over.
+  // Cycle the "building" status lines while that phase is showing.
   useEffect(() => {
-    if (reduced || !planUp || userControlled) return;
-    const id = setInterval(() => setActive((a) => (a + 1) % sim.kids.length), 2600);
+    if (reduced || phase !== 'building') return;
+    const id = setInterval(
+      () => setBuildLine((n) => (n + 1) % sim.building.lines.length),
+      850,
+    );
     return () => clearInterval(id);
-  }, [reduced, planUp, userControlled]);
+  }, [reduced, phase]);
+
+  // Auto-cycle the tabs once the plan is shown, until the visitor takes over.
+  useEffect(() => {
+    if (reduced || phase !== 'plan' || userControlled) return;
+    const id = setInterval(() => setActive((a) => (a + 1) % sim.kids.length), 2800);
+    return () => clearInterval(id);
+  }, [reduced, phase, userControlled]);
 
   const selectKid = (i: number) => {
     setUserControlled(true);
@@ -82,8 +102,9 @@ export function HeroSim() {
   };
 
   const kid = sim.kids[active]!;
-  const caretOn = !reduced && typed.length < sim.query.length;
+  const caretOn = !reduced && phase === 'query' && typed.length < sim.query.length;
   const label = (k: (typeof sim.kids)[number]) => (k.age != null ? `${k.name} (${k.age})` : k.name);
+  const show = (p: Phase) => (phase === p ? s.show : '');
 
   return (
     <figure
@@ -93,8 +114,8 @@ export function HeroSim() {
         .join(', ')}, with every meal allergy-checked.`}
     >
       <div className={s.stage}>
-        {/* Layer 1 — the floating query the plan is built from */}
-        <div className={s.query} aria-hidden="true">
+        {/* Phase 1 — the floating query */}
+        <div className={`${s.layer} ${s.query} ${show('query')}`} aria-hidden="true">
           <div className={s.bar}>
             <span className={s.barIcon}>
               <Icon name="map" />
@@ -103,7 +124,7 @@ export function HeroSim() {
               {typed || <span className={s.placeholder}>{sim.placeholder}</span>}
               {caretOn && <span className={s.caret} />}
             </span>
-            <span className={`${s.goBtn} ${planUp ? s.goBtnDone : ''}`}>
+            <span className={s.goBtn}>
               <Icon name="compass" />
             </span>
           </div>
@@ -116,11 +137,22 @@ export function HeroSim() {
           </div>
         </div>
 
-        {/* Layer 2 — the plan pane that slides up and over the query */}
-        <div className={`${s.plan} ${planUp ? s.in : ''}`}>
-          <div className={s.cardHead} aria-hidden="true">
-            <span className={s.cardDay}>{sim.card.day}</span>
-            <span className={s.cardDate}>{sim.card.date}</span>
+        {/* Phase 2 — the AI building the trip */}
+        <div className={`${s.layer} ${s.building} ${show('building')}`} aria-hidden="true">
+          <p className={s.buildTitle}>{sim.building.title}…</p>
+          <span className={s.orb}>
+            <Icon name="sparkle" />
+          </span>
+          <p className={s.buildLine}>{sim.building.lines[buildLine]}</p>
+        </div>
+
+        {/* Phase 3 — the finished plan */}
+        <div className={`${s.layer} ${s.plan} ${show('plan')}`}>
+          <div className={s.cardHead}>
+            <span className={s.cardTitle}>
+              {sim.card.day} in {sim.card.place}
+            </span>
+            <span className={s.builtBy}>{sim.card.builtBy}</span>
           </div>
 
           <div className={s.tabs} role="tablist" aria-label="Each day in the plan">
@@ -141,23 +173,18 @@ export function HeroSim() {
             ))}
           </div>
 
-          <div role="tabpanel" aria-label={`${label(kid)} day`}>
-            <ul key={active} className={s.items}>
-              {kid.items.map((it, i) => {
-                const flagged = /flag/i.test(it);
-                return (
-                  <li key={it} className={s.item} style={{ animationDelay: `${i * 90}ms` }}>
-                    <span className={`${s.itemDot} ${ACCENT[kid.accent]}`} aria-hidden="true" />
-                    <span className={s.itemText}>{it}</span>
-                    {flagged && (
-                      <span className={s.itemFlag}>
-                        <Icon name="shield" /> flagged
-                      </span>
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
+          <div role="tabpanel" aria-label={`${label(kid)} day`} key={active} className={s.day}>
+            {kid.day.map((a, i) => (
+              <article key={a.title} className={s.act} style={{ animationDelay: `${i * 110}ms` }}>
+                <div className={s.actTop}>
+                  <span className={s.actTime}>{a.time}</span>
+                  <p className={s.actTitle}>{a.title}</p>
+                </div>
+                <p className={s.actDesc}>{a.desc}</p>
+                {a.wow && <p className={s.actWow}>Wow fact: {a.wow}</p>}
+                {a.tag && <span className={`${s.actTag} ${TAG[a.tag] ?? ''}`}>{a.tag}</span>}
+              </article>
+            ))}
           </div>
 
           <div className={s.flags}>
