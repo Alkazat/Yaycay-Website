@@ -2,8 +2,10 @@ import type { Metadata } from 'next';
 import { Header } from '@/components/sections/Header';
 import { Footer } from '@/components/sections/Footer';
 import { Button } from '@/components/ui/Button';
+import { Icon } from '@/components/ui/Icon';
 import { ImageSlot } from '@/components/ui/ImageSlot';
 import { ClosingForm } from '@/components/sections/ClosingForm';
+import { WorksWith } from '@/components/home/WorksWith';
 import { forParentsPage as p } from '@/lib/content';
 import s from '@/components/content/content.module.css';
 
@@ -36,7 +38,55 @@ export default function ForParentsPage() {
           </div>
         </section>
 
-        {/* 2 · The invisible work, itemised */}
+        {/* 2 · Two modes: planning, then travelling */}
+        <section className="section" aria-labelledby="fp-modes">
+          <div className="container">
+            <div className={s.soberInner}>
+              <h2 id="fp-modes" className={s.heroTitle}>
+                {p.modes.headline}
+              </h2>
+              <p className={s.heroSub}>{p.modes.subhead}</p>
+            </div>
+            <div className={s.modeGrid}>
+              {p.modes.items.map((m) => (
+                <article key={m.title} className={s.mode}>
+                  <span className={s.modeIcon} aria-hidden="true">
+                    <Icon name={m.icon} />
+                  </span>
+                  <span className={s.modeTag}>{m.tag}</span>
+                  <h3 className={s.modeTitle}>{m.title}</h3>
+                  <p className={s.modeBody}>{m.body}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 3 · Conversational, and connected (AI + bring-your-own) */}
+        <section className={`section ${s.connectSection}`} aria-labelledby="fp-connect">
+          <div className="container">
+            <div className={s.connect}>
+              <p className="eyebrow">{p.connect.eyebrow}</p>
+              <h2 id="fp-connect" className={s.listTitle}>
+                {p.connect.headline}
+              </h2>
+              <p className={s.commandBody}>{p.connect.body}</p>
+              <ul className={s.commandList}>
+                {p.connect.points.map((pt) => (
+                  <li key={pt}>{pt}</li>
+                ))}
+              </ul>
+              <WorksWith />
+              <div className={s.ctaRow}>
+                <Button href={p.connect.cta.href} variant="primary">
+                  {p.connect.cta.label}
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 4 · The invisible work, itemised */}
         <section className="section" aria-labelledby="fp-invisible">
           <div className="container">
             <div className={s.soberInner}>

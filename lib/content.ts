@@ -653,6 +653,35 @@ export const forParentsPage = {
     headline: 'You plan it. You pack it. You carry it. You are also, technically, on holiday.',
     subhead: 'Yaycay exists for the parent who is the itinerary. The mental load, lifted.',
   },
+  modes: {
+    headline: 'One app, two modes: planning, then travelling.',
+    subhead: 'Yaycay does the part before you go and the part while you are there. Most planners stop at the airport.',
+    items: [
+      {
+        tag: 'Before you go',
+        title: 'Planning',
+        icon: 'sparkle',
+        body: 'Plan the whole trip by chatting. Tell Yaycay your crew, your dates and your must-dos, and it builds a day-by-day holiday around each child, with every meal allergy-checked. Change your mind out loud and the plan reshapes.',
+      },
+      {
+        tag: 'While you are there',
+        title: 'Travelling',
+        icon: 'compass',
+        body: 'On the ground, Yaycay travels with you. Ask what is good to eat near here, pull a rain plan in one tap, reshuffle a tired afternoon. The flags and checks follow you all the way to the table.',
+      },
+    ],
+  },
+  connect: {
+    eyebrow: 'Conversational, and connected',
+    headline: 'You plan by talking. With the AI you already use.',
+    body: "Yaycay is a conversation, not a form to fill in. And if you already pay for ChatGPT, Claude or Gemini, connect it: the whole Yaycay family layer, per-child days, allergy checks and the kids' journals, runs on top of the assistant you already know, for less.",
+    points: [
+      'Just chat. No forms, no menus to wrangle, no blank page.',
+      'Bring your own AI: connect ChatGPT, Claude or Gemini.',
+      'The family layer rides on top: per-child plans, allergy flags, the keepsake.',
+    ],
+    cta: { label: 'Bring your own AI', href: '/connect' },
+  },
   invisible: {
     headline: 'Nobody sees the work. We will list it anyway.',
     items: [

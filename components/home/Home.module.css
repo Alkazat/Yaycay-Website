@@ -44,7 +44,7 @@
 .heroTitle {
   font-size: var(--step-4);
   line-height: 1.05;
-  color: var(--royal-800);
+  color: #fff;
   margin-bottom: var(--space-5);
 }
 .heroSub {
@@ -57,10 +57,14 @@
 .heroLine {
   font-size: var(--step-1);
   font-weight: 600;
-  color: var(--text-body);
+  color: rgba(255, 255, 255, 0.92);
   max-width: 46ch;
   margin-inline: auto;
   margin-bottom: var(--space-6);
+}
+/* The promise section is a darkened present-parent photo with white text. */
+.ctaGhostOnDark {
+  color: #fff;
 }
 
 /* The hero is now just the simulation, centred and prominent. */
@@ -75,10 +79,12 @@
   align-items: center;
 }
 
-/* 2 · The promise: H1 + line + CTA, then the value-prop claims */
+/* 2 · The promise: a darkened present-parent photo with white text */
 .intro {
-  background: var(--cream-100);
-  border-bottom: 2.5px solid var(--sand-200);
+  background:
+    linear-gradient(rgba(4, 34, 63, 0.74), rgba(4, 34, 63, 0.82)),
+    url('/media/home/present-parent.jpg') center / cover no-repeat;
+  border-bottom: 3px solid var(--royal-700);
 }
 .introHead {
   max-width: 760px;
@@ -127,12 +133,12 @@
   font-family: var(--font-display);
   font-weight: 600;
   font-size: var(--step-1);
-  color: var(--royal-800);
+  color: #fff;
   margin: 0;
 }
 .claimBody {
   margin: 0;
-  color: var(--text-body);
+  color: rgba(255, 255, 255, 0.85);
   font-weight: 600;
 }
 
