@@ -755,3 +755,55 @@
     display: none;
   }
 }
+
+/* 3 · Pain → relief ledger (the claims, emotionalised and stepped out) */
+.ledger {
+  list-style: none;
+  margin: var(--space-8) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.ledgerRow {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--space-5);
+  padding-block: var(--space-5);
+  border-top: 2px solid var(--sand-200);
+}
+.ledgerRow:last-child {
+  border-bottom: 2px solid var(--sand-200);
+}
+.ledgerPain {
+  text-align: right;
+  font-size: var(--step-1);
+  font-weight: 600;
+  color: var(--muted);
+}
+.ledgerArrow {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--step-2);
+  color: var(--sun-600);
+}
+.ledgerHeld {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--step-1);
+  color: var(--royal-800);
+}
+@media (max-width: 720px) {
+  .ledgerRow {
+    grid-template-columns: 1fr;
+    gap: var(--space-1);
+    text-align: left;
+    padding-block: var(--space-4);
+  }
+  .ledgerPain {
+    text-align: left;
+  }
+  .ledgerArrow {
+    display: none;
+  }
+}
