@@ -12,14 +12,49 @@ const ACCENT: Record<string, string> = {
   meadow: s.meadow,
   royal: s.royal,
 };
-const TAG: Record<string, string> = {
-  'Spot it': s.tagSpot,
-  Quiz: s.tagQuiz,
-  Photo: s.tagPhoto,
-  Allergy: s.tagAllergy,
+// Challenge tones mirror the FE ChallengeBlock (quiz=sun, spot=sky, photo=coral).
+const CHALLENGE: Record<string, string> = {
+  Quiz: s.chQuiz,
+  'Spot it': s.chSpot,
+  Photo: s.chPhoto,
 };
 
 type Phase = 'query' | 'building' | 'plan';
+type View = 'kid' | 'grownups';
+
+// The seed data in lib/content.ts is inferred as a tuple of literal types (each
+// child's day differs), which makes `.map` over a union of tuples awkward. These
+// shapes give the renderer one uniform type to walk.
+type Meal = {
+  venue: string;
+  allergyLabel: string;
+  checked: string[];
+  confirm: string[];
+  stalls: { name: string; label: string; risk: string }[];
+  ask: { phrase: string; english: string; language: string };
+};
+type Moment = {
+  slot: string;
+  place: string;
+  time: string;
+  title: string;
+  desc: string;
+  wow: string | null;
+  challenge: { type: string; prompt: string } | null;
+  meal: Meal | null;
+  readAloud: boolean;
+};
+type Kid = {
+  name: string;
+  age: number;
+  mode: string;
+  emoji: string;
+  accent: string;
+  allergy: boolean;
+  moments: Moment[];
+};
+
+const kids = sim.kids as unknown as Kid[];
 
 /** Reads prefers-reduced-motion at mount; SSR-safe (assumes motion until known). */
 function useReducedMotion(): boolean {
@@ -36,9 +71,13 @@ function useReducedMotion(): boolean {
 
 /**
  * The hero simulation, in three cross-fading phases:
- *   1. a floating query (destination + people / date / days),
- *   2. the AI "building" the trip (an animated orb + cycling status lines),
- *   3. the finished plan: a day card with a tab per child plus the grown-ups view.
+ *   1. a floating query (destination + family / dates / allergy),
+ *   2. the AI "building" the trip (an animated orb + cycling status lines, the
+ *      same beats as the FE GeneratingOverlay),
+ *   3. the finished plan, framed like the real FE trip view: an Explorers /
+ *      Grown-ups toggle, a profile per child with their age band, a real day
+ *      (slots, activities, wow facts, a typed challenge, the allergy meal card),
+ *      and the grown-ups logistics view.
  *
  * Starts in the query phase and only ever animates *forward* (query → building
  * → plan), so the finished plan fades *in* and is never shown then reset. The
@@ -54,6 +93,7 @@ export function HeroSim() {
   const [phase, setPhase] = useState<Phase>('query');
   const [buildLine, setBuildLine] = useState(0);
   const [active, setActive] = useState(0);
+  const [view, setView] = useState<View>('kid');
   const [userControlled, setUserControlled] = useState(false);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
 
@@ -76,7 +116,7 @@ export function HeroSim() {
     const afterType = 320 + q.length * 90 + 200;
     push(() => setFieldsIn(true), afterType);
     push(() => setPhase('building'), afterType + 800);
-    push(() => setPhase('plan'), afterType + 800 + 2300);
+    push(() => setPhase('plan'), afterType + 800 + 2600);
 
     return () => {
       t.forEach(clearTimeout);
@@ -89,37 +129,42 @@ export function HeroSim() {
     if (reduced || phase !== 'building') return;
     const id = setInterval(
       () => setBuildLine((n) => (n + 1) % sim.building.lines.length),
-      850,
+      720,
     );
     return () => clearInterval(id);
   }, [reduced, phase]);
 
-  // Auto-cycle the tabs once the plan is shown, until the visitor takes over.
+  // Auto-cycle the child profiles once the plan is shown, until the visitor
+  // takes over. Stays within the Explorers view (the Grown-ups view is opt-in).
   useEffect(() => {
-    if (reduced || phase !== 'plan' || userControlled) return;
-    const id = setInterval(() => setActive((a) => (a + 1) % sim.kids.length), 2800);
+    if (reduced || phase !== 'plan' || view !== 'kid' || userControlled) return;
+    const id = setInterval(() => setActive((a) => (a + 1) % kids.length), 3000);
     return () => clearInterval(id);
-  }, [reduced, phase, userControlled]);
+  }, [reduced, phase, view, userControlled]);
 
   const selectKid = (i: number) => {
     setUserControlled(true);
+    setView('kid');
     setActive(i);
   };
+  const selectView = (v: View) => {
+    setUserControlled(true);
+    setView(v);
+  };
 
-  const kid = sim.kids[active]!;
+  const kid = kids[active]!;
   const caretOn = !reduced && phase === 'query' && typed.length < sim.query.length;
-  const label = (k: (typeof sim.kids)[number]) => (k.age != null ? `${k.name} (${k.age})` : k.name);
   const show = (p: Phase) => (phase === p ? s.show : '');
 
   return (
     <figure
       className={s.wrap}
-      aria-label={`A demonstration of Yaycay building a ${sim.query} trip: a separate day for ${sim.kids
-        .map(label)
-        .join(', ')}, with every meal allergy-checked.`}
+      aria-label={`A demonstration of Yaycay building a ${sim.query} trip: a separate day for ${kids
+        .map((k) => `${k.name} (${k.age})`)
+        .join(', ')}, with every meal checked against Pip's tree-nut allergy and a grown-ups view for the logistics.`}
     >
       <div className={s.stage}>
-        {/* Phase 1 — the floating query */}
+        {/* Phase 1 - the floating query */}
         <div className={`${s.layer} ${s.query} ${show('query')}`} aria-hidden="true">
           <div className={s.bar}>
             <span className={s.barIcon}>
@@ -142,7 +187,7 @@ export function HeroSim() {
           </div>
         </div>
 
-        {/* Phase 2 — the AI building the trip */}
+        {/* Phase 2 - the AI building the trip */}
         <div className={`${s.layer} ${s.building} ${show('building')}`} aria-hidden="true">
           <p className={s.buildTitle}>{sim.building.title}…</p>
           <span className={s.orb}>
@@ -151,47 +196,134 @@ export function HeroSim() {
           <p className={s.buildLine}>{sim.building.lines[buildLine]}</p>
         </div>
 
-        {/* Phase 3 — the finished plan */}
+        {/* Phase 3 - the finished plan, framed like the real FE trip view */}
         <div className={`${s.layer} ${s.plan} ${show('plan')}`}>
           <div className={s.cardHead}>
-            <span className={s.cardTitle}>
-              {sim.card.day} in {sim.card.place}
+            <span className={s.cardTitleWrap}>
+              <span className={s.cardTitle}>{sim.trip.destination}</span>
+              <span className={s.cardWhen}>{sim.trip.when}</span>
             </span>
-            <span className={s.builtBy}>{sim.card.builtBy}</span>
+            <span className={s.builtBy}>
+              <Icon name="sparkle" />
+              {sim.trip.builtBy}
+            </span>
           </div>
 
-          <div className={s.tabs} role="tablist" aria-label="Each day in the plan">
-            {sim.kids.map((k, i) => (
-              <button
-                key={k.name}
-                type="button"
-                role="tab"
-                aria-selected={i === active}
-                tabIndex={i === active ? 0 : -1}
-                className={`${s.tab} ${ACCENT[k.accent]} ${i === active ? s.tabActive : ''}`}
-                onClick={() => selectKid(i)}
-              >
-                <span className={s.tabDot} aria-hidden="true" />
-                {k.name}
-                {k.age != null && <span className={s.tabAge}>· {k.age}</span>}
-              </button>
-            ))}
+          {/* Explorers / Grown-ups view toggle (the real top-level switch). */}
+          <div className={s.viewToggle} role="tablist" aria-label="Choose a view">
+            <button
+              type="button"
+              role="tab"
+              aria-selected={view === 'kid'}
+              className={`${s.viewBtn} ${view === 'kid' ? s.viewActive : ''}`}
+              onClick={() => selectView('kid')}
+            >
+              {sim.views.kid}
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={view === 'grownups'}
+              className={`${s.viewBtn} ${view === 'grownups' ? s.viewActive : ''}`}
+              onClick={() => selectView('grownups')}
+            >
+              <Icon name="shield" />
+              {sim.views.grownups}
+            </button>
           </div>
 
-          <div role="tabpanel" aria-label={`${label(kid)} day`} key={active} className={s.day}>
-            {kid.day.map((a, i) => (
-              <article key={a.title} className={s.act} style={{ animationDelay: `${i * 110}ms` }}>
-                <div className={s.actTop}>
-                  <span className={s.actTime}>{a.time}</span>
-                  <p className={s.actTitle}>{a.title}</p>
+          {view === 'kid' ? (
+            <>
+              {/* Profile switcher: one pill per child, with their age band. */}
+              <div className={s.profiles} role="tablist" aria-label="Each explorer in the family">
+                {kids.map((k, i) => (
+                  <button
+                    key={k.name}
+                    type="button"
+                    role="tab"
+                    aria-selected={i === active}
+                    tabIndex={i === active ? 0 : -1}
+                    className={`${s.profile} ${ACCENT[k.accent]} ${i === active ? s.profileActive : ''}`}
+                    onClick={() => selectKid(i)}
+                  >
+                    <span className={s.avatar} aria-hidden="true">
+                      {k.emoji}
+                    </span>
+                    <span className={s.profileText}>
+                      <span className={s.profileName}>
+                        {k.name}
+                        <span className={s.profileAge}>· {k.age}</span>
+                        {k.allergy && (
+                          <span className={s.allergyDot} title="Allergy on file" aria-hidden="true" />
+                        )}
+                      </span>
+                      <span className={s.profileMode}>{k.mode}</span>
+                    </span>
+                  </button>
+                ))}
+              </div>
+
+              {/* Day header: label + hotel badges, summary, did-you-know, weather. */}
+              <div className={s.dayHead}>
+                <div className={s.badges}>
+                  <span className={`${s.badge} ${s.badgeDay}`}>{sim.day.label}</span>
+                  <span className={`${s.badge} ${s.badgeHotel}`}>
+                    <Icon name="map" />
+                    {sim.day.hotel}
+                  </span>
                 </div>
-                <p className={s.actDesc}>{a.desc}</p>
-                {a.wow && <p className={s.actWow}>Wow fact: {a.wow}</p>}
-                {a.tag && <span className={`${s.actTag} ${TAG[a.tag] ?? ''}`}>{a.tag}</span>}
-              </article>
-            ))}
-          </div>
+                <p className={s.daySummary}>{sim.day.summary}</p>
+                <p className={s.didYouKnow}>
+                  <span className={s.dykLabel}>Did you know?</span> {sim.day.didYouKnow}
+                </p>
+                <p className={s.weather}>{sim.day.weather}</p>
+              </div>
 
+              {/* The day itself: moments -> activity cards (re-keyed so each
+                  profile's day animates in). */}
+              <div role="tabpanel" aria-label={`${kid.name}'s day`} key={active} className={s.day}>
+                {kid.moments.map((m, i) => (
+                  <section
+                    key={m.title}
+                    className={s.moment}
+                    style={{ animationDelay: `${i * 110}ms` }}
+                  >
+                    <div className={s.momentHead}>
+                      <span className={s.slot}>{m.slot}</span>
+                      <span className={s.momentPlace}>{m.place}</span>
+                      <span className={s.momentTime}>
+                        <Icon name="clock" />
+                        {m.time}
+                      </span>
+                    </div>
+
+                    <article className={s.act}>
+                      <p className={s.actTitle}>{m.title}</p>
+                      <p className={s.actDesc}>{m.desc}</p>
+                      {m.wow && <p className={s.actWow}>Wow fact: {m.wow}</p>}
+                      {m.readAloud && (
+                        <p className={s.readAloud}>
+                          <Icon name="sound" />
+                          Read aloud for {kid.name}
+                        </p>
+                      )}
+                      {m.challenge && (
+                        <div className={`${s.challenge} ${CHALLENGE[m.challenge.type] ?? ''}`}>
+                          <span className={s.chType}>{m.challenge.type}</span>
+                          <span className={s.chPrompt}>{m.challenge.prompt}</span>
+                        </div>
+                      )}
+                      {m.meal && <MealCard meal={m.meal} />}
+                    </article>
+                  </section>
+                ))}
+              </div>
+            </>
+          ) : (
+            <GrownupsView />
+          )}
+
+          {/* Persistent trust flags. */}
           <div className={s.flags}>
             {sim.flags.map((f) => (
               <span key={f.label} className={s.flag}>
@@ -204,5 +336,93 @@ export function HeroSim() {
       </div>
       <figcaption className={s.caption}>{sim.caption}</figcaption>
     </figure>
+  );
+}
+
+/** The allergy meal card: the centrepiece of the real FE renderer, condensed. */
+function MealCard({ meal }: { meal: Meal }) {
+  return (
+    <div className={s.meal}>
+      <div className={s.mealHead}>
+        <span className={s.mealFlag}>
+          <span className={s.flagDot} aria-hidden="true" />
+          {meal.allergyLabel}
+        </span>
+        <span className={s.mealVenue}>{meal.venue}</span>
+      </div>
+
+      <p className={s.mealRowTitle}>What we checked</p>
+      <ul className={s.mealList}>
+        {meal.checked.map((c) => (
+          <li key={c}>{c}</li>
+        ))}
+      </ul>
+
+      <p className={s.mealRowTitle}>Confirm on the day</p>
+      <ul className={s.mealList}>
+        {meal.confirm.map((c) => (
+          <li key={c}>{c}</li>
+        ))}
+      </ul>
+
+      <div className={s.stalls}>
+        {meal.stalls.map((st) => (
+          <span
+            key={st.name}
+            className={`${s.stall} ${st.risk === 'flagged' ? s.stallFlagged : s.stallLower}`}
+          >
+            {st.name} · {st.label}
+          </span>
+        ))}
+      </div>
+
+      <div className={s.askKitchen}>
+        <p className={s.askLabel}>Ask the kitchen</p>
+        <p className={s.askPhrase}>{meal.ask.phrase}</p>
+        <p className={s.askEnglish}>{meal.ask.english}</p>
+        <p className={s.askLang}>{meal.ask.language}</p>
+      </div>
+    </div>
+  );
+}
+
+/** The Grown-ups view: PIN note, allergy protocol, the day's logistics. */
+function GrownupsView() {
+  const g = sim.grownups;
+  return (
+    <div role="tabpanel" aria-label="Grown-ups view" className={s.grownups}>
+      <p className={s.lockNote}>
+        <Icon name="shield" />
+        {g.lockNote}
+      </p>
+
+      <div className={s.protocol}>
+        <span className={s.protocolLabel}>Allergy protocol</span>
+        <p className={s.protocolBody}>{g.protocol}</p>
+      </div>
+
+      <div className={s.logistics}>
+        {g.logistics.map((row) => (
+          <div key={row.label} className={s.logRow}>
+            <span className={s.logIcon}>
+              <Icon name={row.icon} />
+            </span>
+            <span className={s.logText}>
+              <span className={s.logLabel}>{row.label}</span>
+              <span className={s.logValue}>{row.value}</span>
+            </span>
+          </div>
+        ))}
+        <div className={`${s.logRow} ${s.logAllergy}`}>
+          <span className={s.logIcon}>
+            <Icon name="shield" />
+          </span>
+          <span className={s.logText}>
+            <span className={s.logLabel}>Allergy</span>
+            <span className={s.logValue}>{g.allergy}</span>
+          </span>
+        </div>
+      </div>
+    </div>
   );
 }
