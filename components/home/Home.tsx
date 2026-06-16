@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/Button';
+import { ReturningCta } from '@/components/ui/ReturningCta';
 import { Icon } from '@/components/ui/Icon';
 import { ImageSlot } from '@/components/ui/ImageSlot';
 import { FreeDayForm } from '@/components/FreeDayForm';
@@ -30,9 +31,7 @@ export function Home() {
             </h1>
             <p className={s.heroLine}>{home.hero.line}</p>
             <div className={s.introCtas}>
-              <Button href="#free-day" variant="cta" size="lg">
-                {home.hero.primaryCta.label}
-              </Button>
+              <ReturningCta defaultLabel={home.hero.primaryCta.label} defaultHref="#free-day" variant="cta" size="lg" />
               <Button href={home.hero.secondaryCta.href} variant="ghost" size="lg" className={s.ctaGhostOnDark}>
                 {home.hero.secondaryCta.label}
               </Button>
