@@ -3,7 +3,8 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Logo } from '@/components/ui/Logo';
-import { Button } from '@/components/ui/Button';
+import { ReturningCta } from '@/components/ui/ReturningCta';
+import { useReturningUser } from '@/lib/returningUser';
 import { SITE } from '@/lib/site';
 import s from './sections.module.css';
 
@@ -20,6 +21,9 @@ const LINKS = [
 
 export function Header() {
   const pathname = usePathname();
+  // Returning, signed-in visitors don't need "Log in"; the CTA itself becomes
+  // "Keep planning / travelling" and deep-links back into the app.
+  const { returning } = useReturningUser();
   return (
     <div className={s.navStack}>
       <header className={s.header}>
@@ -28,12 +32,12 @@ export function Header() {
             <Logo width={108} />
           </Link>
           <div className={s.headerActions}>
-            <a href={SITE.loginUrl} className={s.loginLink}>
-              Log in
-            </a>
-            <Button href="/free-day" variant="cta">
-              Build your free day
-            </Button>
+            {!returning && (
+              <a href={SITE.loginUrl} className={s.loginLink}>
+                Log in
+              </a>
+            )}
+            <ReturningCta defaultLabel="Build your free day" defaultHref="/free-day" variant="cta" />
           </div>
         </div>
       </header>
