@@ -324,6 +324,10 @@
   gap: var(--space-2);
   overflow-x: auto;
   scrollbar-width: none;
+  /* overflow-x also clips the vertical axis; pad so the active chip's lift
+     and drop-shadow are not chopped off (negative margin keeps the layout). */
+  padding-block: 6px;
+  margin-block: -6px;
 }
 .profiles::-webkit-scrollbar {
   display: none;
