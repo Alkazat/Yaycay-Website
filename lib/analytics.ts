@@ -18,6 +18,14 @@ declare global {
 
 export type ConsentState = 'granted' | 'denied' | 'unknown';
 
+/**
+ * Same-tab signal fired the moment the visitor decides. localStorage's native
+ * `storage` event never fires in the tab that made the change, so consumers
+ * (e.g. the hero simulation, which waits for the cookie banner to clear) listen
+ * for this instead.
+ */
+export const CONSENT_EVENT = 'yaycay:consent';
+
 export function getConsent(): ConsentState {
   if (typeof window === 'undefined') return 'unknown';
   const stored = window.localStorage.getItem(CONSENT_KEY);
@@ -28,6 +36,7 @@ export function getConsent(): ConsentState {
 export function setConsent(state: 'granted' | 'denied'): void {
   if (typeof window === 'undefined') return;
   window.localStorage.setItem(CONSENT_KEY, state);
+  window.dispatchEvent(new CustomEvent(CONSENT_EVENT, { detail: state }));
   if (state === 'granted') loadPixels();
 }
 
