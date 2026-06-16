@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { Icon } from '@/components/ui/Icon';
+import { CONSENT_EVENT, getConsent } from '@/lib/analytics';
 import { home } from '@/lib/content';
 import s from './HeroSim.module.css';
 
@@ -95,7 +96,29 @@ export function HeroSim() {
   const [active, setActive] = useState(0);
   const [view, setView] = useState<View>('kid');
   const [userControlled, setUserControlled] = useState(false);
+  // Gates the intro on the cookie banner being resolved (see below).
+  const [consentReady, setConsentReady] = useState(false);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
+
+  // Hold the build until the cookie consent banner is out of the way. On a phone
+  // that banner can sit over the hero, so a first-time visitor would miss the
+  // start of the animation while dealing with it. A returning visitor who has
+  // already chosen never sees the banner, so we start at once; a first-time one
+  // waits until they accept/decline. A safety timeout starts it regardless, so
+  // the hero can never stay parked.
+  useEffect(() => {
+    if (getConsent() !== 'unknown') {
+      setConsentReady(true);
+      return;
+    }
+    const onConsent = () => setConsentReady(true);
+    window.addEventListener(CONSENT_EVENT, onConsent);
+    const fallback = setTimeout(() => setConsentReady(true), 10000);
+    return () => {
+      window.removeEventListener(CONSENT_EVENT, onConsent);
+      clearTimeout(fallback);
+    };
+  }, []);
 
   // Reduced motion / no animation: jump straight to the finished plan.
   useEffect(() => {
@@ -105,9 +128,10 @@ export function HeroSim() {
     setPhase('plan');
   }, [reduced]);
 
-  // The forward build sequence. Skipped entirely under reduced motion.
+  // The forward build sequence. Skipped under reduced motion, and held until the
+  // cookie banner is resolved so the intro is never missed behind it.
   useEffect(() => {
-    if (reduced) return;
+    if (reduced || !consentReady) return;
     const t = timers.current;
     const push = (fn: () => void, ms: number) => t.push(setTimeout(fn, ms));
 
@@ -122,7 +146,7 @@ export function HeroSim() {
       t.forEach(clearTimeout);
       timers.current = [];
     };
-  }, [reduced]);
+  }, [reduced, consentReady]);
 
   // Cycle the "building" status lines while that phase is showing.
   useEffect(() => {
